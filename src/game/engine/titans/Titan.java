@@ -1,6 +1,6 @@
 package game.engine.titans;
 
-abstract class Titan implements Comparable <Titan> {
+public abstract class Titan implements Comparable <Titan> {
 	final int baseHealth;
 	private int currentHealth;
 	final int baseDamage;

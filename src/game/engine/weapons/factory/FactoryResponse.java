@@ -1,3 +1,5 @@
+package game.engine.weapons.factory;
+import game.engine.weapons.Weapon;
 
 public class FactoryResponse {
 	Weapon weapon;

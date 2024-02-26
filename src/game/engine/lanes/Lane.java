@@ -1,5 +1,12 @@
+package game.engine.lanes;
+import java.util.*;
+import game.engine.base.Wall;
+import game.engine.titans.Titan;
+import game.engine.weapons.Weapon;
 
-public class Lane implements Comparable{
+
+
+public class Lane implements Comparable<Lane>{
 	Wall laneWall;
 	int dangerLevel;
 	PriorityQueue<Titan> titans;
@@ -9,7 +16,7 @@ public class Lane implements Comparable{
 		this.laneWall=laneWall;
 	}
 	
-	int compareTo(Lane o){
+	public int compareTo(Lane o){
 		if (this.dangerLevel>o.dangerLevel){
 			return 1;
 		}else if(this.dangerLevel<o.dangerLevel){

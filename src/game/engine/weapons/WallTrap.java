@@ -1,3 +1,5 @@
+package game.engine.weapons;
+import game.engine.titans.Titan;
 
 public class WallTrap extends Weapon{
 	Titan attackAction;

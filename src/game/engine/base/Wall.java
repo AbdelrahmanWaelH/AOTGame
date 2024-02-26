@@ -1,3 +1,4 @@
+package game.engine.base;
 
 public class Wall {
 	int baseHealth;

@@ -2,6 +2,7 @@ package game.engine;
 import java.util.*;
 import game.engine.titans.*;
 import game.engine.lanes.Lane;
+import game.engine.weapons.factory.WeaponFactory;
 
 public class Battle {
 	private int[][] PHASES_APPROACHING_TITANS;
@@ -12,7 +13,7 @@ public class Battle {
 	private int numberOfTitansPerTurn;
 	private int score;
 	private int titanSpawnDistance;
-	//WeaponFactory weaponFactory; //when it's time to implement the weaponfactory class
+	private WeaponFactory weaponFactory; //when it's time to implement the weaponfactory class
 	private HashMap<Integer, TitanRegistry> titansArchives;
 	private ArrayList<Titan> approachingTitans;
 	private PriorityQueue<Lane> lanes;

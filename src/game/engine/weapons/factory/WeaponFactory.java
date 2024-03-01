@@ -1,15 +1,11 @@
 package game.engine.weapons.factory;
-import java.io.*;
-
+import java.io.IOException;
 import game.engine.weapons.WeaponRegistry;
-
-import java.util.*;
-
-import game.engine.dataloader.*;
+import java.util.HashMap;
+import game.engine.dataloader.DataLoader;
 
 public class WeaponFactory {
 	private HashMap<Integer, WeaponRegistry> weaponShop;
-	File csvFile= new File("weapons.csv");
 	
 	public WeaponFactory() throws IOException{ 
      this.weaponShop = DataLoader.readWeaponRegistry();

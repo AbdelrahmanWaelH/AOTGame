@@ -3,6 +3,7 @@ import java.util.*;
 import game.engine.titans.*;
 import game.engine.lanes.Lane;
 import game.engine.weapons.factory.WeaponFactory;
+import game.engine.base.Wall;
 
 public class Battle {
 	private int[][] PHASES_APPROACHING_TITANS;
@@ -28,7 +29,12 @@ public class Battle {
 		// use initialResourcesPerLane
 		
 	}
-
+	private void initializeLanes(int numOfLanes){
+		for (int i = 0; i < numOfLanes; i++){
+			lanes.add(new Lane(new Wall(WALL_BASE_HEALTH)));
+			originalLanes.add(new Lane(new Wall(WALL_BASE_HEALTH)));
+		}
+	}
 	public int getNumberOfTurns() {
 		return numberOfTurns;
 	}

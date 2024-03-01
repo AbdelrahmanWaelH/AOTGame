@@ -7,13 +7,16 @@ import game.engine.weapons.Weapon;
 
 
 public class Lane implements Comparable<Lane>{
-	Wall laneWall;
-	int dangerLevel;
-	PriorityQueue<Titan> titans;
-	ArrayList<Weapon> weapons;
+	private final Wall laneWall;
+	private int dangerLevel;
+	private final PriorityQueue<Titan> titans; //should be final 
+	private final  ArrayList<Weapon> weapons; // should be final
 	
 	public Lane(Wall laneWall){
 		this.laneWall=laneWall;
+		this.titans = new PriorityQueue<Titan>();
+		this.weapons = new ArrayList<Weapon>();
+		this.dangerLevel = 0;
 	}
 	
 	public int compareTo(Lane o){
@@ -22,10 +25,6 @@ public class Lane implements Comparable<Lane>{
 
 	public Wall getLaneWall() {
 		return laneWall;
-	}
-
-	public void setLaneWall(Wall laneWall) {
-		this.laneWall = laneWall;
 	}
 
 	public int getDangerLevel() {
@@ -39,18 +38,12 @@ public class Lane implements Comparable<Lane>{
 	public PriorityQueue<Titan> getTitans() {
 		return titans;
 	}
-
-	public void setTitans(PriorityQueue<Titan> titans) {
-		this.titans = titans;
-	}
-
+	
 	public ArrayList<Weapon> getWeapons() {
 		return weapons;
 	}
 
-	public void setWeapons(ArrayList<Weapon> weapons) {
-		this.weapons = weapons;
-	}
+	
 	
 	
 }

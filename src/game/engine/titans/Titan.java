@@ -2,14 +2,14 @@ package game.engine.titans;
 import game.engine.interfaces.*;
 
 public abstract class Titan implements Comparable <Titan>, Attacker, Attackee, Mobil{
-	final int baseHealth;
+	private final int baseHealth;
 	private int currentHealth;
-	final int baseDamage;
-	final int heightInMeters;
+	private final int baseDamage;
+	private final int heightInMeters;
 	private int distanceFromBase;
 	private int speed;
-	final int resourcesValue;
-	final int dangerLevel;
+	private final int resourcesValue;
+	private final int dangerLevel;
 	
 	
 	public Titan(int baseHealth, int baseDamage, int heightInMeters, int distanceFromBase, int speed, int resourcesValue, int dangerLevel){

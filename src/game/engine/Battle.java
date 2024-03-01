@@ -16,9 +16,9 @@ public class Battle {
 	private int titanSpawnDistance;
 	private  WeaponFactory weaponFactory; 
 	
-	private  HashMap<Integer, TitanRegistry> titansArchives;
-	private  ArrayList<Titan> approachingTitans;
-	private  PriorityQueue<Lane> lanes;
+	private final HashMap<Integer, TitanRegistry> titansArchives;
+	private final  ArrayList<Titan> approachingTitans;
+	private PriorityQueue<Lane> lanes;
 	private  ArrayList<Lane> originalLanes; //these 4 attributes may need to become final, not sure yet
 	
 	public Battle(int numberOfTurns, int score, int titanSpawnDistance, int initialNumOfLanes, int initialResourcesPerLane ) throws Exception{ // check the throws IOException keyword
@@ -30,7 +30,6 @@ public class Battle {
 		this.battlePhase = BattlePhase.EARLY;
 		this.titansArchives = new HashMap<Integer, TitanRegistry>();
 		this.approachingTitans = new ArrayList<Titan>();
-		
 		//this.initializeLanes(initialNumOfLanes);
 		// use initialResourcesPerLane
 		

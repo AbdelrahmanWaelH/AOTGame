@@ -1,10 +1,6 @@
 package game.engine.weapons.factory;
-import java.io.*;
-import game.engine.dataloader.*;
 import game.engine.weapons.WeaponRegistry;
-import java.util.*;
 import java.io.IOException;
-import game.engine.weapons.WeaponRegistry;
 import java.util.HashMap;
 import game.engine.dataloader.DataLoader;
 

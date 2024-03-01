@@ -14,25 +14,30 @@ public class Battle {
 	private int numberOfTitansPerTurn;
 	private int score;
 	private int titanSpawnDistance;
-	private WeaponFactory weaponFactory; //when it's time to implement the weaponfactory class
-	private HashMap<Integer, TitanRegistry> titansArchives;
-	private ArrayList<Titan> approachingTitans;
-	private PriorityQueue<Lane> lanes;
-	private ArrayList<Lane> originalLanes;
+	private  WeaponFactory weaponFactory; 
+	
+	private  HashMap<Integer, TitanRegistry> titansArchives;
+	private  ArrayList<Titan> approachingTitans;
+	private  PriorityQueue<Lane> lanes;
+	private  ArrayList<Lane> originalLanes; //these 4 attributes may need to become final, not sure yet
 	
 	public Battle(int numberOfTurns, int score, int titanSpawnDistance, int initialNumOfLanes, int initialResourcesPerLane ) throws Exception{ // check the throws IOException keyword
 		this.numberOfTurns = numberOfTurns;
 		this.score = score;
 		this.titanSpawnDistance = titanSpawnDistance;
 		this.battlePhase = BattlePhase.EARLY;
-		//use initalNumOfLanes
+		this.titansArchives = new HashMap<Integer, TitanRegistry>();
+		this.approachingTitans = new ArrayList<Titan>();
+		//this.initializeLanes(initialNumOfLanes);
 		// use initialResourcesPerLane
 		
 	}
 	private void initializeLanes(int numOfLanes){
 		for (int i = 0; i < numOfLanes; i++){
-			lanes.add(new Lane(new Wall(WALL_BASE_HEALTH)));
-			originalLanes.add(new Lane(new Wall(WALL_BASE_HEALTH)));
+			Wall w = new Wall(WALL_BASE_HEALTH);
+			Lane l = new Lane(w);
+			lanes.add(l);
+			originalLanes.add(l);
 		}
 	}
 	public int getNumberOfTurns() {

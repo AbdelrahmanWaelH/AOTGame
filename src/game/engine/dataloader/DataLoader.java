@@ -10,7 +10,7 @@ public class DataLoader {
 	private static final String TITANS_FILE_NAME= "titans.csv";
 	private static final String WEAPONS_FILE_NAME = "weapons.csv";
 	
-	//DISCLAIMER: ChatGPT was used to aid in the use of the buffer reader and hashmap defintion, the rest was learned from various videos on YouTube 
+	//DISCLAIMER: ChatGPT was used to aid in the use of the buffer reader and hashmap definition, the rest was learned from various videos on YouTube 
 
 		public static HashMap<Integer, TitanRegistry> readTitanRegistry() throws IOException{
 		HashMap<Integer, TitanRegistry> h = new HashMap<Integer, TitanRegistry>();

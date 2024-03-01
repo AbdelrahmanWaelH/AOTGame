@@ -46,6 +46,9 @@ public abstract class Titan implements Comparable <Titan>, Attacker, Attackee, M
 	public int getResourcesValue() {
 		return resourcesValue;
 	}
+	public int getDangerLevel(){
+		return this.dangerLevel;
+	}
 	@Override
 	public int getDistance() {
 		return this.distanceFromBase;
@@ -60,6 +63,9 @@ public abstract class Titan implements Comparable <Titan>, Attacker, Attackee, M
 	public void setDistance(int distance) {
 		this.distanceFromBase = distance;
 		
+	}
+	public int getHeightInMeters(){
+		return this.heightInMeters;
 	}
 	
 }

@@ -23,6 +23,7 @@ public class Battle {
 		this.numberOfTurns = numberOfTurns;
 		this.score = score;
 		this.titanSpawnDistance = titanSpawnDistance;
+		this.battlePhase = BattlePhase.EARLY;
 		//use initalNumOfLanes
 		// use initialResourcesPerLane
 		
@@ -66,5 +67,13 @@ public class Battle {
 
 	public void setTitanSpawnDistance(int titanSpawnDistance) {
 		this.titanSpawnDistance = titanSpawnDistance;
+	}
+
+	public int getResourcesGathered() {
+		return resourcesGathered;
+	}
+
+	public void setResourcesGathered(int resourcesGathered) {
+		this.resourcesGathered = resourcesGathered;
 	}
 }

@@ -1,6 +1,6 @@
 
 public class TitanCSV extends CSVUser {
-	private final String titanFile = "src\\titans.csv";
+	private final String titanFile = "titans.csv";
 	public TitanCSV(){
 	}
 		public void readCSV(){

@@ -1,6 +1,6 @@
 
 public class WeaponCSV extends CSVUser {
-	private final String weaponFile  = "src\\weapons.csv";
+	private final String weaponFile  = "weapons.csv";
 	public WeaponCSV(){
 		
 	}

@@ -1,6 +1,7 @@
 package game.engine.base;
+import game.engine.interfaces.Attackee;
 
-public class Wall {
+public class Wall implements Attackee{
 	int baseHealth;
 	int currentHealth;
 	
@@ -12,17 +13,21 @@ public class Wall {
 	public int getBaseHealth() {
 		return baseHealth;
 	}
-
-	public void setBaseHealth(int baseHealth) {
-		this.baseHealth = baseHealth;
-	}
-
+	
+	@Override
 	public int getCurrentHealth() {
 		return currentHealth;
 	}
+	
+	@Override
+	public void setCurrentHealth(int health) {
+		this.currentHealth = health;
+	}
 
-	public void setCurrentHealth(int currentHealth) {
-		this.currentHealth = currentHealth;
+	@Override
+	public int getResourcesValue() {
+		// TODO Auto-generated method stub
+		return -1;
 	}
 	
 	

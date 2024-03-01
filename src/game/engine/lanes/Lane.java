@@ -17,12 +17,7 @@ public class Lane implements Comparable<Lane>{
 	}
 	
 	public int compareTo(Lane o){
-		if (this.dangerLevel>o.dangerLevel){
-			return 1;
-		}else if(this.dangerLevel<o.dangerLevel){
-			return -1;
-		}
-		return 0;
+		return (this.dangerLevel - o.dangerLevel);
 	}
 
 	public Wall getLaneWall() {

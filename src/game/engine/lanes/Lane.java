@@ -4,8 +4,6 @@ import game.engine.base.Wall;
 import game.engine.titans.Titan;
 import game.engine.weapons.Weapon;
 
-
-
 public class Lane implements Comparable<Lane>{
 	private final Wall laneWall;
 	private int dangerLevel;
@@ -43,7 +41,4 @@ public class Lane implements Comparable<Lane>{
 		return weapons;
 	}
 
-	
-	
-	
 }

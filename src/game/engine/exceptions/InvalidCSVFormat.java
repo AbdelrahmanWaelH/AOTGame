@@ -6,7 +6,7 @@ private static final String MSG = "Invalid input detected while reading csv file
 private String inputLine;
 
 public InvalidCSVFormat(String inputLine){
-	super(MSG + " " + inputLine);
+	super(MSG + inputLine);
 	this.inputLine = inputLine;
 }
 public InvalidCSVFormat(String message, String inputLine){

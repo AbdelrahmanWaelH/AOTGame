@@ -13,15 +13,15 @@ public class Wall implements Attackee{
 	public int getBaseHealth() {
 		return baseHealth;
 	}
-	
+
 	@Override
 	public int getCurrentHealth() {
-		return currentHealth;
+		// TODO Auto-generated method stub
+		return this.currentHealth;
 	}
-	
+
 	@Override
 	public void setCurrentHealth(int health) {
-		this.currentHealth = health;
 	}
 
 	@Override
@@ -29,6 +29,8 @@ public class Wall implements Attackee{
 		// TODO Auto-generated method stub
 		return -1;
 	}
+	
+
 	
 	
 }

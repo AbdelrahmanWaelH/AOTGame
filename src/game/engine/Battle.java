@@ -1,5 +1,6 @@
 package game.engine;
 import java.util.*;
+import game.engine.dataloader.DataLoader;
 import game.engine.titans.*;
 import game.engine.lanes.Lane;
 import game.engine.weapons.factory.WeaponFactory;
@@ -14,12 +15,11 @@ public class Battle {
 	private int numberOfTitansPerTurn;
 	private int score;
 	private int titanSpawnDistance;
-	private  WeaponFactory weaponFactory; 
-	
+	private final WeaponFactory weaponFactory; 
 	private final HashMap<Integer, TitanRegistry> titansArchives;
 	private final  ArrayList<Titan> approachingTitans;
-	private PriorityQueue<Lane> lanes;
-	private  ArrayList<Lane> originalLanes; //these 4 attributes may need to become final, not sure yet
+	private final PriorityQueue<Lane> lanes;
+	private final ArrayList<Lane> originalLanes; 
 	
 	public Battle(int numberOfTurns, int score, int titanSpawnDistance, int initialNumOfLanes, int initialResourcesPerLane ) throws Exception{ // check the throws IOException keyword
 		this.numberOfTurns = numberOfTurns;
@@ -28,9 +28,11 @@ public class Battle {
 		this.titanSpawnDistance = titanSpawnDistance;
 		this.weaponFactory = new WeaponFactory();
 		this.battlePhase = BattlePhase.EARLY;
-		this.titansArchives = new HashMap<Integer, TitanRegistry>();
+		this.titansArchives = DataLoader.readTitanRegistry() ;
 		this.approachingTitans = new ArrayList<Titan>();
-		//this.initializeLanes(initialNumOfLanes);
+		this.lanes = new PriorityQueue<Lane>();
+		this.originalLanes = new ArrayList<Lane>();
+		this.initializeLanes(initialNumOfLanes);
 		// use initialResourcesPerLane
 		
 	}

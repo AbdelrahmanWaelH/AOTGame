@@ -4,7 +4,7 @@ public class WeaponRegistry {
 	private final int code;
 	private int price;
 	private int damage;
-	private String name;
+	private String name = "";
 	private int minRange;
 	private int maxRange;
 	

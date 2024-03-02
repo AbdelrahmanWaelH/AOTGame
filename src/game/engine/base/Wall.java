@@ -22,6 +22,10 @@ public class Wall implements Attackee{
 
 	@Override
 	public void setCurrentHealth(int health) {
+		if (health >= 0)
+			this.currentHealth = health;
+		else
+		this.currentHealth = 0;
 	}
 
 	@Override

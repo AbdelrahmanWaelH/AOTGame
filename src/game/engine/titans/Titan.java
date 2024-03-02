@@ -32,6 +32,10 @@ public abstract class Titan implements Comparable <Titan>, Attacker, Attackee, M
 	}
 
 	public void setCurrentHealth(int health) {
+		if (health >= 0)
+			this.currentHealth = health;
+		else
+		this.currentHealth = 0;
 	}
 
 	public int getSpeed() {

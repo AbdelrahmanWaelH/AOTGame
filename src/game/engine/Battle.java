@@ -7,7 +7,7 @@ import game.engine.weapons.factory.WeaponFactory;
 import game.engine.base.Wall;
 
 public class Battle {
-	private static int[][] PHASES_APPROACHING_TITANS;
+	private static final int[][] PHASES_APPROACHING_TITANS;
 	private static final int WALL_BASE_HEALTH = 10000;
 	private int numberOfTurns;
 	private int resourcesGathered;
@@ -21,6 +21,14 @@ public class Battle {
 	private final PriorityQueue<Lane> lanes;
 	private final ArrayList<Lane> originalLanes; 
 	
+	static { //This block was taken from ChatGPT
+        PHASES_APPROACHING_TITANS = new int[][] {
+            { 1, 1, 1, 2, 1, 3, 4 },
+            { 2, 2, 2, 1, 3, 3, 4 },
+            { 4, 4, 4, 4, 4, 4, 4 }
+        };
+    }
+	
 	public Battle(int numberOfTurns, int score, int titanSpawnDistance, int initialNumOfLanes, int initialResourcesPerLane ) throws Exception{ // check the throws IOException keyword
 		this.numberOfTurns = numberOfTurns;
 		this.resourcesGathered = 0;
@@ -33,9 +41,7 @@ public class Battle {
 		this.lanes = new PriorityQueue<Lane>();
 		this.originalLanes = new ArrayList<Lane>();
 		this.initializeLanes(initialNumOfLanes);
-		// use initialResourcesPerLane
-		
-	}
+		}
 	private void initializeLanes(int numOfLanes){
 		for (int i = 0; i < numOfLanes; i++){
 			Wall w = new Wall(WALL_BASE_HEALTH);

@@ -16,7 +16,7 @@ public class DataLoader {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                 h.put(Integer.parseInt(data[0]), new TitanRegistry(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]),Integer.parseInt(data[3]),Integer.parseInt(data[4]),Integer.parseInt(data[5]),Integer.parseInt(data[6])));
+                h.put(Integer.parseInt(data[0]), new TitanRegistry(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]),Integer.parseInt(data[3]),Integer.parseInt(data[4]),Integer.parseInt(data[5]),Integer.parseInt(data[6])));
             }
         } catch (IOException e) {
             e.printStackTrace();

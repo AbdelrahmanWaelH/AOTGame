@@ -1,4 +1,5 @@
 package game.engine.weapons;
+import game.engine.weapons.*;
 
 public class WeaponRegistry {
 	private final int code;
@@ -17,6 +18,7 @@ public class WeaponRegistry {
 		this(code, price);
 		this.damage=damage;
 		this.name=name;
+		
 	}
 	
 	public WeaponRegistry(int code, int price, int damage, String name, int minRange, int maxRange){
@@ -24,7 +26,9 @@ public class WeaponRegistry {
 		this.minRange=minRange;
 		this.maxRange=maxRange;
 	}
-
+	public String toString(){
+		return this.code + " " + this.price + " "+ this.damage + " " + this.name + " " + this.minRange + " " + this.maxRange;
+	}
 	public int getCode() {
 		return code;
 	}

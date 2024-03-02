@@ -48,4 +48,20 @@ public class DataLoader {
 	public String getWEAPONS_FILE_NAME() {
 		return WEAPONS_FILE_NAME;
 	}
+	
+		public static void main(String[] args) {
+	        try {
+	            HashMap<Integer, WeaponRegistry> weaponRegistryMap = readWeaponRegistry();
+	            printWeaponRegistry(weaponRegistryMap);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    public static void printWeaponRegistry(HashMap<Integer, WeaponRegistry> weaponRegistryMap) {
+	        for (Map.Entry<Integer, WeaponRegistry> entry : weaponRegistryMap.entrySet()) {
+	            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+	        }
+	    }
+	
 }

@@ -56,19 +56,19 @@ public class DataLoader {
 	
 	
 	// this was just used to test the static methods written above 
-		public static void main(String[] args) {
-	        try {
-	            HashMap<Integer, WeaponRegistry> weaponRegistryMap = readWeaponRegistry();
-	            printWeaponRegistry(weaponRegistryMap);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-
-	    public static void printWeaponRegistry(HashMap<Integer, WeaponRegistry> weaponRegistryMap) {
-	        for (Map.Entry<Integer, WeaponRegistry> entry : weaponRegistryMap.entrySet()) {
-	            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
-	        }
-	    }
+//		public static void main(String[] args) {
+//	        try {
+//	            HashMap<Integer, WeaponRegistry> weaponRegistryMap = readWeaponRegistry();
+//	            printWeaponRegistry(weaponRegistryMap);
+//	        } catch (IOException e) {
+//	            e.printStackTrace();
+//	        }
+//	    }
+//
+//	    public static void printWeaponRegistry(HashMap<Integer, WeaponRegistry> weaponRegistryMap) {
+//	        for (Map.Entry<Integer, WeaponRegistry> entry : weaponRegistryMap.entrySet()) {
+//	            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+//	        }
+//	    }
 	
 }

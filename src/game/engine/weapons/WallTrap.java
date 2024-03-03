@@ -7,14 +7,4 @@ public class WallTrap extends Weapon{
 	public WallTrap(int baseDamage){
 		super(baseDamage);
 	}
-
-//	public Titan getAttackAction() {
-//		return attackAction;
-//	}
-//
-//	public void setAttackAction(Titan attackAction) {
-//		this.attackAction = attackAction;
-//	}
-	
-	
 }

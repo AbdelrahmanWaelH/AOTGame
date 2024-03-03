@@ -7,8 +7,8 @@ import game.engine.weapons.Weapon;
 public class Lane implements Comparable<Lane>{
 	private final Wall laneWall;
 	private int dangerLevel;
-	private final PriorityQueue<Titan> titans; //should be final 
-	private final  ArrayList<Weapon> weapons; // should be final
+	private final PriorityQueue<Titan> titans;
+	private final  ArrayList<Weapon> weapons; 
 	
 	public Lane(Wall laneWall){
 		this.laneWall=laneWall;

@@ -1,5 +1,4 @@
 package game.engine.weapons;
-import game.engine.weapons.*;
 
 public class WeaponRegistry {
 	private final int code;
@@ -8,25 +7,16 @@ public class WeaponRegistry {
 	private String name = "";
 	private int minRange;
 	private int maxRange;
-	//private Weapon w;
 	
 	public WeaponRegistry(int code, int price){
 		this.code=code;
 		this.price=price;
-		//this.w = new PiercingCannon(0);
 	}
 	
 	public WeaponRegistry(int code, int price, int damage, String name){
 		this(code, price);
 		this.damage=damage;
 		this.name=name;
-//		switch (this.code){
-//		case 1: this.w = new PiercingCannon(this.damage);
-//		case 2: this.w = new SniperCannon(this.damage);
-//		case 3: this.w = new VolleySpreadCannon(this.damage,this.minRange,this.maxRange);
-//		case 4: this.w = new WallTrap(this.damage);
-//		}
-		
 	}
 	
 	public WeaponRegistry(int code, int price, int damage, String name, int minRange, int maxRange){

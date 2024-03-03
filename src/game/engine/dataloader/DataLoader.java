@@ -26,7 +26,7 @@ public class DataLoader {
 	
 	public static HashMap<Integer, WeaponRegistry> readWeaponRegistry() throws IOException{
 		HashMap<Integer, WeaponRegistry> h = new HashMap<Integer, WeaponRegistry>();
-		try (BufferedReader br = new BufferedReader(new FileReader(TITANS_FILE_NAME))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(WEAPONS_FILE_NAME))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(","); //cases length of string array calls appropriate constructors in dataloader

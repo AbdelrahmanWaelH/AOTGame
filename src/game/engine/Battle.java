@@ -1,6 +1,8 @@
 package game.engine;
 import java.util.*;
+
 import game.engine.dataloader.DataLoader;
+import game.engine.exceptions.InvalidLaneException;
 import game.engine.titans.*;
 import game.engine.lanes.Lane;
 import game.engine.weapons.factory.WeaponFactory;
@@ -42,12 +44,16 @@ public class Battle {
 		this.originalLanes = new ArrayList<Lane>();
 		this.initializeLanes(initialNumOfLanes);
 		}
-	private void initializeLanes(int numOfLanes){
-		for (int i = 0; i < numOfLanes; i++){
-			Wall w = new Wall(WALL_BASE_HEALTH);
-			Lane l = new Lane(w);
-			lanes.add(l);
-			originalLanes.add(l);
+	private void initializeLanes(int numOfLanes) throws InvalidLaneException{
+		try{
+			for (int i = 0; i < numOfLanes; i++){
+				Wall w = new Wall(WALL_BASE_HEALTH);
+				Lane l = new Lane(w);
+				lanes.add(l);
+				originalLanes.add(l);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	public int getNumberOfTurns() {

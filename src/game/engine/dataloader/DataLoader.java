@@ -1,7 +1,10 @@
 package game.engine.dataloader;
 import java.io.*;
+
 import game.engine.weapons.WeaponRegistry;
+import game.engine.exceptions.InvalidCSVFormat;
 import game.engine.titans.TitanRegistry;
+
 import java.util.*;
 
 public class DataLoader {
@@ -10,7 +13,7 @@ public class DataLoader {
 	
 	//DISCLAIMER: ChatGPT was used to aid in the use of the buffer reader and hashmap definition, the rest was learned from various Q&A's on programming forums 
 
-		public static HashMap<Integer, TitanRegistry> readTitanRegistry() throws IOException{
+		public static HashMap<Integer, TitanRegistry> readTitanRegistry() throws IOException, InvalidCSVFormat{
 		HashMap<Integer, TitanRegistry> h = new HashMap<Integer, TitanRegistry>();
 		try (BufferedReader br = new BufferedReader(new FileReader(TITANS_FILE_NAME))) {
             String line;
@@ -24,7 +27,7 @@ public class DataLoader {
 		return h;
 	}
 	
-	public static HashMap<Integer, WeaponRegistry> readWeaponRegistry() throws IOException{
+	public static HashMap<Integer, WeaponRegistry> readWeaponRegistry() throws IOException, InvalidCSVFormat{
 		HashMap<Integer, WeaponRegistry> h = new HashMap<Integer, WeaponRegistry>();
 		try (BufferedReader br = new BufferedReader(new FileReader(WEAPONS_FILE_NAME))) {
             String line;

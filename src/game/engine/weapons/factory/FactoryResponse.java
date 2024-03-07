@@ -1,4 +1,5 @@
 package game.engine.weapons.factory;
+import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.weapons.Weapon;
 
 public class FactoryResponse {
@@ -6,6 +7,7 @@ public class FactoryResponse {
 	private final int remainingResources;
 	
 	public FactoryResponse(Weapon weapon, int remainingResources){
+
 		this.weapon=weapon;
 		this.remainingResources=remainingResources;
 	}

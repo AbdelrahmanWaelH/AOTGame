@@ -1,11 +1,11 @@
 package game.engine.dataloader;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
 
-import game.engine.weapons.WeaponRegistry;
-import game.engine.exceptions.InvalidCSVFormat;
 import game.engine.titans.TitanRegistry;
-
-import java.util.*;
+import game.engine.weapons.WeaponRegistry;
 
 public class DataLoader {
 	private static final String TITANS_FILE_NAME= "titans.csv";
@@ -13,40 +13,40 @@ public class DataLoader {
 	
 	//DISCLAIMER: ChatGPT was used to aid in the use of the buffer reader and hashmap definition, the rest was learned from various Q&A's on programming forums 
 
-		public static HashMap<Integer, TitanRegistry> readTitanRegistry() throws IOException, InvalidCSVFormat{
-		HashMap<Integer, TitanRegistry> h = new HashMap<Integer, TitanRegistry>();
-		try (BufferedReader br = new BufferedReader(new FileReader(TITANS_FILE_NAME))) {
+		public static HashMap<Integer, TitanRegistry> readTitanRegistry() throws IOException{
+		HashMap<Integer, TitanRegistry> outputHashMap = new HashMap<Integer, TitanRegistry>();
+		try (BufferedReader reader = new BufferedReader(new FileReader(TITANS_FILE_NAME))) {
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
-                h.put(Integer.parseInt(data[0]), new TitanRegistry(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]),Integer.parseInt(data[3]),Integer.parseInt(data[4]),Integer.parseInt(data[5]),Integer.parseInt(data[6])));
+                outputHashMap.put(Integer.parseInt(data[0]), new TitanRegistry(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]),Integer.parseInt(data[3]),Integer.parseInt(data[4]),Integer.parseInt(data[5]),Integer.parseInt(data[6])));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-		return h;
+		return outputHashMap;
 	}
 	
-	public static HashMap<Integer, WeaponRegistry> readWeaponRegistry() throws IOException, InvalidCSVFormat{
-		HashMap<Integer, WeaponRegistry> h = new HashMap<Integer, WeaponRegistry>();
-		try (BufferedReader br = new BufferedReader(new FileReader(WEAPONS_FILE_NAME))) {
+	public static HashMap<Integer, WeaponRegistry> readWeaponRegistry() throws IOException{
+		HashMap<Integer, WeaponRegistry> outputHashMap = new HashMap<Integer, WeaponRegistry>();
+		try (BufferedReader reader = new BufferedReader(new FileReader(WEAPONS_FILE_NAME))) {
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] data = line.split(","); //cases length of string array calls appropriate constructors in dataloader
                 if (data.length == 2){
-                	h.put(Integer.parseInt(data[0]), new WeaponRegistry(Integer.parseInt(data[0]),Integer.parseInt(data[1])));
+                	outputHashMap.put(Integer.parseInt(data[0]), new WeaponRegistry(Integer.parseInt(data[0]),Integer.parseInt(data[1])));
                 }
                 else if (data.length == 4)
                 {
-                	h.put(Integer.parseInt(data[0]), new WeaponRegistry(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]),data[3]));
+                	outputHashMap.put(Integer.parseInt(data[0]), new WeaponRegistry(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]),data[3]));
                 }
                 else 
-                	h.put(Integer.parseInt(data[0]), new WeaponRegistry(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]),data[3],Integer.parseInt(data[4]),Integer.parseInt(data[5])));
+                	outputHashMap.put(Integer.parseInt(data[0]), new WeaponRegistry(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]),data[3],Integer.parseInt(data[4]),Integer.parseInt(data[5])));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-		return h;
+		return outputHashMap;
 	}
 
 	

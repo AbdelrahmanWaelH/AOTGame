@@ -1,5 +1,4 @@
 package game.engine.weapons.factory;
-import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.weapons.Weapon;
 
 public class FactoryResponse {

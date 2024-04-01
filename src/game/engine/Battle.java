@@ -33,8 +33,9 @@ public class Battle {
 	
 	public Battle(int numberOfTurns, int score, int titanSpawnDistance, int initialNumOfLanes, int initialResourcesPerLane ) throws Exception{ // check the throws IOException keyword
 		this.numberOfTurns = numberOfTurns;
-		this.resourcesGathered = 0;
+		this.resourcesGathered = initialResourcesPerLane*initialNumOfLanes;
 		this.score = score;
+		this.numberOfTitansPerTurn = 1;
 		this.titanSpawnDistance = titanSpawnDistance;
 		this.weaponFactory = new WeaponFactory();
 		this.battlePhase = BattlePhase.EARLY;
@@ -44,18 +45,14 @@ public class Battle {
 		this.originalLanes = new ArrayList<Lane>();
 		this.initializeLanes(initialNumOfLanes);
 		}
-	private void initializeLanes(int numOfLanes) throws InvalidLaneException{
-		try{
+	private void initializeLanes(int numOfLanes){
 			for (int i = 0; i < numOfLanes; i++){
 				Wall w = new Wall(WALL_BASE_HEALTH);
 				Lane l = new Lane(w);
 				lanes.add(l);
 				originalLanes.add(l);
 			}
-		}catch(Exception e){
-			e.printStackTrace();
 		}
-	}
 	public int getNumberOfTurns() {
 		return numberOfTurns;
 	}

@@ -14,7 +14,7 @@ public abstract class Titan implements Comparable <Titan>, Attacker, Attackee, M
 	
 	public Titan(int baseHealth, int baseDamage, int heightInMeters, int distanceFromBase, int speed, int resourcesValue, int dangerLevel){
 		this.baseHealth = baseHealth;
-		this.currentHealth = this.baseHealth;
+		this.currentHealth = baseHealth;
 		this.baseDamage = baseDamage;
 		this.heightInMeters = heightInMeters;
 		this.distanceFromBase = distanceFromBase;
@@ -64,11 +64,16 @@ public abstract class Titan implements Comparable <Titan>, Attacker, Attackee, M
 
 	@Override
 	public void setDistance(int distance) {
+		if (distance >= 0)
 		this.distanceFromBase = distance;
-		
+		else
+		this.distanceFromBase = 0;
 	}
 	public int getHeightInMeters(){
 		return this.heightInMeters;
+	}
+	public int getBaseHealth(){
+		return this.baseHealth;
 	}
 	
 }

@@ -18,6 +18,7 @@ public class DataLoader
 	{
 		HashMap<Integer, TitanRegistry> titanRegistryMap = new HashMap<>();
 
+		@SuppressWarnings("resource")
 		BufferedReader br = new BufferedReader(new FileReader(TITANS_FILE_NAME));
 
 		while (br.ready())
@@ -46,6 +47,7 @@ public class DataLoader
 	{
 		HashMap<Integer, WeaponRegistry> weaponRegistryMap = new HashMap<>();
 
+		@SuppressWarnings("resource")
 		BufferedReader br = new BufferedReader(new FileReader(WEAPONS_FILE_NAME));
 
 		while (br.ready())

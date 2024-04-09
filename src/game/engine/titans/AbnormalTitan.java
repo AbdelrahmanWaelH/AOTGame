@@ -1,4 +1,5 @@
 package game.engine.titans;
+import game.engine.interfaces.*;
 
 public class AbnormalTitan extends Titan
 {
@@ -9,5 +10,10 @@ public class AbnormalTitan extends Titan
 	{
 		super(baseHealth, baseDamage, heightInMeters, distanceFromBase, speed, resourcesValue, dangerLevel);
 	}
-
+	public int attack(Attackee target){ //How would you override a default method?
+		int resourcesGained = super.attack(target);
+		if (resourcesGained != 0)
+		return resourcesGained;
+		return super.attack(target);
+	}
 }

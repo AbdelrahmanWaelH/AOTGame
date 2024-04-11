@@ -7,6 +7,8 @@ import java.util.PriorityQueue;
 
 import game.engine.base.Wall;
 import game.engine.dataloader.DataLoader;
+import game.engine.exceptions.InsufficientResourcesException;
+import game.engine.exceptions.InvalidLaneException;
 import game.engine.lanes.Lane;
 import game.engine.titans.Titan;
 import game.engine.titans.TitanRegistry;
@@ -147,6 +149,18 @@ public class Battle
 			this.getOriginalLanes().add(l);
 			this.getLanes().add(l);
 		}
+	} 
+	//OK! The following four methods rely on 2.3 - 2.6, can't work on those just yet... :p
+	public void refillApproachingTitans(){
+		//bruh what
 	}
-
+	public void purchaseWeapon(int weaponCode, Lane lane) throws InsufficientResourcesException, InvalidLaneException{
+		//bruh what 
+	}
+	public void passTurn(){
+		//huh??!
+	}
+	private void addTurnTitansToLane(){
+		//lmao what 
+	}
 }

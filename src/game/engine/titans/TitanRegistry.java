@@ -59,4 +59,20 @@ public class TitanRegistry // For storing the titan's information from the csv f
 	}
 	
 
+	Titan spawnTitan(int distanceFromBase){
+		int code= getCode();
+		Titan currTitan;
+		if(code==1){
+			currTitan= new PureTitan(getBaseHealth(), getBaseDamage(), getHeightInMeters(), distanceFromBase, getSpeed(), getResourcesValue(), getDangerLevel());
+		}else if(code==2){
+			currTitan= new AbnormalTitan(getBaseHealth(), getBaseDamage(), getHeightInMeters(), distanceFromBase, getSpeed(), getResourcesValue(), getDangerLevel());
+		}else if(code==3){
+			currTitan= new ArmoredTitan(getBaseHealth(), getBaseDamage(), getHeightInMeters(), distanceFromBase, getSpeed(), getResourcesValue(), getDangerLevel());
+		}else{
+			currTitan= new ColossalTitan(getBaseHealth(), getBaseDamage(), getHeightInMeters(), distanceFromBase, getSpeed(), getResourcesValue(), getDangerLevel());
+		}
+		
+		return currTitan;
+	}
+
 }

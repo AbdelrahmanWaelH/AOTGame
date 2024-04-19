@@ -1,6 +1,7 @@
 package game.engine.weapons;
 
 import java.util.PriorityQueue;
+import java.util.Stack;
 
 import game.engine.titans.Titan;
 
@@ -30,7 +31,7 @@ public class VolleySpreadCannon extends Weapon
 
 	@Override
 	public int turnAttack(PriorityQueue<Titan> laneTitans) {
-		PriorityQueue<Titan> reservedTitans = new PriorityQueue<>(); 
+		Stack <Titan> reservedTitans = new Stack<>(); 
 		//stores titans who are either not attacked or not yet defeated
 		int totalResourcesGained = 0;
 
@@ -39,13 +40,13 @@ public class VolleySpreadCannon extends Weapon
 			if (t.getDistance() >= minRange && t.getDistance()  <= maxRange){
 			int resourcesGained = 0; 
 			resourcesGained = t.takeDamage(this.getDamage());//titan gets attacked
-				if (resourcesGained == 0){ //if titan is not defeated, add to PQ
+				if (resourcesGained == 0){ //if titan is not defeated, add to stack
 					reservedTitans.add(t);}
 			totalResourcesGained += resourcesGained; //add resources gained regardless
 			}
 		}
 		while (!reservedTitans.isEmpty()){
-			laneTitans.add(reservedTitans.remove());
+			laneTitans.add(reservedTitans.pop());
 		} //return living titans into lane 
 		return totalResourcesGained; 
 	}

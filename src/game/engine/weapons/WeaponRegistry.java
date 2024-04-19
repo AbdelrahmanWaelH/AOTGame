@@ -1,7 +1,5 @@
 package game.engine.weapons;
 
-import game.engine.weapons.Weapon;
-
 public class WeaponRegistry
 {
 	private final int code;

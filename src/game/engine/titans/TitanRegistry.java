@@ -58,10 +58,7 @@ public class TitanRegistry // For storing the titan's information from the csv f
 		return dangerLevel;
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4a8bf600dea8e149476f2d468c9324e0d06ddbb2
+
 	Titan spawnTitan(int distanceFromBase){
 		int code= getCode();
 		Titan currTitan;
@@ -77,10 +74,4 @@ public class TitanRegistry // For storing the titan's information from the csv f
 		
 		return currTitan;
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> 039ddaef95e5b672e634890fb5d7d7fa1c5b5828
-=======
->>>>>>> 4a8bf600dea8e149476f2d468c9324e0d06ddbb2
 }

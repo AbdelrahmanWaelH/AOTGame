@@ -3,13 +3,15 @@ package game.engine.lanes;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.PriorityQueue;
+import java.util.Stack;
 
 import game.engine.base.Wall;
-import game.engine.interfaces.*;
+import game.engine.interfaces.Attackee;
+import game.engine.interfaces.Attacker;
 import game.engine.titans.Titan;
 import game.engine.weapons.Weapon;
 
-public class Lane implements Comparable<Lane>, Attackee, Attacker, Mobil
+public class Lane implements Comparable<Lane>, Attackee, Attacker
 {
 	private final Wall laneWall;
 	private int dangerLevel;
@@ -65,7 +67,7 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker, Mobil
 	}
 	
 	void moveLaneTitans(){
-		PriorityQueue<Titan> tempQ= new PriorityQueue<>();
+		Stack<Titan> tempQ= new Stack<>();
 		while(titans.size()!=0){
 			Titan currTitan;
 			currTitan=titans.peek();
@@ -76,14 +78,14 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker, Mobil
 			}
 		}
 		
-		while(tempQ.size()!=0){
-			addTitan(tempQ.remove());
+		while(!tempQ.isEmpty()){
+			addTitan(tempQ.pop());
 		}
 	}
 	
 	int performLaneTitansAttacks(){
 		int resourcesGathered=0;
-		PriorityQueue<Titan> tempQ= new PriorityQueue<>();
+		Stack<Titan> tempQ= new Stack<>();
 		while(titans.size()!=0){
 			Titan currTitan;
 			currTitan=titans.peek();
@@ -96,8 +98,8 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker, Mobil
 			}
 		}
 		
-		while(tempQ.size()!=0){
-			addTitan(tempQ.remove());
+		while(!tempQ.isEmpty()){
+			addTitan(tempQ.pop());
 		}
 		
 		return resourcesGathered;
@@ -148,30 +150,6 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker, Mobil
 		dangerLevel=dangerSum/titanCount;
 		
 		setDangerLevel(dangerLevel);
-	}
-
-	@Override
-	public int getDistance() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getDistance'");
-	}
-
-	@Override
-	public void setDistance(int distance) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'setDistance'");
-	}
-
-	@Override
-	public int getSpeed() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getSpeed'");
-	}
-
-	@Override
-	public void setSpeed(int speed) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'setSpeed'");
 	}
 
 	@Override

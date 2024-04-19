@@ -7,11 +7,12 @@ import java.util.PriorityQueue;
 import game.engine.base.Wall;
 import game.engine.interfaces.Attackee;
 import game.engine.interfaces.Attacker;
+import game.engine.interfaces.Mobil;
 import game.engine.titans.AbnormalTitan;
 import game.engine.titans.Titan;
 import game.engine.weapons.Weapon;
 
-public class Lane implements Comparable<Lane>, Attackee, Attacker, Mobil
+public class Lane implements Comparable<Lane>, Attackee, Attacker
 {
 	private final Wall laneWall;
 	private int dangerLevel;
@@ -150,5 +151,29 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker, Mobil
 		dangerLevel=dangerSum/titanCount;
 		
 		setDangerLevel(dangerLevel);
+	}
+
+	@Override
+	public int getDamage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getCurrentHealth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setCurrentHealth(int health) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getResourcesValue() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

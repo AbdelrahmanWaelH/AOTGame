@@ -3,12 +3,16 @@ package game.engine.lanes;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.PriorityQueue;
+import java.util.Stack;
 
 import game.engine.base.Wall;
 import game.engine.interfaces.Attackee;
 import game.engine.interfaces.Attacker;
+<<<<<<< HEAD
 import game.engine.interfaces.Mobil;
 import game.engine.titans.AbnormalTitan;
+=======
+>>>>>>> 4a8bf600dea8e149476f2d468c9324e0d06ddbb2
 import game.engine.titans.Titan;
 import game.engine.weapons.Weapon;
 
@@ -68,7 +72,7 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker
 	}
 	
 	void moveLaneTitans(){
-		PriorityQueue<Titan> tempQ= new PriorityQueue<>();
+		Stack<Titan> tempQ= new Stack<>();
 		while(titans.size()!=0){
 			Titan currTitan;
 			currTitan=titans.peek();
@@ -79,14 +83,14 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker
 			}
 		}
 		
-		while(tempQ.size()!=0){
-			addTitan(tempQ.remove());
+		while(!tempQ.isEmpty()){
+			addTitan(tempQ.pop());
 		}
 	}
 	
 	int performLaneTitansAttacks(){
 		int resourcesGathered=0;
-		PriorityQueue<Titan> tempQ= new PriorityQueue<>();
+		Stack<Titan> tempQ= new Stack<>();
 		while(titans.size()!=0){
 			Titan currTitan;
 			currTitan=titans.peek();
@@ -99,8 +103,8 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker
 			}
 		}
 		
-		while(tempQ.size()!=0){
-			addTitan(tempQ.remove());
+		while(!tempQ.isEmpty()){
+			addTitan(tempQ.pop());
 		}
 		
 		return resourcesGathered;
@@ -156,24 +160,40 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker
 	@Override
 	public int getDamage() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		return 0;
+=======
+		throw new UnsupportedOperationException("Unimplemented method 'getDamage'");
+>>>>>>> 4a8bf600dea8e149476f2d468c9324e0d06ddbb2
 	}
 
 	@Override
 	public int getCurrentHealth() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		return 0;
+=======
+		throw new UnsupportedOperationException("Unimplemented method 'getCurrentHealth'");
+>>>>>>> 4a8bf600dea8e149476f2d468c9324e0d06ddbb2
 	}
 
 	@Override
 	public void setCurrentHealth(int health) {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		
+=======
+		throw new UnsupportedOperationException("Unimplemented method 'setCurrentHealth'");
+>>>>>>> 4a8bf600dea8e149476f2d468c9324e0d06ddbb2
 	}
 
 	@Override
 	public int getResourcesValue() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		return 0;
+=======
+		throw new UnsupportedOperationException("Unimplemented method 'getResourcesValue'");
+>>>>>>> 4a8bf600dea8e149476f2d468c9324e0d06ddbb2
 	}
 }

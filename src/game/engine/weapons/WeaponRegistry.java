@@ -1,5 +1,7 @@
 package game.engine.weapons;
 
+import game.engine.weapons.Weapon;
+
 public class WeaponRegistry
 {
 	private final int code;
@@ -64,6 +66,22 @@ public class WeaponRegistry
 	public int getMaxRange()
 	{
 		return maxRange;
+	}
+	public Weapon buildWeapon(){
+		if(this.code==1)
+			return new PiercingCannon(damage);
+		else
+			if(this.code==2)
+				return new SniperCannon(damage);
+			else
+				if(this.code==3)
+					return new VolleySpreadCannon(damage,minRange,maxRange);
+				else
+					if(this.code==4)
+						return new WallTrap(damage);
+					else
+						return null;
+		
 	}
 
 }

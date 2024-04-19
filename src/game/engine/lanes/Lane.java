@@ -5,9 +5,7 @@ import java.util.Iterator;
 import java.util.PriorityQueue;
 
 import game.engine.base.Wall;
-import game.engine.interfaces.Attackee;
-import game.engine.interfaces.Attacker;
-import game.engine.titans.AbnormalTitan;
+import game.engine.interfaces.*;
 import game.engine.titans.Titan;
 import game.engine.weapons.Weapon;
 
@@ -150,5 +148,53 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker, Mobil
 		dangerLevel=dangerSum/titanCount;
 		
 		setDangerLevel(dangerLevel);
+	}
+
+	@Override
+	public int getDistance() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getDistance'");
+	}
+
+	@Override
+	public void setDistance(int distance) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'setDistance'");
+	}
+
+	@Override
+	public int getSpeed() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getSpeed'");
+	}
+
+	@Override
+	public void setSpeed(int speed) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'setSpeed'");
+	}
+
+	@Override
+	public int getDamage() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getDamage'");
+	}
+
+	@Override
+	public int getCurrentHealth() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getCurrentHealth'");
+	}
+
+	@Override
+	public void setCurrentHealth(int health) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'setCurrentHealth'");
+	}
+
+	@Override
+	public int getResourcesValue() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getResourcesValue'");
 	}
 }

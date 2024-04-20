@@ -6,8 +6,6 @@ import java.util.PriorityQueue;
 import java.util.Stack;
 
 import game.engine.base.Wall;
-import game.engine.interfaces.Attackee;
-import game.engine.interfaces.Attacker;
 
 import game.engine.titans.Titan;
 import game.engine.weapons.Weapon;

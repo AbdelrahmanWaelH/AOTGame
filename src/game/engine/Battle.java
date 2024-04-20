@@ -12,7 +12,9 @@ import game.engine.exceptions.InvalidLaneException;
 import game.engine.lanes.Lane;
 import game.engine.titans.Titan;
 import game.engine.titans.TitanRegistry;
+import game.engine.weapons.Weapon;
 import game.engine.weapons.WeaponRegistry;
+import game.engine.weapons.factory.FactoryResponse;
 import game.engine.weapons.factory.WeaponFactory;
 
 public class Battle
@@ -168,8 +170,17 @@ public class Battle
 		}
 	}
 	public void purchaseWeapon(int weaponCode, Lane lane) throws InsufficientResourcesException, InvalidLaneException, IOException{
-		HashMap<Integer, WeaponRegistry> Weapons = DataLoader.readWeaponRegistry();
-		lane.addWeapon(Weapons.get(weaponCode).buildWeapon()); //Not sure if this should be using the FactoryResponse class or not, it did solve 2 failures though
+		WeaponFactory factory = new WeaponFactory();
+		HashMap<Integer, WeaponRegistry> weapons = DataLoader.readWeaponRegistry();
+		if (factory.buyWeapon(resourcesGathered, weaponCode) instanceof FactoryResponse){
+		Weapon w = weapons.get(weaponCode).buildWeapon();
+		lane.addWeapon(w);
+		}
+
+
+
+		//if (Weapons.get(weaponCode).buildWeapon().getPrice() <= this.resourcesGathered)
+		//Not sure if this should be using the FactoryResponse class or not, it did solve 2 failures though
 	} 
 	public void passTurn(){
 		//huh??!

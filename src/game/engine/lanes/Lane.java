@@ -12,8 +12,7 @@ import game.engine.interfaces.Attacker;
 import game.engine.titans.Titan;
 import game.engine.weapons.Weapon;
 
-public class Lane implements Comparable<Lane>, Attackee, Attacker
-{
+public class Lane implements Comparable<Lane>{
 	private final Wall laneWall;
 	private int dangerLevel;
 	private final PriorityQueue<Titan> titans;
@@ -59,19 +58,18 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker
 		return this.dangerLevel - o.dangerLevel;
 	}
 	
-	void addTitan(Titan titan){
+	public void addTitan(Titan titan){
 		titans.add(titan);
 	}
 	
-	void addWeapon(Weapon weapon){
+	public void addWeapon(Weapon weapon){
 		weapons.add(weapon);
 	}
 	
-	void moveLaneTitans(){
+	public void moveLaneTitans(){
 		Stack<Titan> tempQ= new Stack<>();
-		while(titans.size()!=0){
-			Titan currTitan;
-			currTitan=titans.peek();
+		while(!titans.isEmpty()){
+			Titan currTitan = titans.peek();
 			if(!currTitan.hasReachedTarget()){
 				currTitan.move();
 				tempQ.add(currTitan);
@@ -84,18 +82,15 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker
 		}
 	}
 	
-	int performLaneTitansAttacks(){
+	public int performLaneTitansAttacks(){
 		int resourcesGathered=0;
 		Stack<Titan> tempQ= new Stack<>();
-		while(titans.size()!=0){
-			Titan currTitan;
-			currTitan=titans.peek();
+		while(!titans.isEmpty()){
+			Titan currTitan=titans.remove();
 			if(currTitan.hasReachedTarget()){
-				int currDamage=currTitan.getDamage();
-				laneWall.takeDamage(currDamage);
+				laneWall.takeDamage(currTitan.getDamage());
 				resourcesGathered+=laneWall.getResourcesValue();
 				tempQ.add(currTitan);
-				titans.remove();
 			}
 		}
 		
@@ -106,23 +101,23 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker
 		return resourcesGathered;
 	}
 	
-	int performLaneWeaponsAttacks(){
+	public int performLaneWeaponsAttacks(){
 		int resourcesGathered=0;
-		PriorityQueue<Titan> tempQ= new PriorityQueue<>();
+		Stack<Titan> tempQ= new Stack<>();
 		for(int i=0; i<weapons.size(); i++){
 			Weapon currWeapon;
 			currWeapon=weapons.get(i);
 			int currDamage=currWeapon.getDamage();
-			while(titans.size()!=0){  //uses weapon on each titan, so this iterates the titan queue
-				Titan currTitan;
-				currTitan=titans.peek();
-				currTitan.takeDamage(currDamage);
-				resourcesGathered+=currTitan.getResourcesValue();
+			while(!titans.isEmpty()){  //uses weapon on each titan, so this iterates the titan queue
+				Titan currTitan = titans.remove();
+				int resources = currTitan.takeDamage(currDamage);
+				if (resources == 0){
+				resourcesGathered += resources;
 				tempQ.add(currTitan);
-				titans.remove();
+				} //only undefeated titans will be re-inserted into the queue
 				}
-			while(tempQ.size()!=0){
-				addTitan(tempQ.remove());
+			while(!tempQ.isEmpty()){
+				addTitan(tempQ.pop());
 			}
 		}
 		
@@ -130,19 +125,17 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker
 		
 	}
 	
-	boolean isLaneLost(){
-		if(getLaneWall().getCurrentHealth()<=0){
-			return true;
-		}
-		return false;
+	public boolean isLaneLost(){
+		return (getLaneWall().getCurrentHealth()<=0);
+		
 	}
 	
-	void updateLaneDangerLevel(){
+	public void updateLaneDangerLevel(){
 		int dangerLevel=0;
 		int titanCount=titans.size();
 		int dangerSum=0;
 		
-		Iterator<Titan> value=titans.iterator();
+		Iterator<Titan> value=titans.iterator(); //wut duuuu heeeeell is an iterator
 		
 		while(value.hasNext()){
 			dangerSum+=value.next().getDangerLevel();
@@ -153,33 +146,4 @@ public class Lane implements Comparable<Lane>, Attackee, Attacker
 		setDangerLevel(dangerLevel);
 	}
 
-	@Override
-	public int getDamage() {
-		
-
-		return 0;
-
-
-
-	}
-
-	@Override
-	public int getCurrentHealth() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setCurrentHealth(int health) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public int getResourcesValue() {
-		// TODO Auto-generated method stub
-
-		return 0;
-
-	}
 }

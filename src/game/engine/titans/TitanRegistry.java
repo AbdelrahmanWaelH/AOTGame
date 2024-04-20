@@ -59,17 +59,17 @@ public class TitanRegistry // For storing the titan's information from the csv f
 	}
 	
 
-	Titan spawnTitan(int distanceFromBase){
+	public Titan spawnTitan(int distanceFromBase){
 		int code= getCode();
-		Titan currTitan;
+		Titan currTitan = null; //to return null if code doesn't match any of the cases
 		if(code==1){
-			currTitan= new PureTitan(getBaseHealth(), getBaseDamage(), getHeightInMeters(), distanceFromBase, getSpeed(), getResourcesValue(), getDangerLevel());
+			currTitan= new PureTitan(this.baseHealth, this.baseDamage, this.heightInMeters, distanceFromBase, this.speed, this.resourcesValue, this.dangerLevel);
 		}else if(code==2){
-			currTitan= new AbnormalTitan(getBaseHealth(), getBaseDamage(), getHeightInMeters(), distanceFromBase, getSpeed(), getResourcesValue(), getDangerLevel());
+			currTitan= new AbnormalTitan(this.baseHealth, this.baseDamage, this.heightInMeters, distanceFromBase, this.speed,this.resourcesValue, this.dangerLevel);
 		}else if(code==3){
-			currTitan= new ArmoredTitan(getBaseHealth(), getBaseDamage(), getHeightInMeters(), distanceFromBase, getSpeed(), getResourcesValue(), getDangerLevel());
+			currTitan= new ArmoredTitan(this.baseHealth, this.baseDamage, this.heightInMeters, distanceFromBase, this.speed, this.resourcesValue, this.dangerLevel);
 		}else{
-			currTitan= new ColossalTitan(getBaseHealth(), getBaseDamage(), getHeightInMeters(), distanceFromBase, getSpeed(), getResourcesValue(), getDangerLevel());
+			currTitan= new ColossalTitan(this.baseHealth, this.baseDamage, this.heightInMeters, distanceFromBase, this.speed, this.resourcesValue, this.dangerLevel);
 		}
 		
 		return currTitan;

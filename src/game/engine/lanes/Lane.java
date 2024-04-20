@@ -129,19 +129,22 @@ public class Lane implements Comparable<Lane>{
 	}
 	
 	public void updateLaneDangerLevel(){
-		int dangerLevel=0;
-		int titanCount=titans.size();
 		int dangerSum=0;
+		Stack<Titan> tempS= new Stack<>();
+		Titan currTitan;
 		
-		Iterator<Titan> value=titans.iterator(); //wut duuuu heeeeell is an iterator
-		
-		while(value.hasNext()){
-			dangerSum+=value.next().getDangerLevel();
+		while(titans.size()!=0){
+			currTitan=titans.remove();
+			dangerSum+=currTitan.getDangerLevel();
+			tempS.push(currTitan);
 		}
 		
-		dangerLevel=dangerSum/titanCount;
+		while(tempS.size()!=0){
+			titans.add(tempS.pop());
+		}
 		
-		setDangerLevel(dangerLevel);
+		
+		setDangerLevel(dangerSum);
 	}
 
 }

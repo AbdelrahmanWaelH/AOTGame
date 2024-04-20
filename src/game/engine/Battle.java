@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
+import java.util.Stack;
 
+import game.engine.lanes.*;
 import game.engine.base.Wall;
 import game.engine.dataloader.DataLoader;
 import game.engine.exceptions.InsufficientResourcesException;
@@ -188,4 +190,77 @@ public class Battle
 	 private void addTurnTitansToLane(){
 	// 	//lmao what 
 	}
+	 
+	 @SuppressWarnings("unused")
+	private void moveTitans(){
+		 Stack<Lane> tempS= new Stack<>();
+		 Lane currLane;
+		 while(lanes.size()!=0){
+			 currLane=lanes.remove();
+			 currLane.moveLaneTitans();
+			 tempS.push(currLane);
+		 }
+		 
+		 while(tempS.size()!=0){
+			 lanes.add(tempS.pop());
+		 }
+	 }
+	 
+	 @SuppressWarnings("unused")
+	private int performWeaponsAttacks(){
+		 Stack<Lane> tempS= new Stack<>();
+		 Lane currLane;
+		 int resourcesGathered=0;
+		 while(lanes.size()!=0){
+			 currLane=lanes.remove();
+			 resourcesGathered+=currLane.performLaneWeaponsAttacks();
+			 tempS.push(currLane);
+		 }
+		 
+		 while(tempS.size()!=0){
+			 lanes.add(tempS.pop());
+		 }
+		 
+		 return resourcesGathered;
+			 
+	 }
+	 
+	 @SuppressWarnings("unused")
+	private int performTitansAttacks(){
+		 Stack<Lane> tempS= new Stack<>();
+		 Lane currLane;
+		 int damageSum=0;
+		 while(lanes.size()!=0){
+			 currLane=lanes.remove();
+			 damageSum+=currLane.performLaneTitansAttacks();
+			 if(currLane.isLaneLost()){
+				 while(tempS.size()!=0){
+					 lanes.add(tempS.pop());
+				 }
+				 return currLane.getLaneWall().getResourcesValue();
+			 }
+			 tempS.push(currLane);
+		 }
+		 
+		 while(tempS.size()!=0){
+			 lanes.add(tempS.pop());
+		 }
+		 
+		 return damageSum;
+	 }
+	 
+	 @SuppressWarnings("unused")
+	private void updateLanesDangerLevels(){
+		 Stack<Lane> tempS= new Stack<>();
+		 Lane currLane;
+		 while(lanes.size()!=0){
+			 currLane=lanes.remove();
+			 currLane.updateLaneDangerLevel();
+			 tempS.push(currLane);
+		 }
+		 
+		 while(tempS.size()!=0){
+			 lanes.add(tempS.pop());
+		 }
+	 }
 }

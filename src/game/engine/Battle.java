@@ -274,4 +274,28 @@ public class Battle
 			 lanes.add(tempS.pop());
 		 }
 	 }
+	 private void finalizeTurns(){
+		 numberOfTurns++;
+		 if(numberOfTurns<15)
+			 battlePhase= BattlePhase.EARLY;
+		 else
+			 if(numberOfTurns>15 && numberOfTurns<30)
+				 battlePhase=BattlePhase.INTENSE;
+			 else
+				 if(numberOfTurns>=35 && numberOfTurns%5==0){ //first digit divisible by 5 greater than 30 is 35 so yh
+					 battlePhase=BattlePhase.GRUMBLING;
+					 numberOfTitansPerTurn= 2*numberOfTitansPerTurn;
+				 }
+				 else
+					 battlePhase=BattlePhase.GRUMBLING;
+					 
+					 
+	 }
+	 private void performTurn(){
+		 
+	 }
+	 boolean isGameOver(){
+		 return lanes.isEmpty();
+	 }
+	 
 }

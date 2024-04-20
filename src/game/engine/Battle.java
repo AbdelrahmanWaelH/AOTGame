@@ -174,7 +174,7 @@ public class Battle
 	public void passTurn(){
 		//huh??!
 	}
-	// private void addTurnTitansToLane(){
+	 private void addTurnTitansToLane(){
 	// 	//lmao what 
-	// }
+	}
 }

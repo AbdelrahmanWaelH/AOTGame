@@ -189,7 +189,7 @@ public class Battle
 		this.performWeaponsAttacks();//weapons attack
 		this.performTitansAttacks();//titans attack
 		this.addTurnTitansToLane();//add from approachingTitans to lanes
-		//finalize turn
+		this.finalizeTurns();//finalize turn
 	}
 	 private void addTurnTitansToLane(){
 		Stack<Lane> tempS = new Stack<>();
@@ -292,7 +292,13 @@ public class Battle
 					 
 	 }
 	 private void performTurn(){
-		 
+		//this.purchaseWeapon(WALL_BASE_HEALTH, null);
+		//or just use passturn :p
+		this.moveTitans();
+		this.performWeaponsAttacks();
+		this.performTitansAttacks();
+		this.addTurnTitansToLane();
+		this.finalizeTurns();
 	 }
 	 boolean isGameOver(){
 		 return lanes.isEmpty();

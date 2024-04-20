@@ -1,7 +1,6 @@
 package game.engine.lanes;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
@@ -68,7 +67,7 @@ public class Lane implements Comparable<Lane>{
 		Stack<Titan> tempQ= new Stack<>();
 		while(!titans.isEmpty()){
 			Titan currTitan = titans.remove();
-			tempQ.add(currTitan);
+			tempQ.push(currTitan);
 			if(!currTitan.hasReachedTarget())
 				currTitan.move();
 		}
@@ -85,7 +84,7 @@ public class Lane implements Comparable<Lane>{
 
 		while(!titans.isEmpty() && !allReached){
 			Titan currTitan=titans.remove();
-			tempQ.add(currTitan);
+			tempQ.push(currTitan);
 			if(currTitan.hasReachedTarget()){
 				laneWall.takeDamage(currTitan.getDamage());
 				resourcesGathered+=laneWall.getResourcesValue();	
@@ -93,7 +92,7 @@ public class Lane implements Comparable<Lane>{
 		}
 		
 		while(!tempQ.isEmpty()){
-			addTitan(tempQ.pop());
+			titans.add(tempQ.pop());
 		}
 		
 		return resourcesGathered;
@@ -111,11 +110,11 @@ public class Lane implements Comparable<Lane>{
 				int resources = currTitan.takeDamage(currDamage);
 				if (resources == 0){
 				resourcesGathered += resources;
-				tempQ.add(currTitan);
+				tempQ.push(currTitan);
 				} //only undefeated titans will be re-inserted into the queue
 				}
 			while(!tempQ.isEmpty()){
-				addTitan(tempQ.pop());
+				titans.add(tempQ.pop());
 			}
 		}
 		

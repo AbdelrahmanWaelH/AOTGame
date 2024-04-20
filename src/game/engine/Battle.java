@@ -185,17 +185,16 @@ public class Battle
 		//Not sure if this should be using the FactoryResponse class or not, it did solve 2 failures though
 	} 
 	public void passTurn(){
-		//huh??!
-		//move titans
-		//weapons attack
-		//titans attack
-		//add from approachingTitans to lanes
+		this.moveTitans();//move titans
+		this.performWeaponsAttacks();//weapons attack
+		this.performTitansAttacks();//titans attack
+		this.addTurnTitansToLane();//add from approachingTitans to lanes
 		//finalize turn
 	}
 	 private void addTurnTitansToLane(){
 		Stack<Lane> tempS = new Stack<>();
 		while (!lanes.isEmpty()){
-			tempS.add(lanes.remove());}
+			tempS.push(lanes.remove());}
 
 		Lane lastLane = tempS.peek();
 		for (int i = 0; i < numberOfTitansPerTurn; i++){
@@ -207,7 +206,6 @@ public class Battle
 		}
 	}
 	 
-	 @SuppressWarnings("unused")
 	private void moveTitans(){
 		 Stack<Lane> tempS= new Stack<>();
 		 Lane currLane;
@@ -222,7 +220,6 @@ public class Battle
 		 }
 	 }
 	 
-	 @SuppressWarnings("unused")
 	private int performWeaponsAttacks(){
 		 Stack<Lane> tempS= new Stack<>();
 		 Lane currLane;
@@ -241,7 +238,6 @@ public class Battle
 			 
 	 }
 	 
-	 @SuppressWarnings("unused")
 	private int performTitansAttacks(){
 		 Stack<Lane> tempS= new Stack<>();
 		 Lane currLane;
@@ -265,7 +261,6 @@ public class Battle
 		 return damageSum;
 	 }
 	 
-	 @SuppressWarnings("unused")
 	private void updateLanesDangerLevels(){
 		 Stack<Lane> tempS= new Stack<>();
 		 Lane currLane;

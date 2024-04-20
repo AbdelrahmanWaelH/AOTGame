@@ -298,6 +298,15 @@ public class Battle
 	 }
 	 private void performTurn(){
 		 
+		 moveTitans();
+		 performWeaponsAttacks();
+		 performTitansAttacks();
+		 addTurnTitansToLane();
+		 updateLanesDangerLevels();
+		 finalizeTurns();
+		 
+		 
+		 
 	 }
 	 boolean isGameOver(){
 		 return lanes.isEmpty();

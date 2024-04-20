@@ -12,6 +12,7 @@ import game.engine.exceptions.InvalidLaneException;
 import game.engine.lanes.Lane;
 import game.engine.titans.Titan;
 import game.engine.titans.TitanRegistry;
+import game.engine.weapons.WeaponRegistry;
 import game.engine.weapons.factory.WeaponFactory;
 
 public class Battle
@@ -150,17 +151,30 @@ public class Battle
 			this.getLanes().add(l);
 		}
 	} 
-	//OK! The following four methods rely on 2.3 - 2.6, can't work on those just yet... :p
-	public void refillApproachingTitans(){
-		//bruh what
+	
+	public void refillApproachingTitans() throws IOException{
+		int phase = 0;
+		if (this.battlePhase == BattlePhase.EARLY)
+			phase = 0;
+		if (this.battlePhase == BattlePhase.INTENSE)
+			phase = 1;
+		if (this.battlePhase == BattlePhase.INTENSE)
+			phase = 2;
+		HashMap<Integer, TitanRegistry> Titans = DataLoader.readTitanRegistry();
+		for (int i = 0; i < 7; i++){
+			int titanCode = PHASES_APPROACHING_TITANS[phase][i];
+			//having a titan code, we should create a titan of the appropriate type and add it to approachingTitans ArrayList
+			this.approachingTitans.add(Titans.get(titanCode).spawnTitan(this.titanSpawnDistance)); //the spawnTitan method is called on the TitanRegistry corresponding to the current titan code
+		}
 	}
-	public void purchaseWeapon(int weaponCode, Lane lane) throws InsufficientResourcesException, InvalidLaneException{
-		//bruh what 
-	}
+	public void purchaseWeapon(int weaponCode, Lane lane) throws InsufficientResourcesException, InvalidLaneException, IOException{
+		HashMap<Integer, WeaponRegistry> Weapons = DataLoader.readWeaponRegistry();
+		lane.addWeapon(Weapons.get(weaponCode).buildWeapon()); //Not sure if this should be using the FactoryResponse class or not, it did solve 2 failures though
+	} 
 	public void passTurn(){
 		//huh??!
 	}
-	private void addTurnTitansToLane(){
-		//lmao what 
-	}
+	// private void addTurnTitansToLane(){
+	// 	//lmao what 
+	// }
 }

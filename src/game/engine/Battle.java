@@ -160,7 +160,7 @@ public class Battle
 			phase = 0;
 		if (this.battlePhase == BattlePhase.INTENSE)
 			phase = 1;
-		if (this.battlePhase == BattlePhase.INTENSE)
+		if (this.battlePhase == BattlePhase.GRUMBLING)
 			phase = 2;
 		HashMap<Integer, TitanRegistry> Titans = DataLoader.readTitanRegistry();
 		for (int i = 0; i < 7; i++){

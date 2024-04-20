@@ -36,14 +36,16 @@ public class VolleySpreadCannon extends Weapon
 		int totalResourcesGained = 0;
 
 		while (!laneTitans.isEmpty()){
-			Titan t = laneTitans.remove();
+		Titan t = laneTitans.remove();
+		int resourcesGained = 0; boolean inRange = false;
 			if (t.getDistance() >= minRange && t.getDistance()  <= maxRange){
-			int resourcesGained = 0; 
+			inRange = true;
+			resourcesGained = 0; 
 			resourcesGained = t.takeDamage(this.getDamage());//titan gets attacked
-				if (resourcesGained == 0){ //if titan is not defeated, add to stack
-					reservedTitans.add(t);}
 			totalResourcesGained += resourcesGained; //add resources gained regardless
 			}
+			if (resourcesGained == 0 || !inRange) 
+			reservedTitans.add(t);
 		}
 		while (!reservedTitans.isEmpty()){
 			laneTitans.add(reservedTitans.pop());

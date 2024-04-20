@@ -15,9 +15,12 @@ public class SniperCannon extends Weapon
 
 	@Override
 	public int turnAttack(PriorityQueue<Titan> laneTitans) {
+		int res = 0;
 		if (!laneTitans.isEmpty())
-		return laneTitans.peek().takeDamage(this.getDamage());
-		return 0; //when no titan was attacked
+		res = laneTitans.peek().takeDamage(this.getDamage());
+		if (res != 0)
+		laneTitans.remove();
+		return res; 
 	}
 
 }

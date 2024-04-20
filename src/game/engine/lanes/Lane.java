@@ -67,16 +67,14 @@ public class Lane implements Comparable<Lane>{
 	public void moveLaneTitans(){
 		Stack<Titan> tempQ= new Stack<>();
 		while(!titans.isEmpty()){
-			Titan currTitan = titans.peek();
-			if(!currTitan.hasReachedTarget()){
+			Titan currTitan = titans.remove();
+			tempQ.add(currTitan);
+			if(!currTitan.hasReachedTarget())
 				currTitan.move();
-				tempQ.add(currTitan);
-				titans.remove();
-			}
 		}
 		
 		while(!tempQ.isEmpty()){
-			addTitan(tempQ.pop());
+			titans.add(tempQ.pop());
 		}
 	}
 	

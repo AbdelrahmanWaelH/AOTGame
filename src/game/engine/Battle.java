@@ -186,9 +186,25 @@ public class Battle
 	} 
 	public void passTurn(){
 		//huh??!
+		//move titans
+		//weapons attack
+		//titans attack
+		//add from approachingTitans to lanes
+		//finalize turn
 	}
 	 private void addTurnTitansToLane(){
-	// 	//lmao what 
+		Stack<Lane> tempS = new Stack<>();
+		while (!lanes.isEmpty()){
+			tempS.add(lanes.remove());}
+
+		Lane lastLane = tempS.peek();
+		for (int i = 0; i < numberOfTitansPerTurn; i++){
+			lastLane.addTitan(approachingTitans.remove(i));
+			lastLane.updateLaneDangerLevel();}
+
+		while (!tempS.isEmpty()){
+			lanes.add(tempS.pop());
+		}
 	}
 	 
 	 @SuppressWarnings("unused")

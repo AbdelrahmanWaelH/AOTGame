@@ -14,6 +14,7 @@ public class Lane implements Comparable<Lane>{
 	private int dangerLevel;
 	private final PriorityQueue<Titan> titans;
 	private final ArrayList<Weapon> weapons;
+	private int laneScore=0;
 
 	public Lane(Wall laneWall)
 	{
@@ -53,6 +54,14 @@ public class Lane implements Comparable<Lane>{
 	public int compareTo(Lane o)
 	{
 		return this.dangerLevel - o.dangerLevel;
+	}
+	
+	public void addlaneScore(int scoreAdd){
+		this.laneScore+=scoreAdd;
+	}
+	
+	public int getLaneScore(){
+		return this.laneScore;
 	}
 	
 	public void addTitan(Titan titan){
@@ -102,6 +111,7 @@ public class Lane implements Comparable<Lane>{
 		int resourcesGathered=0;
 		Stack<Titan> tempQ= new Stack<>();
 		int i = 0;
+		int laneScore=0;
 		if (this.isLaneLost())
 		return 0;
 		
@@ -109,21 +119,26 @@ public class Lane implements Comparable<Lane>{
 			Weapon currWeapon;
 			currWeapon=weapons.get(i); i++;
 			if (currWeapon != null){
-			int currDamage=currWeapon.getDamage();
-			while(!titans.isEmpty()){  //uses weapon on each titan, so this iterates the titan queue
-				Titan currTitan = titans.remove();
-				int resources = currTitan.takeDamage(currDamage);
-				if (resources == 0){
-				resourcesGathered += resources;
-				tempQ.add(currTitan);
-				} //only undefeated titans will be re-inserted into the queue
+				int currDamage=currWeapon.getDamage();
+				while(!titans.isEmpty()){  //uses weapon on each titan, so this iterates the titan queue
+					Titan currTitan = titans.remove();
+					int resources = currTitan.takeDamage(currDamage);
+					resourcesGathered += resources;
+					if (resources == 0){
+					laneScore++;
+					tempQ.add(currTitan);
+					} //only undefeated titans will be re-inserted into the queue
+				
+			}
 			}
 		}
 		while(!tempQ.isEmpty()){
 			titans.add(tempQ.pop());
 		}
-		}
+		addlaneScore(laneScore);
+		
 		return resourcesGathered;
+		
 	}
 	
 	public boolean isLaneLost(){

@@ -235,18 +235,22 @@ public class Battle
 		 Stack<Lane> tempS= new Stack<>();
 		 Lane currLane;
 		 int resourcesGathered=0;
+		 int totScore=0;
 		 
 		 while(!lanes.isEmpty()){
 			 currLane=lanes.remove();
 			 if (!currLane.isLaneLost())
 			 resourcesGathered+=currLane.performLaneWeaponsAttacks();
 			 tempS.push(currLane);
+			 totScore+=currLane.getLaneScore();
+			 
 		 }
 		 
 		 while(!tempS.isEmpty()){
 			 lanes.add(tempS.pop());
 		 }
-		 
+		 setScore(totScore);
+		 setResourcesGathered(getResourcesGathered()+resourcesGathered);
 		 return resourcesGathered;
 			 
 	 }

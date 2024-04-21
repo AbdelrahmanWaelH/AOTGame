@@ -12,7 +12,7 @@ public class AbnormalTitan extends Titan
 	}
 	public int attack(Attackee target){ //How would you override a default method?
 		int resourcesGained = super.attack(target);
-		if (resourcesGained != 0)
+		if (target.isDefeated())
 		return resourcesGained;
 		return super.attack(target);
 	}

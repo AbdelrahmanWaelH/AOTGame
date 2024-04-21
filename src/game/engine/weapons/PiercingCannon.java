@@ -20,14 +20,12 @@ public class PiercingCannon extends Weapon
 		Stack<Titan> removedTitans = new Stack<>();
 		for (int i = 0; i < 5 && !laneTitans.isEmpty(); i++){
 			Titan t = laneTitans.remove();
-			int resourcesGained	= t.takeDamage(this.getDamage());
-			if (resourcesGained == 0){
+			totalResourcesGained += t.takeDamage(this.getDamage());
+			if (!t.isDefeated()){
 			removedTitans.add(t);} //titan will be re-added if it is not defeated
-			totalResourcesGained += resourcesGained;
 		} //pop 5 titans if available, apply damage to them
 		while (!removedTitans.isEmpty()){
-			Titan t = removedTitans.pop();
-			laneTitans.add(t);
+			laneTitans.add(removedTitans.pop());
 		} //add popped titans back into the original priority queue, their order will be figured out automatically by the PQ ADT
 		return totalResourcesGained;
 	}

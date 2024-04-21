@@ -68,7 +68,7 @@ public class TitanRegistry // For storing the titan's information from the csv f
 			currTitan= new AbnormalTitan(this.baseHealth, this.baseDamage, this.heightInMeters, distanceFromBase, this.speed,this.resourcesValue, this.dangerLevel);
 		}else if(code==3){
 			currTitan= new ArmoredTitan(this.baseHealth, this.baseDamage, this.heightInMeters, distanceFromBase, this.speed, this.resourcesValue, this.dangerLevel);
-		}else{
+		}else if (code == 4){
 			currTitan= new ColossalTitan(this.baseHealth, this.baseDamage, this.heightInMeters, distanceFromBase, this.speed, this.resourcesValue, this.dangerLevel);
 		}
 		

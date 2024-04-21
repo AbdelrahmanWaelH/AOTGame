@@ -196,6 +196,7 @@ public class Battle
 		this.performWeaponsAttacks();//weapons attack
 		this.performTitansAttacks();//titans attack
 		this.addTurnTitansToLane();//add from approachingTitans to lanes
+		this.updateLanesDangerLevels();
 		this.finalizeTurns();//finalize turn
 
 	}
@@ -229,11 +230,11 @@ public class Battle
 		 }
 	 }
 	 
-	 @SuppressWarnings("unused")
 	private int performWeaponsAttacks(){
 		 Stack<Lane> tempS= new Stack<>();
 		 Lane currLane;
 		 int resourcesGathered=0;
+		 
 		 while(lanes.size()!=0){
 			 currLane=lanes.remove();
 			 resourcesGathered+=currLane.performLaneWeaponsAttacks();
@@ -305,28 +306,29 @@ public class Battle
 	 }
 	 private void performTurn(){
 
-		 
-		 moveTitans();
-		 performWeaponsAttacks();
-		 performTitansAttacks();
-		 addTurnTitansToLane();
-		 updateLanesDangerLevels();
-		 finalizeTurns();
-		 
-		 
-		 
-
 		//this.purchaseWeapon(WALL_BASE_HEALTH, null);
 		//or just use passturn :p
 		this.moveTitans();
 		this.performWeaponsAttacks();
 		this.performTitansAttacks();
 		this.addTurnTitansToLane();
+		this.updateLanesDangerLevels();
 		this.finalizeTurns();
 
 	 }
 	 boolean isGameOver(){
-		 return lanes.isEmpty();
+		// return lanes.isEmpty();
+		Stack<Lane> temp = new Stack<>();
+		boolean over = false;
+		while (!lanes.isEmpty() && !over){
+			Lane l = lanes.remove();
+			temp.push(l);
+			over = (!l.isLaneLost());
+		}
+		while (!temp.isEmpty()){
+			lanes.add(temp.pop());
+		}
+		return over;
 	 }
 	 
 }

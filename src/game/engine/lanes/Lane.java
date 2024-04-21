@@ -1,7 +1,6 @@
 package game.engine.lanes;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
@@ -81,30 +80,32 @@ public class Lane implements Comparable<Lane>{
 	public int performLaneTitansAttacks(){
 		int resourcesGathered=1; //2 test cases passed if it's initially set 1, fails otherwise for some reason
 		Stack<Titan> tempQ= new Stack<>();
-		boolean allReached = false;
+		boolean allAttacked = false;
 
-		while(!titans.isEmpty() && !allReached){
+		while(!titans.isEmpty() && !allAttacked){
 			Titan currTitan=titans.remove();
 			tempQ.add(currTitan);
 			if(currTitan.hasReachedTarget()){
 				laneWall.takeDamage(currTitan.getDamage());
 				resourcesGathered+=laneWall.getResourcesValue();	
-			} else allReached = true;
+			} else allAttacked = true;
 		}
 		
 		while(!tempQ.isEmpty()){
 			addTitan(tempQ.pop());
 		}
-		
 		return resourcesGathered;
+
 	}
 	
 	public int performLaneWeaponsAttacks(){
 		int resourcesGathered=0;
 		Stack<Titan> tempQ= new Stack<>();
-		for(int i=0; i<weapons.size(); i++){
+		int i = 0;
+		while(!weapons.isEmpty()){
 			Weapon currWeapon;
-			currWeapon=weapons.get(i);
+			currWeapon=weapons.get(i); i++;
+			if (currWeapon != null){
 			int currDamage=currWeapon.getDamage();
 			while(!titans.isEmpty()){  //uses weapon on each titan, so this iterates the titan queue
 				Titan currTitan = titans.remove();
@@ -113,14 +114,13 @@ public class Lane implements Comparable<Lane>{
 				resourcesGathered += resources;
 				tempQ.add(currTitan);
 				} //only undefeated titans will be re-inserted into the queue
-				}
-			while(!tempQ.isEmpty()){
-				addTitan(tempQ.pop());
 			}
 		}
-		
+		while(!tempQ.isEmpty()){
+			titans.add(tempQ.pop());
+		}
+		}
 		return resourcesGathered;
-		
 	}
 	
 	public boolean isLaneLost(){

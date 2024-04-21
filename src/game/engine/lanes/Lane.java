@@ -84,7 +84,7 @@ public class Lane implements Comparable<Lane>{
 
 		while(!titans.isEmpty() && !allAttacked){
 			Titan currTitan=titans.remove();
-			tempQ.add(currTitan);
+			tempQ.push(currTitan);
 			if(currTitan.hasReachedTarget()){
 				laneWall.takeDamage(currTitan.getDamage());
 				resourcesGathered+=laneWall.getResourcesValue();	

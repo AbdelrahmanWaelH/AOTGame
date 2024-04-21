@@ -219,13 +219,14 @@ public class Battle
 	private void moveTitans(){
 		 Stack<Lane> tempS= new Stack<>();
 		 Lane currLane;
-		 while(lanes.size()!=0){
+		 while(!lanes.isEmpty()){
 			 currLane=lanes.remove();
-			 currLane.moveLaneTitans();
+			 if (!currLane.isLaneLost())
+			 	currLane.moveLaneTitans();
 			 tempS.push(currLane);
 		 }
 		 
-		 while(tempS.size()!=0){
+		 while(!tempS.isEmpty()){
 			 lanes.add(tempS.pop());
 		 }
 	 }
@@ -235,13 +236,14 @@ public class Battle
 		 Lane currLane;
 		 int resourcesGathered=0;
 		 
-		 while(lanes.size()!=0){
+		 while(!lanes.isEmpty()){
 			 currLane=lanes.remove();
+			 if (!currLane.isLaneLost())
 			 resourcesGathered+=currLane.performLaneWeaponsAttacks();
 			 tempS.push(currLane);
 		 }
 		 
-		 while(tempS.size()!=0){
+		 while(!tempS.isEmpty()){
 			 lanes.add(tempS.pop());
 		 }
 		 
@@ -254,7 +256,7 @@ public class Battle
 		 Stack<Lane> tempS= new Stack<>();
 		 Lane currLane;
 		 int damageSum=0;
-		 while(lanes.size()!=0){
+		 while(!lanes.isEmpty()){
 			 currLane=lanes.remove();
 			 damageSum+=currLane.performLaneTitansAttacks();
 			 if(currLane.isLaneLost()){
@@ -266,7 +268,7 @@ public class Battle
 			 tempS.push(currLane);
 		 }
 		 
-		 while(tempS.size()!=0){
+		 while(!tempS.isEmpty()){
 			 lanes.add(tempS.pop());
 		 }
 		 

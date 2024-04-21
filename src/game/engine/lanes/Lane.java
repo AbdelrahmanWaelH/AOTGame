@@ -102,6 +102,9 @@ public class Lane implements Comparable<Lane>{
 		int resourcesGathered=0;
 		Stack<Titan> tempQ= new Stack<>();
 		int i = 0;
+		if (this.isLaneLost())
+		return 0;
+		
 		while(!weapons.isEmpty()){
 			Weapon currWeapon;
 			currWeapon=weapons.get(i); i++;

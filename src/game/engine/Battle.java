@@ -177,7 +177,7 @@ public class Battle
 		if (factory.buyWeapon(resourcesGathered, weaponCode) instanceof FactoryResponse){
 		Weapon w = weapons.get(weaponCode).buildWeapon();
 		lane.addWeapon(w);
-		}
+		}  //throw new InvalidLaneException();
 
 
 

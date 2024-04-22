@@ -211,8 +211,8 @@ public class Battle
 		Lane lastLane = tempS.peek();
 		for (int i = 0; i < numberOfTitansPerTurn; i++){
 			lastLane.addTitan(approachingTitans.remove(i));
-			lastLane.updateLaneDangerLevel();}
-
+			}
+			lastLane.updateLaneDangerLevel();
 		while (!tempS.isEmpty()){
 			lanes.add(tempS.pop());
 		}

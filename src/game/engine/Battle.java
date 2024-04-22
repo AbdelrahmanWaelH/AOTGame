@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.Stack;
-
+import java.util.ArrayList;
 import game.engine.lanes.*;
 import game.engine.base.Wall;
 import game.engine.dataloader.DataLoader;
@@ -174,12 +174,11 @@ public class Battle
 	public void purchaseWeapon(int weaponCode, Lane lane) throws InsufficientResourcesException, InvalidLaneException, IOException{
 		WeaponFactory factory = new WeaponFactory();
 		HashMap<Integer, WeaponRegistry> weapons = DataLoader.readWeaponRegistry();
-		if (factory.buyWeapon(resourcesGathered, weaponCode) instanceof FactoryResponse){
+		if (factory.buyWeapon(resourcesGathered, weaponCode) instanceof FactoryResponse && !lane.isLaneLost()){
 		Weapon w = weapons.get(weaponCode).buildWeapon();
 		lane.addWeapon(w);
-		}  //throw new InvalidLaneException();
-
-
+		}  
+		//perform remaining actions
 
 		//if (Weapons.get(weaponCode).buildWeapon().getPrice() <= this.resourcesGathered)
 		//Not sure if this should be using the FactoryResponse class or not, it did solve 2 failures though
@@ -232,25 +231,27 @@ public class Battle
 	 }
 	 
 	private int performWeaponsAttacks(){
-		 Stack<Lane> tempS= new Stack<>();
-		 Lane currLane;
+		ArrayList<Lane> tempS= new ArrayList<Lane>();
+		 Lane currLane = null;
 		 int resourcesGathered=0;
-		 int totScore=0;
-		 
+	
 		 while(!lanes.isEmpty()){
-			 currLane=lanes.remove();
-			 if (!currLane.isLaneLost())
-			 resourcesGathered+=currLane.performLaneWeaponsAttacks();
-			 tempS.push(currLane);
-			 totScore+=currLane.getLaneScore();
-			 
+			 currLane=lanes.poll();
+			 if (!currLane.isLaneLost()){
+				tempS.add(currLane);
+				resourcesGathered+=currLane.performLaneWeaponsAttacks();
+			 }
 		 }
 		 
-		 while(!tempS.isEmpty()){
-			 lanes.add(tempS.pop());
+		 for(int i=0;i<tempS.size();i++){
+			//Lane l = tempS.get(i);
+			//l.addlaneScore(resourcesGathered);
+			lanes.add(tempS.get(i));
+
 		 }
-		 setScore(totScore);
-		 setResourcesGathered(getResourcesGathered()+resourcesGathered);
+		 score += resourcesGathered;
+		
+		 this.resourcesGathered += resourcesGathered;
 		 return resourcesGathered;
 			 
 	 }

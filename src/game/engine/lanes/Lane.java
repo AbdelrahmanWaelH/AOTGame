@@ -87,17 +87,16 @@ public class Lane implements Comparable<Lane>{
 	}
 	
 	public int performLaneTitansAttacks(){
-		int resourcesGathered=1; //2 test cases passed if it's initially set 1, fails otherwise for some reason
+		int resourcesGathered=0; //2 test cases passed if it's initially set 1, fails otherwise for some reason
 		Stack<Titan> tempQ= new Stack<>();
 		boolean allAttacked = false;
 
 		while(!titans.isEmpty() && !allAttacked){
-			Titan currTitan=titans.remove();
+			Titan currTitan=titans.poll();
 			tempQ.push(currTitan);
 			if(currTitan.hasReachedTarget()){
-				laneWall.takeDamage(currTitan.getDamage());
-				resourcesGathered+=laneWall.getResourcesValue();	
-			} else allAttacked = true;
+				resourcesGathered+=currTitan.attack(laneWall);
+			} else allAttacked = true; //coming titans haven't reached wall, they won't attack or be removed from the PQ
 		}
 		
 		while(!tempQ.isEmpty()){
@@ -106,40 +105,16 @@ public class Lane implements Comparable<Lane>{
 		return resourcesGathered;
 
 	}
-	
+	//Redo 125
 	public int performLaneWeaponsAttacks(){
-		int resourcesGathered=0;
-		Stack<Titan> tempQ= new Stack<>();
-		int i = 0;
-		int laneScore=0;
-		if (this.isLaneLost())
-		return 0;
-		
-		while(!weapons.isEmpty()){
-			Weapon currWeapon;
-			currWeapon=weapons.get(i); i++;
-			if (currWeapon != null){
-				int currDamage=currWeapon.getDamage();
-				while(!titans.isEmpty()){  //uses weapon on each titan, so this iterates the titan queue
-					Titan currTitan = titans.remove();
-					int resources = currTitan.takeDamage(currDamage);
-					resourcesGathered += resources;
-					if (resources == 0){
-					laneScore++;
-					tempQ.add(currTitan);
-					} //only undefeated titans will be re-inserted into the queue
-				
-			}
-			}
+		int totalResources = 0;
+		Weapon currentWeapon = null;
+		for(int i=0; i<this.weapons.size();i++){
+			currentWeapon = this.weapons.get(i);
+			totalResources += currentWeapon.turnAttack(this.titans);
 		}
-		while(!tempQ.isEmpty()){
-			titans.add(tempQ.pop());
-		}
-		addlaneScore(laneScore);
-		
-		return resourcesGathered;
-		
-	}
+		return totalResources;
+	}	
 	
 	public boolean isLaneLost(){
 		return (getLaneWall().getCurrentHealth()<=0);

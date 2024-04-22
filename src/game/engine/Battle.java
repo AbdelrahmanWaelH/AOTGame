@@ -268,10 +268,9 @@ public class Battle
 		 while(!lanes.isEmpty()){
 			 currLane=lanes.remove();
 			 damageSum+=currLane.performLaneTitansAttacks();
-			 if(currLane.isLaneLost()){
-				 damageSum+=currLane.getLaneWall().getResourcesValue();
-			 }else{
-				 tempS.push(currLane);
+			 if(!currLane.isLaneLost()){
+				tempS.push(currLane);
+				 //damageSum+=currLane.getLaneWall().getResourcesValue();
 			 }
 		 }
 		 

@@ -181,20 +181,13 @@ public class Battle
 		Weapon w = response.getWeapon();
 		lane.addWeapon(w);
 		setResourcesGathered(response.getRemainingResources());
-		// this.moveTitans();
-		// this.performWeaponsAttacks();
-		// this.performTitansAttacks();
-		// this.addTurnTitansToLane();
-		// this.finalizeTurns();
+		this.moveTitans();
+		this.performWeaponsAttacks();
+		this.performTitansAttacks();
+		this.addTurnTitansToLane();
+		this.finalizeTurns();
 	} 
 	public void passTurn(){
-
-		//huh??!
-		//move titans
-		//weapons attack
-		//titans attack
-		//add from approachingTitans to lanes
-		//finalize turn
 		this.moveTitans();//move titans
 		this.performWeaponsAttacks();//weapons attack
 		this.performTitansAttacks();//titans attack

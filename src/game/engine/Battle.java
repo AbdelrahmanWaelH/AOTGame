@@ -204,18 +204,11 @@ public class Battle
 
 	}
 	 private void addTurnTitansToLane(){
-		Stack<Lane> tempS = new Stack<>();
-		while (!lanes.isEmpty()){
-			tempS.add(lanes.remove());}
-
-		Lane lastLane = tempS.peek();
-		for (int i = 0; i < numberOfTitansPerTurn; i++){
+		Lane lastLane = lanes.peek();
+		for (int i = 0; i < numberOfTitansPerTurn && !approachingTitans.isEmpty(); i++){
 			lastLane.addTitan(approachingTitans.remove(i));
 			}
 			lastLane.updateLaneDangerLevel();
-		while (!tempS.isEmpty()){
-			lanes.add(tempS.pop());
-		}
 	}
 	 
 	 @SuppressWarnings("unused")

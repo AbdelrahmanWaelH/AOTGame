@@ -172,16 +172,20 @@ public class Battle
 		}
 	}
 	public void purchaseWeapon(int weaponCode, Lane lane) throws InsufficientResourcesException, InvalidLaneException, IOException{
-		WeaponFactory factory = new WeaponFactory();
-		HashMap<Integer, WeaponRegistry> weapons = DataLoader.readWeaponRegistry();
-		if (factory.buyWeapon(resourcesGathered, weaponCode) instanceof FactoryResponse && !lane.isLaneLost()){
-		Weapon w = weapons.get(weaponCode).buildWeapon();
-		lane.addWeapon(w);
-		}  
-		//perform remaining actions
+		if (lane.isLaneLost())
+			throw new InvalidLaneException(); //make sure that lane is in the lanes PQ
 
-		//if (Weapons.get(weaponCode).buildWeapon().getPrice() <= this.resourcesGathered)
-		//Not sure if this should be using the FactoryResponse class or not, it did solve 2 failures though
+		WeaponFactory factory = new WeaponFactory();
+		FactoryResponse response = factory.buyWeapon(resourcesGathered, weaponCode);
+		response.getWeapon();
+		Weapon w = response.getWeapon();
+		lane.addWeapon(w);
+		setResourcesGathered(response.getRemainingResources());
+		// this.moveTitans();
+		// this.performWeaponsAttacks();
+		// this.performTitansAttacks();
+		// this.addTurnTitansToLane();
+		// this.finalizeTurns();
 	} 
 	public void passTurn(){
 
@@ -265,7 +269,8 @@ public class Battle
 			 currLane=lanes.remove();
 			 damageSum+=currLane.performLaneTitansAttacks();
 			 if(!currLane.isLaneLost()){
-				 tempS.push(currLane);
+				tempS.push(currLane);
+				//damageSum+=currLane.getLaneWall().getResourcesValue();
 			 }
 		 }
 		 
@@ -313,19 +318,8 @@ public class Battle
 		this.finalizeTurns();
 
 	 }
-	 boolean isGameOver(){
-		// return lanes.isEmpty();
-		Stack<Lane> temp = new Stack<>();
-		boolean over = false;
-		while (!lanes.isEmpty() && !over){
-			Lane l = lanes.remove();
-			temp.push(l);
-			over = (!l.isLaneLost());
-		}
-		while (!temp.isEmpty()){
-			lanes.add(temp.pop());
-		}
-		return over;
+	public boolean isGameOver(){
+		return (lanes.isEmpty());
 	 }
 	 
 }

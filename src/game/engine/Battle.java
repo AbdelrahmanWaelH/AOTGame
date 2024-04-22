@@ -203,8 +203,7 @@ public class Battle
 			}
 			lastLane.updateLaneDangerLevel();
 	}
-	 
-	 @SuppressWarnings("unused")
+	
 	private void moveTitans(){
 		 Stack<Lane> tempS= new Stack<>();
 		 Lane currLane;
@@ -234,10 +233,7 @@ public class Battle
 		 }
 		 
 		 for(int i=0;i<tempS.size();i++){
-			//Lane l = tempS.get(i);
-			//l.addlaneScore(resourcesGathered);
 			lanes.add(tempS.get(i));
-
 		 }
 		 score += resourcesGathered;
 		
@@ -246,7 +242,6 @@ public class Battle
 			 
 	 }
 	 
-	 @SuppressWarnings("unused")
 	private int performTitansAttacks(){
 		 Stack<Lane> tempS= new Stack<>();
 		 Lane currLane;
@@ -256,18 +251,16 @@ public class Battle
 			 damageSum+=currLane.performLaneTitansAttacks();
 			 if(!currLane.isLaneLost()){
 				tempS.push(currLane);
-				//damageSum+=currLane.getLaneWall().getResourcesValue();
 			 }
 		 }
 		 
-		 while(!tempS.isEmpty()){
+		while(!tempS.isEmpty()){
 			 lanes.add(tempS.pop());
-		 }
+		}
 		 
 		 return damageSum;
 	 }
 	 
-	 @SuppressWarnings("unused")
 	private void updateLanesDangerLevels(){
 		 Stack<Lane> tempS= new Stack<>();
 		 Lane currLane;
@@ -295,14 +288,7 @@ public class Battle
 	 private void performTurn(){
 
 		//this.purchaseWeapon(WALL_BASE_HEALTH, null);
-		//or just use passturn :p
-		this.moveTitans();
-		this.performWeaponsAttacks();
-		this.performTitansAttacks();
-		this.addTurnTitansToLane();
-		this.updateLanesDangerLevels();
-		this.finalizeTurns();
-
+		passTurn();
 	 }
 	public boolean isGameOver(){
 		return (lanes.isEmpty());

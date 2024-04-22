@@ -170,16 +170,17 @@ public class Battle
 	public void purchaseWeapon(int weaponCode, Lane lane) throws InsufficientResourcesException, InvalidLaneException, IOException{
 		if (lane.isLaneLost())
 			throw new InvalidLaneException(); //make sure that lane is in the lanes PQ
+		if(!originalLanes.contains(lane))
+			throw new InvalidLaneException();
+		if(!lanes.contains(lane))
+			throw new InvalidLaneException();
 
 		FactoryResponse response = weaponFactory.buyWeapon(resourcesGathered, weaponCode);
 		Weapon w = response.getWeapon();
 		lane.addWeapon(w);
 		setResourcesGathered(response.getRemainingResources());
-		this.moveTitans();
-		this.performWeaponsAttacks();
-		this.performTitansAttacks();
-		this.addTurnTitansToLane();
-		this.finalizeTurns();
+        performTurn();
+        
 	} 
 	public void passTurn(){
 		this.moveTitans();
@@ -191,12 +192,19 @@ public class Battle
 	}
 	private void addTurnTitansToLane(){
 		Lane lastLane = lanes.peek();
-		for (int i = 0; i < numberOfTitansPerTurn && !approachingTitans.isEmpty(); i++)
-			lastLane.addTitan(approachingTitans.remove(i));
+		for (int i = 0; i<numberOfTitansPerTurn ; i++){
+			if (approachingTitans.isEmpty()){
+				refillApproachingTitans();
+				lastLane.addTitan(approachingTitans.remove(0));
+			}
+			else
+			    lastLane.addTitan(approachingTitans.remove(0));
 			
-		lastLane.updateLaneDangerLevel();
-		if (approachingTitans.isEmpty())
-			refillApproachingTitans();
+		
+		}	
+		  
+		
+
 	}
 	
 	private void moveTitans(){

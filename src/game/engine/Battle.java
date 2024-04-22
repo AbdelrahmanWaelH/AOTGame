@@ -270,7 +270,7 @@ public class Battle
 			 damageSum+=currLane.performLaneTitansAttacks();
 			 if(!currLane.isLaneLost()){
 				tempS.push(currLane);
-				 //damageSum+=currLane.getLaneWall().getResourcesValue();
+				//damageSum+=currLane.getLaneWall().getResourcesValue();
 			 }
 		 }
 		 

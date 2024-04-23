@@ -73,34 +73,34 @@ public class Lane implements Comparable<Lane>{
 	}
 	
 	public void moveLaneTitans(){
-		Stack<Titan> tempQ= new Stack<>();
+		Stack<Titan> tempTitans = new Stack<>();
 		while(!titans.isEmpty()){
 			Titan currTitan = titans.remove();
-			tempQ.add(currTitan);
+			tempTitans.add(currTitan);
 			if(!currTitan.hasReachedTarget())
 				currTitan.move();
 		}
 		
-		while(!tempQ.isEmpty()){
-			titans.add(tempQ.pop());
+		while(!tempTitans.isEmpty()){
+			titans.add(tempTitans.pop());
 		}
 	}
 	
 	public int performLaneTitansAttacks(){
 		int resourcesGathered=0; //2 test cases passed if it's initially set 1, fails otherwise for some reason
-		Stack<Titan> tempQ= new Stack<>();
+		Stack<Titan> tempTitans = new Stack<>();
 		boolean allAttacked = false;
 
 		while(!titans.isEmpty() && !allAttacked){
 			Titan currTitan=titans.poll();
-			tempQ.push(currTitan);
+			tempTitans.push(currTitan);
 			if(currTitan.hasReachedTarget()){
 				resourcesGathered+=currTitan.attack(laneWall);
 			} else allAttacked = true; //coming titans haven't reached wall, they won't attack or be removed from the PQ
 		}
 		
-		while(!tempQ.isEmpty()){
-			addTitan(tempQ.pop());
+		while(!tempTitans.isEmpty()){
+			addTitan(tempTitans.pop());
 		}
 		return resourcesGathered;
 
@@ -114,7 +114,7 @@ public class Lane implements Comparable<Lane>{
 			totalResources += currentWeapon.turnAttack(this.titans);
 		}
 		return totalResources;
-	}	
+	}   
 	
 	public boolean isLaneLost(){
 		return (getLaneWall().getCurrentHealth()<=0);
@@ -123,17 +123,17 @@ public class Lane implements Comparable<Lane>{
 	
 	public void updateLaneDangerLevel(){
 		int dangerSum=0;
-		Stack<Titan> tempS= new Stack<>();
+		Stack<Titan> tempTitans = new Stack<>();
 		Titan currTitan;
 		
-		while(titans.size()!=0){
+		while(!titans.isEmpty()){
 			currTitan=titans.remove();
 			dangerSum+=currTitan.getDangerLevel();
-			tempS.push(currTitan);
+			tempTitans.push(currTitan);
 		}
 		
-		while(tempS.size()!=0){
-			titans.add(tempS.pop());
+		while(!tempTitans.isEmpty()){
+			titans.add(tempTitans.pop());
 		}
 		
 		

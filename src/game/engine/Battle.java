@@ -197,9 +197,9 @@ public class Battle
 		 Lane currLane;
 		 while(!lanes.isEmpty()){
 			currLane=lanes.remove();
-			if (!currLane.isLaneLost())
+			if (!currLane.isLaneLost()) //is this line necessary?
 				currLane.moveLaneTitans();
-			 tempLanes.push(currLane);
+			tempLanes.push(currLane);
 		 }
 		 
 		 while(!tempLanes.isEmpty()){
@@ -210,23 +210,22 @@ public class Battle
 	private int performWeaponsAttacks(){
 		Stack<Lane> tempLanes = new Stack<>();
 		Lane currLane = null;
-		int resourcesGathered = 0;
+		int resourcesGained = 0;
 	
 		while(!lanes.isEmpty()){
 			 currLane=lanes.poll();
 			 if (!currLane.isLaneLost()){
 				tempLanes.add(currLane);
-				resourcesGathered+=currLane.performLaneWeaponsAttacks();
+				resourcesGained+=currLane.performLaneWeaponsAttacks();
 			 }
 		}
 		 
 		for(int i=0;i<tempLanes.size();i++){
 			lanes.add(tempLanes.get(i));
 		}
-		score += resourcesGathered;
-		
-		this.resourcesGathered += resourcesGathered;
-		return resourcesGathered;
+		this.score += resourcesGained;
+		this.resourcesGathered += resourcesGained;
+		return resourcesGained;
 	}
 	 
 	private int performTitansAttacks(){

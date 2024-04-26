@@ -87,12 +87,12 @@ public class Lane implements Comparable<Lane>{
 	}
 	
 	public int performLaneTitansAttacks(){
-		int resourcesGathered=0; //2 test cases passed if it's initially set 1, fails otherwise for some reason
+		int resourcesGathered=0; 
 		Stack<Titan> tempTitans = new Stack<>();
 		boolean allAttacked = false;
 
 		while(!titans.isEmpty() && !allAttacked){
-			Titan currTitan=titans.poll();
+			Titan currTitan=titans.remove();
 			tempTitans.push(currTitan);
 			if(currTitan.hasReachedTarget()){
 				resourcesGathered+=currTitan.attack(laneWall);

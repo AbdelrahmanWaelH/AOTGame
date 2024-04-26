@@ -32,20 +32,17 @@ public class VolleySpreadCannon extends Weapon
 	@Override
 	public int turnAttack(PriorityQueue<Titan> laneTitans) {
 		Stack <Titan> reservedTitans = new Stack<>(); 
-		//stores titans who are either not attacked or not yet defeated
 		int totalResourcesGained = 0;
 
 		while (!laneTitans.isEmpty()){
-		Titan t = laneTitans.remove();
-		int resourcesGained = 0; boolean inRange = false;
+			Titan t = laneTitans.remove();
+			boolean inRange = false;
 			if (t.getDistance() >= minRange && t.getDistance()  <= maxRange){
-			inRange = true;
-			resourcesGained = 0; 
-			resourcesGained = t.takeDamage(this.getDamage());//titan gets attacked
-			totalResourcesGained += resourcesGained; //add resources gained regardless
-			}
-			if (resourcesGained == 0 || !inRange) 
-			reservedTitans.add(t);
+				inRange = true; 
+				totalResourcesGained += t.takeDamage(this.getDamage()); 
+				}
+				if (!t.isDefeated() || !inRange) 
+					reservedTitans.add(t);
 		}
 		while (!reservedTitans.isEmpty()){
 			laneTitans.add(reservedTitans.pop());

@@ -213,7 +213,7 @@ public class Battle
 		int resourcesGained = 0;
 	
 		while(!lanes.isEmpty()){
-			 currLane=lanes.poll();
+			 currLane=lanes.remove();
 			 if (!currLane.isLaneLost()){
 				tempLanes.add(currLane);
 				resourcesGained+=currLane.performLaneWeaponsAttacks();

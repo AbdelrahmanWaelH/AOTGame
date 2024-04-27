@@ -25,7 +25,7 @@ import java.util.PriorityQueue;
 
 import org.junit.Test;
 
-@SuppressWarnings("all")
+
 
 public class Milestone2PublicTests {
 

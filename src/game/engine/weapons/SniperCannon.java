@@ -14,14 +14,22 @@ public class SniperCannon extends Weapon
 	}
 
 	@Override
-	public int turnAttack(PriorityQueue<Titan> laneTitans) {
-		int res = 0;
-		if (!laneTitans.isEmpty()){
-			res = laneTitans.peek().takeDamage(this.getDamage());
-			if (laneTitans.peek().isDefeated())
-				laneTitans.remove();
+	public int turnAttack(PriorityQueue<Titan> laneTitans)
+	{
+		Titan closestTitan = laneTitans.peek();
+		int resourcesGathered = 0;
+
+		if (closestTitan != null)
+		{
+			resourcesGathered += this.attack(closestTitan);
+
+			if (closestTitan.isDefeated())
+			{
+				laneTitans.remove(closestTitan);
+			}
 		}
-		return res; 
+
+		return resourcesGathered;
 	}
 
 }

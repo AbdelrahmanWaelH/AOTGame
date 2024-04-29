@@ -57,21 +57,31 @@ public class TitanRegistry // For storing the titan's information from the csv f
 	{
 		return dangerLevel;
 	}
-	
 
-	public Titan spawnTitan(int distanceFromBase){
-		int code= getCode();
-		Titan currTitan = null; //to return null if code doesn't match any of the cases
-		if(code==1){
-			currTitan= new PureTitan(this.baseHealth, this.baseDamage, this.heightInMeters, distanceFromBase, this.speed, this.resourcesValue, this.dangerLevel);
-		}else if(code==2){
-			currTitan= new AbnormalTitan(this.baseHealth, this.baseDamage, this.heightInMeters, distanceFromBase, this.speed,this.resourcesValue, this.dangerLevel);
-		}else if(code==3){
-			currTitan= new ArmoredTitan(this.baseHealth, this.baseDamage, this.heightInMeters, distanceFromBase, this.speed, this.resourcesValue, this.dangerLevel);
-		}else if (code == 4){
-			currTitan= new ColossalTitan(this.baseHealth, this.baseDamage, this.heightInMeters, distanceFromBase, this.speed, this.resourcesValue, this.dangerLevel);
+	public Titan spawnTitan(int distanceFromBase) // Spawns a specific type titan based on the code at the specified
+													// distance from base
+	{
+		switch (this.getCode())
+		{
+		case PureTitan.TITAN_CODE:
+			return new PureTitan(this.getBaseHealth(), this.getBaseDamage(), this.getHeightInMeters(), distanceFromBase,
+					this.getSpeed(), this.getResourcesValue(), this.getDangerLevel());
+
+		case AbnormalTitan.TITAN_CODE:
+			return new AbnormalTitan(this.getBaseHealth(), this.getBaseDamage(), this.getHeightInMeters(),
+					distanceFromBase, this.getSpeed(), this.getResourcesValue(), this.getDangerLevel());
+
+		case ArmoredTitan.TITAN_CODE:
+			return new ArmoredTitan(this.getBaseHealth(), this.getBaseDamage(), this.getHeightInMeters(),
+					distanceFromBase, this.getSpeed(), this.getResourcesValue(), this.getDangerLevel());
+
+		case ColossalTitan.TITAN_CODE:
+			return new ColossalTitan(this.getBaseHealth(), this.getBaseDamage(), this.getHeightInMeters(),
+					distanceFromBase, this.getSpeed(), this.getResourcesValue(), this.getDangerLevel());
+
+		default:
+			return null;
 		}
-		
-		return currTitan;
 	}
+
 }

@@ -65,21 +65,22 @@ public class WeaponRegistry
 	{
 		return maxRange;
 	}
-	public Weapon buildWeapon(){
-		if(this.code==1)
-			return new PiercingCannon(damage);
-		else
-			if(this.code==2)
-				return new SniperCannon(damage);
-			else
-				if(this.code==3)
-					return new VolleySpreadCannon(damage,minRange,maxRange);
-				else
-					if(this.code==4)
-						return new WallTrap(damage);
-					else
-						return null;
-		
+
+	public Weapon buildWeapon()
+	{
+		switch (this.getCode())
+		{
+		case PiercingCannon.WEAPON_CODE:
+			return new PiercingCannon(this.getDamage());
+		case SniperCannon.WEAPON_CODE:
+			return new SniperCannon(this.getDamage());
+		case VolleySpreadCannon.WEAPON_CODE:
+			return new VolleySpreadCannon(this.getDamage(), this.getMinRange(), this.getMaxRange());
+		case WallTrap.WEAPON_CODE:
+			return new WallTrap(this.getDamage());
+		default:
+			return null;
+		}
 	}
 
 }

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
-import java.util.Stack;
+
 import game.engine.base.Wall;
 import game.engine.dataloader.DataLoader;
 import game.engine.exceptions.InsufficientResourcesException;
@@ -151,138 +151,161 @@ public class Battle
 			this.getOriginalLanes().add(l);
 			this.getLanes().add(l);
 		}
-	} 
-	
-	public void refillApproachingTitans(){
-		int phase;
-		switch (battlePhase) {
-			case EARLY : phase = 0; break;
-			case INTENSE : phase = 1; break;
-			case GRUMBLING : phase = 2; break;
-			default : phase = 0; break;
-		}
-		for (int i = 0; i < 7; i++){
-			int titanCode = PHASES_APPROACHING_TITANS[phase][i];
-			//having a titan code, we should create a titan of the appropriate type and add it to approachingTitans ArrayList
-			this.approachingTitans.add(titansArchives.get(titanCode).spawnTitan(this.titanSpawnDistance)); //the spawnTitan method is called on the TitanRegistry corresponding to the current titan code
-		}
 	}
-	public void purchaseWeapon(int weaponCode, Lane lane) throws InsufficientResourcesException, InvalidLaneException, IOException{
-		if (lane.isLaneLost() || !originalLanes.contains(lane) || !lanes.contains(lane)) 
-			throw new InvalidLaneException();
-			
-		FactoryResponse response = weaponFactory.buyWeapon(resourcesGathered, weaponCode);
-		Weapon w = response.getWeapon();
-		lane.addWeapon(w);
-		setResourcesGathered(response.getRemainingResources());
-        performTurn();
-        
-	} 
-	public void passTurn(){
-		this.performTurn();
-	}
-	private void addTurnTitansToLane(){
-		Lane lastLane = lanes.peek();
-		for (int i = 0; i<numberOfTitansPerTurn ; i++){
-			if (approachingTitans.isEmpty()){
-				refillApproachingTitans();
-				lastLane.addTitan(approachingTitans.remove(0));
-			}
-			else
-			    lastLane.addTitan(approachingTitans.remove(0));
-		}	
-	}
-	
-	private void moveTitans(){
-		 Stack<Lane> tempLanes = new Stack<>();
-		 Lane currLane;
-		 while(!lanes.isEmpty()){
-			currLane=lanes.remove();
-			if (!currLane.isLaneLost()) //is this line necessary?
-				currLane.moveLaneTitans();
-			tempLanes.push(currLane);
-		 }
-		 
-		 while(!tempLanes.isEmpty()){
-			lanes.add(tempLanes.pop());
-		 }
-	 }
-	 
-	private int performWeaponsAttacks(){
-		Stack<Lane> tempLanes = new Stack<>();
-		Lane currLane = null;
-		int resourcesGained = 0;
-	
-		while(!lanes.isEmpty()){
-			 currLane=lanes.remove();
-			 if (!currLane.isLaneLost()){
-				tempLanes.add(currLane);
-				resourcesGained+=currLane.performLaneWeaponsAttacks();
-			 }
-		}
-		 
-		for(int i=0;i<tempLanes.size();i++){
-			lanes.add(tempLanes.get(i));
-		}
-		this.score += resourcesGained;
-		this.resourcesGathered += resourcesGained;
-		return resourcesGained;
-	}
-	 
-	private int performTitansAttacks(){
-		 Stack<Lane> tempS= new Stack<>();
-		 Lane currLane;
-		 int damageSum=0;
-		 while(!lanes.isEmpty()){
-			currLane=lanes.remove();
-			damageSum+=currLane.performLaneTitansAttacks();
-			if(!currLane.isLaneLost()){
-				tempS.push(currLane);
-			}
-		}
-		 
-		while(!tempS.isEmpty()){
-			lanes.add(tempS.pop());
-		}
-		 
-		return damageSum;
-	}
-	 
-	private void updateLanesDangerLevels(){
-		Stack<Lane> tempStack = new Stack<>();
-		Lane currLane;
-		while (!lanes.isEmpty()) {
-			currLane = lanes.remove();
-			currLane.updateLaneDangerLevel();
-			tempStack.push(currLane);
+
+	public void refillApproachingTitans() // spawns titans of the specified code to lanes based on the current phase
+	{
+		int[] phaseApproachingTitans;
+
+		switch (this.getBattlePhase())
+		{
+		case EARLY:
+			phaseApproachingTitans = PHASES_APPROACHING_TITANS[0];
+			break;
+		case INTENSE:
+			phaseApproachingTitans = PHASES_APPROACHING_TITANS[1];
+			break;
+		case GRUMBLING:
+			phaseApproachingTitans = PHASES_APPROACHING_TITANS[2];
+			break;
+		default:
+			phaseApproachingTitans = new int[0];
 		}
 
-		while (!tempStack.isEmpty()) {
-			lanes.add(tempStack.pop());
+		for (int code : phaseApproachingTitans)
+		{
+			Titan spawnedTitan = this.getTitansArchives().get(code).spawnTitan(this.getTitanSpawnDistance());
+			this.getApproachingTitans().add(spawnedTitan);
 		}
-	 }
-	 private void finalizeTurns(){
-		numberOfTurns++;
-		if(numberOfTurns<15)
-			battlePhase= BattlePhase.EARLY;
-		else if(numberOfTurns>=15 && numberOfTurns<30)
-			battlePhase=BattlePhase.INTENSE;
-		else if(numberOfTurns>=35 && numberOfTurns%5==0){ //first digit divisible by 5 greater than 30 is 35 so yh
-			battlePhase=BattlePhase.GRUMBLING;
-			numberOfTitansPerTurn= 2*numberOfTitansPerTurn;
-		} else battlePhase = BattlePhase.GRUMBLING;
-	 }
-	 private void performTurn(){
-		//this.purchaseWeapon(weaponCode, Lane); //No telling how this is gonna work, gonna leave it be since it passes all test cases
+	}
+
+	public void purchaseWeapon(int weaponCode, Lane lane) throws InsufficientResourcesException, InvalidLaneException
+	{
+		if (!this.getLanes().contains(lane))
+		{
+			throw new InvalidLaneException("Weapon purchase failed");
+		}
+
+		FactoryResponse factoryResponse = this.getWeaponFactory().buyWeapon(getResourcesGathered(), weaponCode);
+		Weapon purchasedWeapon = factoryResponse.getWeapon();
+
+		if (purchasedWeapon != null)
+		{
+			lane.addWeapon(purchasedWeapon);
+			this.setResourcesGathered(factoryResponse.getRemainingResources());
+			performTurn();
+		}
+	}
+
+	public void passTurn()
+	{
+		performTurn();
+	}
+
+	private void addTurnTitansToLane()
+	{
+		Lane leastDangerLane = this.getLanes().poll();
+
+		for (int i = 0; i < this.getNumberOfTitansPerTurn(); i++)
+		{
+			if (this.getApproachingTitans().isEmpty())
+			{
+				this.refillApproachingTitans();
+			}
+
+			leastDangerLane.addTitan(this.getApproachingTitans().remove(0));
+		}
+
+		this.getLanes().add(leastDangerLane);
+	}
+
+	private void moveTitans()
+	{
+		for (Lane l : this.getLanes())
+		{
+			l.moveLaneTitans();
+		}
+	}
+
+	private int performWeaponsAttacks()
+	{
+		int resourcesGathered = 0;
+
+		for (Lane l : this.getLanes())
+		{
+			resourcesGathered += l.performLaneWeaponsAttacks();
+		}
+
+		this.setResourcesGathered(this.getResourcesGathered() + resourcesGathered);
+		this.setScore(this.getScore() + resourcesGathered);
+
+		return resourcesGathered;
+	}
+
+	private int performTitansAttacks()
+	{
+		int resourcesGathered = 0;
+		ArrayList<Lane> lostLanes = new ArrayList<>();
+
+		for (Lane l : this.getLanes())
+		{
+			resourcesGathered += l.performLaneTitansAttacks();
+			if (l.isLaneLost())
+			{
+				lostLanes.add(l);
+			}
+		}
+
+		this.getLanes().removeAll(lostLanes);
+
+		return resourcesGathered;
+	}
+
+	private void updateLanesDangerLevels()
+	{
+		ArrayList<Lane> tmp = new ArrayList<>();
+		
+		while(!this.getLanes().isEmpty())
+		{
+			Lane l = this.getLanes().poll();
+			l.updateLaneDangerLevel();
+			tmp.add(l);
+		}
+		
+		this.getLanes().addAll(tmp);
+	}
+
+	private void finalizeTurns()
+	{
+		this.setNumberOfTurns(this.getNumberOfTurns() + 1);
+
+		if (this.getNumberOfTurns() == 15)
+		{
+			this.setBattlePhase(BattlePhase.INTENSE);
+		} else if (this.getNumberOfTurns() == 30)
+		{
+			this.setBattlePhase(BattlePhase.GRUMBLING);
+		} else if (this.getNumberOfTurns() > 30 && this.getNumberOfTurns() % 5 == 0)
+		{
+			this.setNumberOfTitansPerTurn(this.getNumberOfTitansPerTurn() * 2);
+		}
+	}
+
+	private void performTurn()
+	{
 		this.moveTitans();
 		this.performWeaponsAttacks();
 		this.performTitansAttacks();
+
 		this.addTurnTitansToLane();
 		this.updateLanesDangerLevels();
-		this.finalizeTurns(); 
-	 }
-	public boolean isGameOver(){
-		return (lanes.isEmpty());
-	 }
-	 
+
+		this.finalizeTurns();
+	}
+
+	public boolean isGameOver() // checks if all lanes are destroyed
+	{
+		return this.getLanes().size() == 0;
+	}
+
 }

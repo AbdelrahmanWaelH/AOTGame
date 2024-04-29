@@ -2,19 +2,17 @@ package game.engine.lanes;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
-import java.util.Stack;
 
 import game.engine.base.Wall;
-
 import game.engine.titans.Titan;
 import game.engine.weapons.Weapon;
 
-public class Lane implements Comparable<Lane>{
+public class Lane implements Comparable<Lane>
+{
 	private final Wall laneWall;
 	private int dangerLevel;
 	private final PriorityQueue<Titan> titans;
 	private final ArrayList<Weapon> weapons;
-	private int laneScore=0;
 
 	public Lane(Wall laneWall)
 	{
@@ -55,89 +53,77 @@ public class Lane implements Comparable<Lane>{
 	{
 		return this.dangerLevel - o.dangerLevel;
 	}
-	
-	public void addlaneScore(int scoreAdd){
-		this.laneScore+=scoreAdd;
-	}
-	
-	public int getLaneScore(){
-		return this.laneScore;
-	}
-	
-	public void addTitan(Titan titan){
-		titans.add(titan);
-	}
-	
-	public void addWeapon(Weapon weapon){
-		weapons.add(weapon);
-	}
-	
-	public void moveLaneTitans(){
-		Stack<Titan> tempTitans = new Stack<>();
-		while(!titans.isEmpty()){
-			Titan currTitan = titans.remove();
-			tempTitans.add(currTitan);
-			if(!currTitan.hasReachedTarget())
-				currTitan.move();
-		}
-		
-		while(!tempTitans.isEmpty()){
-			titans.add(tempTitans.pop());
-		}
-	}
-	
-	public int performLaneTitansAttacks(){
-		int resourcesGathered=0; 
-		Stack<Titan> tempTitans = new Stack<>();
-		boolean allAttacked = false;
 
-		while(!titans.isEmpty() && !allAttacked){
-			Titan currTitan=titans.remove();
-			tempTitans.push(currTitan);
-			if(currTitan.hasReachedTarget()){
-				resourcesGathered+=currTitan.attack(laneWall);
-			} else allAttacked = true; //coming titans haven't reached wall, they won't attack or be removed from the PQ
+	public void addTitan(Titan titan)
+	{
+		this.getTitans().add(titan);
+	}
+
+	public void addWeapon(Weapon weapon)
+	{
+		this.getWeapons().add(weapon);
+	}
+
+	public void moveLaneTitans()
+	{
+		ArrayList<Titan> tmp = new ArrayList<>();
+
+		for (Titan t : this.getTitans())
+		{
+			if (!t.hasReachedTarget())
+			{
+				t.move();
+				tmp.add(t);
+			}
+
 		}
 		
-		while(!tempTitans.isEmpty()){
-			addTitan(tempTitans.pop());
+		this.getTitans().removeAll(tmp);
+		this.getTitans().addAll(tmp);
+	}
+
+	public int performLaneTitansAttacks()
+	{
+		int resourcesGathered = 0;
+
+		for (Titan t : this.getTitans())
+		{
+			if (t.hasReachedTarget())
+			{
+				resourcesGathered += t.attack(this.getLaneWall());
+			}
 		}
+
 		return resourcesGathered;
+	}
 
+	public int performLaneWeaponsAttacks()
+	{
+		int resourcesGathered = 0;
+
+		for (Weapon w : this.getWeapons())
+		{
+			resourcesGathered += w.turnAttack(this.getTitans());
+		}
+
+		return resourcesGathered;
 	}
-	//Redo 125
-	public int performLaneWeaponsAttacks(){
-		int totalResources = 0;
-		Weapon currentWeapon = null;
-		for(int i=0; i<this.weapons.size();i++){
-			currentWeapon = this.weapons.get(i);
-			totalResources += currentWeapon.turnAttack(this.titans);
-		}
-		return totalResources;
-	}   
-	
-	public boolean isLaneLost(){
-		return (getLaneWall().getCurrentHealth()<=0);
-		
+
+	public boolean isLaneLost()
+	{
+		return this.getLaneWall().isDefeated();
 	}
-	
-	public void updateLaneDangerLevel(){
-		int dangerSum=0;
-		Stack<Titan> tempTitans = new Stack<>();
-		Titan currTitan;
-		
-		while(!titans.isEmpty()){
-			currTitan=titans.remove();
-			dangerSum+=currTitan.getDangerLevel();
-			tempTitans.push(currTitan);
+
+	public void updateLaneDangerLevel()
+	{
+		int newDanger = 0;
+
+		for (Titan t : this.getTitans())
+		{
+			newDanger += t.getDangerLevel();
 		}
-		
-		while(!tempTitans.isEmpty()){
-			titans.add(tempTitans.pop());
-		}
-		
-		
-		setDangerLevel(dangerSum);
+
+		this.setDangerLevel(newDanger);
 	}
 
 }

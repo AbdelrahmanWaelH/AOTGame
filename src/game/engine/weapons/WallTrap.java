@@ -16,7 +16,7 @@ public class WallTrap extends Weapon
 	@Override
 	public int turnAttack(PriorityQueue<Titan> laneTitans) {
 		int resourcesGained = 0;
-		if (laneTitans.peek().hasReachedTarget()){
+		if (!laneTitans.isEmpty() && laneTitans.peek().hasReachedTarget()){
 			resourcesGained = laneTitans.peek().takeDamage(this.getDamage());
 			if (laneTitans.peek().isDefeated())
 				laneTitans.remove(); 

@@ -5,15 +5,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.gui.Controller">
    <top>
       <HBox prefHeight="65.0" prefWidth="800.0" spacing="120.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Score" />
-            <Label text="Current Turn" />
-            <Label text="Current Phase" />
-            <Label text="Resources" />
+            <Label fx:id="scoreLabel" />
+            <Label fx:id="turnLabel" text="Current Turn: " />
+            <Label fx:id="phaseLabel" text="Current Phase: " />
+            <Label fx:id="resourcesLabel" text="Resources: " />
          </children>
          <BorderPane.margin>
             <Insets />

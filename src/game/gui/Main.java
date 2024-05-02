@@ -20,9 +20,9 @@ public class Main extends Application {
 		primaryStage.setScene(new Scene(splashRoot));
 		//primaryStage.setMaximized(true);
 		primaryStage.show();
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 
-		Parent mainUI = FXMLLoader.load(getClass().getResource("Main.fxml"));
+		Parent mainUI = FXMLLoader.load(getClass().getResource("diffSelection.fxml"));
 		primaryStage.setScene(new Scene(mainUI));
 		primaryStage.setMaximized(true);
 		//primaryStage.setFullScreen(true);

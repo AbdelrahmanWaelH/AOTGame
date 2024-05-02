@@ -16,15 +16,16 @@ public class Main extends Application {
 		primaryStage.getIcons().add(new Image(iconPath));
 
 		try{
-		Parent splashRoot = FXMLLoader.load(getClass().getResource("Splash.fxml"));
-		primaryStage.setScene(new Scene(splashRoot));
-		//primaryStage.setMaximized(true);
-		primaryStage.show();
-		Thread.sleep(1000);
+		// Parent splashRoot = FXMLLoader.load(getClass().getResource("Splash.fxml"));
+		// primaryStage.setScene(new Scene(splashRoot));
+		// //primaryStage.setMaximized(true);
+		// primaryStage.show();
+		// Thread.sleep(1000);
 
-		Parent mainUI = FXMLLoader.load(getClass().getResource("diffSelection.fxml"));
-		primaryStage.setScene(new Scene(mainUI));
+		Parent diffSelect = FXMLLoader.load(getClass().getResource("diffSelection.fxml"));
+		primaryStage.setScene(new Scene(diffSelect));
 		primaryStage.setMaximized(true);
+		primaryStage.show();
 		//primaryStage.setFullScreen(true);
 		} catch (Exception e){
 			e.printStackTrace();

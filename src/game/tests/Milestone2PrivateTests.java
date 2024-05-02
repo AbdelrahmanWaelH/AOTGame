@@ -26,7 +26,7 @@ import java.util.PriorityQueue;
 import org.junit.Test;
 
 
-
+@SuppressWarnings("all")
 public class Milestone2PrivateTests {
 
 	private String weaponPath = "game.engine.weapons.Weapon";

@@ -21,7 +21,7 @@ import org.junit.Test;
 
 import game.engine.titans.Titan;
 import game.engine.weapons.Weapon;
-
+@SuppressWarnings("all")
 public class Milestone1PrivateTests {
 
 	private String weaponPath = "game.engine.weapons.Weapon";

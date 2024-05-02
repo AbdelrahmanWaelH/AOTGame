@@ -2,13 +2,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.gui.Controller">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.gui.Controller">
    <children>
-      <Button layoutX="14.0" layoutY="242.0" mnemonicParsing="false" onAction="#easy" prefHeight="108.0" prefWidth="269.0" text="Easy" />
-      <Button layoutX="317.0" layoutY="242.0" mnemonicParsing="false" onAction="#hard" prefHeight="108.0" prefWidth="269.0" text="Hard" />
-      <Label layoutX="237.0" layoutY="104.0" text="Choose a difficulty!" />
-      <Button layoutX="66.0" layoutY="65.0" mnemonicParsing="false" onAction="#switchToSplash" text="splash" />
+      <Button layoutX="14.0" layoutY="185.0" mnemonicParsing="false" onAction="#easy" prefHeight="203.0" prefWidth="250.0" text="Easy" />
+      <Button layoutX="336.0" layoutY="185.0" mnemonicParsing="false" onAction="#hard" prefHeight="203.0" prefWidth="250.0" text="Hard" />
+      <Label layoutX="239.0" layoutY="108.0" prefHeight="21.0" prefWidth="133.0" text="Choose a difficulty!" />
    </children>
-</Pane>
+</AnchorPane>

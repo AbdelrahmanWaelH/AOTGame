@@ -1,15 +1,9 @@
 package game.gui;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javax.swing.Action;
-
 import game.engine.Battle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,7 +26,6 @@ public class Controller {
 	@FXML
 	 private Stage stage;
 	 private Scene scene;
-	 private Parent root;
 	 private Parent game;
 	private Battle battle;
 	 
@@ -41,13 +34,13 @@ public class Controller {
 		try {
 			battle = new Battle(1,0,10,3,250);
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-			Parent game = FXMLLoader.load(getClass().getResource("Battle.fxml"));
+			game = FXMLLoader.load(getClass().getResource("EasyBattle.fxml"));
 			
 			scoreLabel.setText("Score: " + battle.getScore());
 			turnLabel.setText("turn: " + battle.getNumberOfTurns());
 			phaseLabel.setText("phase: " + battle.getBattlePhase());
 			resourcesLabel.setText("resources: " + battle.getResourcesGathered());
-
+			// dunno how to make these labels dynamic
 			scene = new Scene(game);
 			stage.setScene(scene);
 			stage.setMaximized(true);
@@ -66,13 +59,13 @@ public class Controller {
 		try {
 			battle = new Battle(1,0,10,5,125);
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-			Parent game = FXMLLoader.load(getClass().getResource("Battle.fxml"));
+			game = FXMLLoader.load(getClass().getResource("HardBattle.fxml"));
 			
 			scoreLabel.setText("Score: " + battle.getScore());
 			turnLabel.setText("turn: " + battle.getNumberOfTurns());
 			phaseLabel.setText("phase: " + battle.getBattlePhase());
 			resourcesLabel.setText("resources: " + battle.getResourcesGathered());
-			
+			// dunno how to make these labels dynamic
 			scene = new Scene(game);
 			stage.setScene(scene);
 			stage.setMaximized(true);
@@ -107,7 +100,7 @@ public class Controller {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		
+		//something is wrong with this one
 	}
 	public void buy(){
 		//should take parameters to fill the purchase weapon method

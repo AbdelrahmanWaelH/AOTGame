@@ -1,5 +1,7 @@
 package game.gui;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javax.swing.Action;
 
@@ -7,6 +9,7 @@ import game.engine.Battle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,25 +33,30 @@ public class Controller {
 	 private Stage stage;
 	 private Scene scene;
 	 private Parent root;
-	
+	 private Parent game;
+	private Battle battle;
 	 
 	public void easy(ActionEvent event){
 		
 		try {
-			Battle battle = new Battle(1,0,10,3,250);
+			battle = new Battle(1,0,10,3,250);
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 			Parent game = FXMLLoader.load(getClass().getResource("Battle.fxml"));
 			
-			scoreLabel.setText("score: " + battle.getScore());
+			scoreLabel.setText("Score: " + battle.getScore());
 			turnLabel.setText("turn: " + battle.getNumberOfTurns());
 			phaseLabel.setText("phase: " + battle.getBattlePhase());
 			resourcesLabel.setText("resources: " + battle.getResourcesGathered());
-			
+
 			scene = new Scene(game);
 			stage.setScene(scene);
 			stage.setMaximized(true);
 			stage.show();
 			System.out.println("You have chosen easy mode, instance created");
+			System.out.println("Score: " + battle.getScore());
+			System.out.println("turn: " + battle.getNumberOfTurns());
+			System.out.println("phase: " + battle.getBattlePhase());
+			System.out.println("resources: " + battle.getResourcesGathered());
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -56,7 +64,7 @@ public class Controller {
 	
 	public void hard(ActionEvent event){
 		try {
-			Battle battle = new Battle(1,0,10,5,125);
+			battle = new Battle(1,0,10,5,125);
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 			Parent game = FXMLLoader.load(getClass().getResource("Battle.fxml"));
 			
@@ -70,8 +78,39 @@ public class Controller {
 			stage.setMaximized(true);
 			stage.show();
 			System.out.println("You have chosen hard mode, instance created");
+			System.out.println("Score: " + battle.getScore());
+			System.out.println("turn: " + battle.getNumberOfTurns());
+			System.out.println("phase: " + battle.getBattlePhase());
+			System.out.println("resources: " + battle.getResourcesGathered());
 		} catch (IOException e){
 			e.printStackTrace();
 		}
+	}
+	public void openShop(ActionEvent event){
+		System.out.println("Shop opened!");
+		try{
+		Parent shop = FXMLLoader.load(getClass().getResource("Shop.fxml"));
+		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+
+		scene = new Scene(shop);
+		stage.setScene(scene);
+		stage.setMaximized(true);
+		stage.show();
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+	}
+	public void skipThisTurn(){
+		System.out.println("Turn skipped...");
+		try{
+			battle.passTurn();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	public void buy(){
+		//should take parameters to fill the purchase weapon method
+		//battle.purchaseWeapon(code, lane);
 	}
 }

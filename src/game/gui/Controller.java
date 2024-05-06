@@ -102,6 +102,7 @@ public class Controller {
 		stage.setScene(scene);
 		stage.setFullScreen(true);
 		stage.show();
+		textRefresh();
 		} catch (IOException e){
 			e.printStackTrace();
 		}

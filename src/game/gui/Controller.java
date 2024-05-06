@@ -1,31 +1,42 @@
 package game.gui;
 import java.io.IOException;
 import game.engine.Battle;
+import game.engine.exceptions.InsufficientResourcesException;
+import game.engine.exceptions.InvalidLaneException;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Controller {
+	String iconPath = "game/gui/assets/icon.png";
 	@FXML
-    private Label scoreLabel = new Label();
+     private Label scoreLabel = new Label();
 
 	@FXML
-    private Label turnLabel = new Label();
+     private Label turnLabel = new Label();
 
     @FXML
-    private Label phaseLabel = new Label();
+     private Label phaseLabel = new Label();
 
     @FXML
-    private Label resourcesLabel = new Label();
+     private Label resourcesLabel = new Label();
 
 	@FXML
 	 private Stage stage;
+	 @FXML
 	 private Scene scene;
+	 @FXML
 	 private Parent game;
 	private Battle battle;
 	 
@@ -36,11 +47,17 @@ public class Controller {
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 			game = FXMLLoader.load(getClass().getResource("EasyBattle.fxml"));
 			
-			scoreLabel.setText("Score: " + battle.getScore());
+			// IntegerProperty scoreProperty = new SimpleIntegerProperty();
+			// scoreProperty.bindBidirectional(new SimpleIntegerProperty(battle.getScore()));
+			// scoreLabel.textProperty().bind(scoreProperty.asString("Score: %d"));
+			// dunno how to make these labels dynamic
+			
+
+
 			turnLabel.setText("turn: " + battle.getNumberOfTurns());
 			phaseLabel.setText("phase: " + battle.getBattlePhase());
 			resourcesLabel.setText("resources: " + battle.getResourcesGathered());
-			// dunno how to make these labels dynamic
+			
 			scene = new Scene(game);
 			stage.setScene(scene);
 			stage.setMaximized(true);
@@ -79,11 +96,13 @@ public class Controller {
 			e.printStackTrace();
 		}
 	}
+	
 	public void openShop(ActionEvent event){
-		System.out.println("Shop opened!");
+		
 		try{
 		Parent shop = FXMLLoader.load(getClass().getResource("Shop.fxml"));
 		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+		System.out.println("Shop opened!");
 
 		scene = new Scene(shop);
 		stage.setScene(scene);
@@ -92,7 +111,9 @@ public class Controller {
 		} catch (IOException e){
 			e.printStackTrace();
 		}
+		
 	}
+	
 	public void skipThisTurn(){
 		System.out.println("Turn skipped...");
 		try{
@@ -104,6 +125,29 @@ public class Controller {
 	}
 	public void buy(){
 		//should take parameters to fill the purchase weapon method
-		//battle.purchaseWeapon(code, lane);
+
+		// try{
+		// 	battle.purchaseWeapon(code, lane);
+		// }catch (InvalidLaneException ILE){
+		// 	displayAlert("The lane you chose is invalid!");
+		// } catch (InsufficientResourcesException IRE) {
+		// 	displayAlert("You currently don't have enough resources to perform this action");
+		// }
 	}
+	private void displayAlert(String message) {
+        Stage alertStage = new Stage();
+        alertStage.setTitle("Warning! Invalid Action!");
+		alertStage.getIcons().add(new Image(iconPath));
+        Label label = new Label(message);
+        Button closeButton = new Button("Ok!");
+        closeButton.setOnAction(event -> alertStage.close());
+
+        BorderPane pane = new BorderPane();
+        pane.setTop(label);
+        pane.setCenter(closeButton);
+
+        Scene scene = new Scene(pane, 500, 100);
+        alertStage.setScene(scene);
+        alertStage.show();
+    }
 }

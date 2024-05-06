@@ -60,7 +60,7 @@ public class Controller {
 			
 			scene = new Scene(game);
 			stage.setScene(scene);
-			stage.setMaximized(true);
+			stage.setFullScreen(true);
 			stage.show();
 			System.out.println("You have chosen easy mode, instance created");
 			consolePrint();
@@ -82,7 +82,7 @@ public class Controller {
 			// dunno how to make these labels dynamic
 			scene = new Scene(game);
 			stage.setScene(scene);
-			stage.setMaximized(true);
+			stage.setFullScreen(true);
 			stage.show();
 			System.out.println("You have chosen hard mode, instance created");
 			consolePrint();
@@ -100,7 +100,7 @@ public class Controller {
 
 		scene = new Scene(shop);
 		stage.setScene(scene);
-		stage.setMaximized(true);
+		stage.setFullScreen(true);
 		stage.show();
 		} catch (IOException e){
 			e.printStackTrace();
@@ -110,6 +110,7 @@ public class Controller {
 	
 	public void skipThisTurn(){
 		System.out.println("Turn skipped...");
+		
 		// 	battle.passTurn();
 		// } catch (Exception e){
 		// 	e.printStackTrace();
@@ -145,17 +146,15 @@ public class Controller {
     }
 	private void consolePrint(){
 		System.out.println(scoreLabel.getText());
-			System.out.println(turnLabel.getText());
-			System.out.println(phaseLabel.getText());
-			System.out.println(resourcesLabel.getText());
+		System.out.println(turnLabel.getText());
+		System.out.println(phaseLabel.getText());
+		System.out.println(resourcesLabel.getText());
 	}
-	private void textRefresh(ActionEvent event){
-		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-
+	public void textRefresh(){
 		scoreLabel.setText("Score: " + battle.getScore());
 		turnLabel.setText("turn: " + battle.getNumberOfTurns());
 		phaseLabel.setText("phase: " + battle.getBattlePhase());
 		resourcesLabel.setText("resources: " + battle.getResourcesGathered());
-		System.out.println("Text refreshed!");
+		//System.out.println("Text refreshed!");
 	}
 }

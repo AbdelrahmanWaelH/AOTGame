@@ -18,9 +18,9 @@ public class Main extends Application {
 		try{
 		Parent diffSelect = FXMLLoader.load(getClass().getResource("diffSelection.fxml"));
 		primaryStage.setScene(new Scene(diffSelect));
-		primaryStage.setMaximized(true);
+		//primaryStage.setMaximized(true);
 		primaryStage.show();
-		//primaryStage.setFullScreen(true);
+		primaryStage.setFullScreen(true);
 		} catch (Exception e){
 			e.printStackTrace();
 		}

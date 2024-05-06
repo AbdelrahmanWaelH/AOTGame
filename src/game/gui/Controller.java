@@ -152,9 +152,8 @@ public class Controller {
 	}
 	public void textRefresh(){
 		scoreLabel.setText("Score: " + battle.getScore());
-		turnLabel.setText("turn: " + battle.getNumberOfTurns());
-		phaseLabel.setText("phase: " + battle.getBattlePhase());
-		resourcesLabel.setText("resources: " + battle.getResourcesGathered());
-		//System.out.println("Text refreshed!");
+		turnLabel.setText("Turn: " + battle.getNumberOfTurns());
+		phaseLabel.setText("Phase: " + battle.getBattlePhase());
+		resourcesLabel.setText("Resources: " + battle.getResourcesGathered());
 	}
 }

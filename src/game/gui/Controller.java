@@ -38,7 +38,7 @@ public class Controller {
 	 private Scene scene;
 	 @FXML
 	 private Parent game;
-	private Battle battle;
+	private static Battle battle;
 	 
 	public void easy(ActionEvent event){
 		
@@ -63,10 +63,7 @@ public class Controller {
 			stage.setMaximized(true);
 			stage.show();
 			System.out.println("You have chosen easy mode, instance created");
-			System.out.println(scoreLabel.getText());
-			System.out.println(turnLabel.getText());
-			System.out.println(phaseLabel.getText());
-			System.out.println(resourcesLabel.getText());
+			consolePrint();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -88,10 +85,7 @@ public class Controller {
 			stage.setMaximized(true);
 			stage.show();
 			System.out.println("You have chosen hard mode, instance created");
-			System.out.println(scoreLabel.getText());
-			System.out.println(turnLabel.getText());
-			System.out.println(phaseLabel.getText());
-			System.out.println(resourcesLabel.getText());
+			consolePrint();
 		} catch (IOException e){
 			e.printStackTrace();
 		}
@@ -116,11 +110,10 @@ public class Controller {
 	
 	public void skipThisTurn(){
 		System.out.println("Turn skipped...");
-		try{
-			battle.passTurn();
-		} catch (Exception e){
-			e.printStackTrace();
-		}
+		// 	battle.passTurn();
+		// } catch (Exception e){
+		// 	e.printStackTrace();
+		// }
 		//something is wrong with this one
 	}
 	public void buy(){
@@ -150,4 +143,19 @@ public class Controller {
         alertStage.setScene(scene);
         alertStage.show();
     }
+	private void consolePrint(){
+		System.out.println(scoreLabel.getText());
+			System.out.println(turnLabel.getText());
+			System.out.println(phaseLabel.getText());
+			System.out.println(resourcesLabel.getText());
+	}
+	private void textRefresh(ActionEvent event){
+		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+
+		scoreLabel.setText("Score: " + battle.getScore());
+		turnLabel.setText("turn: " + battle.getNumberOfTurns());
+		phaseLabel.setText("phase: " + battle.getBattlePhase());
+		resourcesLabel.setText("resources: " + battle.getResourcesGathered());
+		System.out.println("Text refreshed!");
+	}
 }

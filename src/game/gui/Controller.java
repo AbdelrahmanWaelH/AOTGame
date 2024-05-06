@@ -53,7 +53,7 @@ public class Controller {
 			// dunno how to make these labels dynamic
 			
 
-
+			scoreLabel.setText("Score: " + battle.getScore());
 			turnLabel.setText("turn: " + battle.getNumberOfTurns());
 			phaseLabel.setText("phase: " + battle.getBattlePhase());
 			resourcesLabel.setText("resources: " + battle.getResourcesGathered());
@@ -63,10 +63,10 @@ public class Controller {
 			stage.setMaximized(true);
 			stage.show();
 			System.out.println("You have chosen easy mode, instance created");
-			System.out.println("Score: " + battle.getScore());
-			System.out.println("turn: " + battle.getNumberOfTurns());
-			System.out.println("phase: " + battle.getBattlePhase());
-			System.out.println("resources: " + battle.getResourcesGathered());
+			System.out.println(scoreLabel.getText());
+			System.out.println(turnLabel.getText());
+			System.out.println(phaseLabel.getText());
+			System.out.println(resourcesLabel.getText());
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -88,10 +88,10 @@ public class Controller {
 			stage.setMaximized(true);
 			stage.show();
 			System.out.println("You have chosen hard mode, instance created");
-			System.out.println("Score: " + battle.getScore());
-			System.out.println("turn: " + battle.getNumberOfTurns());
-			System.out.println("phase: " + battle.getBattlePhase());
-			System.out.println("resources: " + battle.getResourcesGathered());
+			System.out.println(scoreLabel.getText());
+			System.out.println(turnLabel.getText());
+			System.out.println(phaseLabel.getText());
+			System.out.println(resourcesLabel.getText());
 		} catch (IOException e){
 			e.printStackTrace();
 		}

@@ -1,8 +1,14 @@
 package game.gui;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+
+import org.omg.CORBA.PRIVATE_MEMBER;
+
 import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
+import game.engine.lanes.Lane;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -31,6 +37,27 @@ public class Controller {
 
     @FXML
      private Label resourcesLabel = new Label();
+    
+    @FXML
+     private Label lane1= new Label();
+    
+    @FXML
+     private Label lane2= new Label();
+    
+    @FXML
+     private Label lane3= new Label();
+    
+    @FXML
+	 private Label lane4= new Label();
+    
+    @FXML
+	 private Label lane5=new Label();
+    
+     private boolean Hard=true;
+    
+    
+ 
+    
 
 	@FXML
 	 private Stage stage;
@@ -41,6 +68,7 @@ public class Controller {
 	private static Battle battle;
 	 
 	public void easy(ActionEvent event){
+		Hard=false;
 		
 		try {
 			battle = new Battle(1,0,10,3,250);
@@ -52,11 +80,17 @@ public class Controller {
 			// scoreLabel.textProperty().bind(scoreProperty.asString("Score: %d"));
 			// dunno how to make these labels dynamic
 			
-
 			scoreLabel.setText("Score: " + battle.getScore());
 			turnLabel.setText("turn: " + battle.getNumberOfTurns());
 			phaseLabel.setText("phase: " + battle.getBattlePhase());
 			resourcesLabel.setText("resources: " + battle.getResourcesGathered());
+			ArrayList<Lane> tempArr= battle.getOriginalLanes();
+			Lane l1=tempArr.get(0);
+			Lane l2=tempArr.get(1);
+			Lane l3=tempArr.get(2);
+			lane1.setText("Wall health: " + l1.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l1.getDangerLevel());
+			lane2.setText("Wall health: " + l2.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l2.getDangerLevel());
+			lane3.setText("Wall health: " + l3.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l3.getDangerLevel());
 			
 			scene = new Scene(game);
 			stage.setScene(scene);
@@ -79,6 +113,18 @@ public class Controller {
 			turnLabel.setText("turn: " + battle.getNumberOfTurns());
 			phaseLabel.setText("phase: " + battle.getBattlePhase());
 			resourcesLabel.setText("resources: " + battle.getResourcesGathered());
+			ArrayList<Lane> tempArr= battle.getOriginalLanes();
+			Lane l1=tempArr.get(0);
+			Lane l2=tempArr.get(1);
+			Lane l3=tempArr.get(2);
+			Lane l4=tempArr.get(3);
+			Lane l5=tempArr.get(4);
+			lane1.setText("Wall health: " + l1.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l1.getDangerLevel());
+			lane2.setText("Wall health: " + l2.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l2.getDangerLevel());
+			lane3.setText("Wall health: " + l3.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l3.getDangerLevel());
+			lane4.setText("Wall health: " + l4.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l4.getDangerLevel());
+			lane5.setText("Wall health: " + l5.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l5.getDangerLevel());
+			
 			// dunno how to make these labels dynamic
 			scene = new Scene(game);
 			stage.setScene(scene);
@@ -150,11 +196,32 @@ public class Controller {
 		System.out.println(turnLabel.getText());
 		System.out.println(phaseLabel.getText());
 		System.out.println(resourcesLabel.getText());
+		System.out.println(lane1.getText());
+		System.out.println(lane2.getText());
+		System.out.println(lane3.getText());
+		System.out.println(lane4.getText());
+		System.out.println(lane5.getText());
+
 	}
 	public void textRefresh(){
 		scoreLabel.setText("Score: " + battle.getScore());
 		turnLabel.setText("Turn: " + battle.getNumberOfTurns());
 		phaseLabel.setText("Phase: " + battle.getBattlePhase());
 		resourcesLabel.setText("Resources: " + battle.getResourcesGathered());
+		ArrayList<Lane> tempArr= battle.getOriginalLanes();
+		Lane l1=tempArr.get(0);
+		Lane l2=tempArr.get(1);
+		Lane l3=tempArr.get(2);
+		lane1.setText("Wall health: " + l1.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l1.getDangerLevel());
+		lane2.setText("Wall health: " + l2.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l2.getDangerLevel());
+		lane3.setText("Wall health: " + l3.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l3.getDangerLevel());
+		if(Hard){
+			Lane l4=tempArr.get(3);
+			Lane l5=tempArr.get(4);
+			lane4.setText("Wall health: " + l4.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l4.getDangerLevel());
+			lane5.setText("Wall health: " + l5.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l5.getDangerLevel());
+		}
+		
+		
 	}
 }

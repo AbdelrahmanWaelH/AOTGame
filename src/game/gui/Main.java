@@ -11,7 +11,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		String title = "AOT Game pre-alpha";
-		String iconPath = "game/gui/assets/icon.png";
+		String iconPath = Controller.iconPath;
 		primaryStage.setTitle(title);
 		primaryStage.getIcons().add(new Image(iconPath));
 

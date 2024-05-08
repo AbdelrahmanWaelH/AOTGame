@@ -12,10 +12,10 @@
    <top>
       <HBox prefHeight="65.0" prefWidth="800.0" spacing="120.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="scoreLabel" />
-            <Label fx:id="turnLabel" text="Current Turn: " />
-            <Label fx:id="phaseLabel" text="Current Phase: " />
-            <Label fx:id="resourcesLabel" text="Resources: " />
+            <Label fx:id="scoreLabel" text = "score" />
+            <Label fx:id="turnLabel" text="turn" />
+            <Label fx:id="phaseLabel" text="phase" />
+            <Label fx:id="resourcesLabel" text="res" />
          </children>
          <BorderPane.margin>
             <Insets />

@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import game.engine.exceptions.GameActionException;
 
 public class Controller {
 	String iconPath = "game/gui/assets/icon.png";
@@ -36,9 +37,9 @@ public class Controller {
 	 @FXML
 	 private Parent game;
 	private static Battle battle;
-	 
+	private static boolean easyDiff = false;
 	public void easy(ActionEvent event){
-		
+		easyDiff = true;
 		try {
 			battle = new Battle(1,0,10,3,250);
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -108,16 +109,13 @@ public class Controller {
 	
 	public void skipThisTurn(){
 		System.out.println("Turn skipped...");
+		//displayAlert("Turn Skipped...");
+		battle.passTurn();
 		textRefresh();
-		// 	battle.passTurn();
-		// } catch (Exception e){
-		// 	e.printStackTrace();
-		// }
-		//something is wrong with this one
 	}
 	public void buy(){
 		//should take parameters to fill the purchase weapon method
-
+		//use easyDiff and a helper that takes two general parameters
 		// try{
 		// 	battle.purchaseWeapon(code, lane);
 		// }catch (InvalidLaneException ILE){

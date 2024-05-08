@@ -66,7 +66,7 @@ public class Controller {
 			consolePrint();
 		} catch (Exception e){
 			e.printStackTrace();
-		}
+		} 
 	}
 	
 	public void hard(ActionEvent event){
@@ -105,13 +105,13 @@ public class Controller {
 		textRefresh();
 		} catch (IOException e){
 			e.printStackTrace();
-		}
+		} 
 		
 	}
 	
 	public void skipThisTurn(){
 		System.out.println("Turn skipped...");
-		
+		textRefresh();
 		// 	battle.passTurn();
 		// } catch (Exception e){
 		// 	e.printStackTrace();

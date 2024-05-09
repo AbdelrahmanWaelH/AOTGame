@@ -1,17 +1,8 @@
 package game.gui;
 import java.io.IOException;
-import java.security.acl.Group;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-<<<<<<< HEAD
-import javax.swing.RootPaneContainer;
-
-import org.omg.CORBA.PRIVATE_MEMBER;
-
-=======
->>>>>>> efd4347a7be5e357447ada95ea7264de31fe6302
 import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
@@ -69,27 +60,7 @@ public class Controller {
 	 private Label lane4 = new Label();
     
     @FXML
-<<<<<<< HEAD
-	 private Label lane5=new Label();
-    
-     private boolean Hard=true;
-     
-     @FXML
-	 VBox lane1field= new VBox(); 
-     
-     @FXML
-	 VBox lane2field= new VBox(); 
-     
-     @FXML
-	 VBox lane3field= new VBox(); 
-     
-     @FXML
-     Rectangle rectangle= new Rectangle();
-    
- 
-=======
 	 private Label lane5 = new Label();
->>>>>>> efd4347a7be5e357447ada95ea7264de31fe6302
     
      private boolean hardDifficulty = true;
 
@@ -112,7 +83,6 @@ public class Controller {
 			turnLabel.setText("turn: " + battle.getNumberOfTurns());
 			phaseLabel.setText("phase: " + battle.getBattlePhase());
 			resourcesLabel.setText("resources: " + battle.getResourcesGathered());
-			
 			
 			scene = new Scene(game);
 			stage.setScene(scene);
@@ -248,6 +218,4 @@ public class Controller {
 		
 		
 	}
-	
-	
 }

@@ -13,14 +13,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#textRefresh" onMouseReleased="#textRefresh" prefHeight="545.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.gui.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#textRefresh" prefHeight="545.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.gui.Controller">
    <top>
       <HBox prefHeight="65.0" prefWidth="800.0" spacing="120.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="scoreLabel" />
-            <Label fx:id="turnLabel" text="Current Turn: " />
-            <Label fx:id="phaseLabel" text="Current Phase: " />
-            <Label fx:id="resourcesLabel" text="Resources: " />
+            <Label fx:id="scoreLabel" text="score" />
+            <Label fx:id="turnLabel" text="turn" />
+            <Label fx:id="phaseLabel" text="phase" />
+            <Label fx:id="resourcesLabel" text="res" />
          </children>
          <BorderPane.margin>
             <Insets />
@@ -30,6 +30,9 @@
          </padding>
       </HBox>
    </top>
+   <center>
+      <HBox onMouseEntered="#textRefresh" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
    <bottom>
       <SplitPane dividerPositions="0.17167919799498746" prefHeight="100.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <items>

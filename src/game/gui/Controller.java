@@ -181,7 +181,7 @@ public class Controller implements Initializable{
 		System.out.println(lane3.getText());
 		System.out.println(lane4.getText());
 		System.out.println(lane5.getText());
-
+		//System.out.println("lane choice: " + laneChoice.getValue());
 	}
 
 	public void textRefresh(){
@@ -221,6 +221,6 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		laneChoice.getItems().addAll("Lane 1", "Lane 2", "Lane 3", "Lane 4", "Lane 5");
-		//laneChoice.setOnAction(this::getLaneChoiceBox);
+		laneChoice.setOnAction(this::getLaneChoiceBox);
 	}
 }

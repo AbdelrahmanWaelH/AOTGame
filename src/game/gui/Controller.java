@@ -1,6 +1,8 @@
 package game.gui;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
@@ -10,18 +12,19 @@ import game.engine.lanes.Lane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 
-public class Controller {
+public class Controller implements Initializable{
 	public static String iconPath = "game/gui/assets/icon.png";
 	@FXML
      private Label scoreLabel = new Label();
@@ -49,6 +52,15 @@ public class Controller {
     
     @FXML
 	 private Label lane5 = new Label();
+
+	 private Lane l1;
+	 private Lane l2;
+	 private Lane l3;
+	 private Lane l4;
+	 private Lane l5;
+	@FXML
+	 private ChoiceBox<String> laneChoice = new ChoiceBox<>();
+	private Lane purchaseLane;
     
     private boolean hardDifficulty = true;
 
@@ -60,6 +72,8 @@ public class Controller {
 	 private Parent game;
 	private static Battle battle;
 	
+
+
 	public void easy(ActionEvent event){
 		hardDifficulty = false;
 		try {
@@ -169,25 +183,44 @@ public class Controller {
 		System.out.println(lane5.getText());
 
 	}
+
 	public void textRefresh(){
 		scoreLabel.setText("Score: " + battle.getScore());
 		turnLabel.setText("Turn: " + battle.getNumberOfTurns());
 		phaseLabel.setText("Phase: " + battle.getBattlePhase());
 		resourcesLabel.setText("Resources: " + battle.getResourcesGathered());
 		ArrayList<Lane> tempArr= battle.getOriginalLanes();
-		Lane l1=tempArr.get(0);
-		Lane l2=tempArr.get(1);
-		Lane l3=tempArr.get(2);
+		l1=tempArr.get(0);
+		l2=tempArr.get(1);
+		l3=tempArr.get(2);
 		lane1.setText("Wall 1 health: " + l1.getLaneWall().getCurrentHealth() + " & Danger Level: " + l1.getDangerLevel());
 		lane2.setText("Wall 2 health: " + l2.getLaneWall().getCurrentHealth() + " & Danger Level: " + l2.getDangerLevel());
 		lane3.setText("Wall 3 health: " + l3.getLaneWall().getCurrentHealth() + " & Danger Level: " + l3.getDangerLevel());
 		if(hardDifficulty){
-			Lane l4=tempArr.get(3);
-			Lane l5=tempArr.get(4);
+			l4=tempArr.get(3);
+			l5=tempArr.get(4);
 			lane4.setText("Wall 4 health: " + l4.getLaneWall().getCurrentHealth() + " & Danger Level: " + l4.getDangerLevel());
 			lane5.setText("Wall 5 health: " + l5.getLaneWall().getCurrentHealth() + " & Danger Level: " + l5.getDangerLevel());
 		}
-		
-		
+	}
+	
+
+	public void getLaneChoiceBox(ActionEvent event){
+		String laneName = (String) laneChoice.getValue();
+		System.out.println("Lane: " + laneName + " chosen");
+		switch (laneName) {
+		case "Lane 1": purchaseLane = l1; break;
+		case "Lane 2": purchaseLane = l2; break;
+		case "Lane 3": purchaseLane = l3; break;
+		case "Lane 4": purchaseLane = l4; break;
+		case "Lane 5": purchaseLane = l5; break;
+		default: purchaseLane = null;
+		scoreLabel.setText("laneName");
+		}		
+	}
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		laneChoice.getItems().addAll("Lane 1", "Lane 2", "Lane 3", "Lane 4", "Lane 5");
+		//laneChoice.setOnAction(this::getLaneChoiceBox);
 	}
 }

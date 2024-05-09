@@ -1,21 +1,12 @@
 package game.gui;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 
 import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
 import game.engine.exceptions.GameActionException;
 import game.engine.lanes.Lane;
-<<<<<<< HEAD
-import game.engine.titans.Titan;
-import javafx.animation.TranslateTransition;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-=======
->>>>>>> efd4347a7be5e357447ada95ea7264de31fe6302
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,9 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 
@@ -62,13 +50,13 @@ public class Controller {
     @FXML
 	 private Label lane5 = new Label();
     
-     private boolean hardDifficulty = true;
+    private boolean hardDifficulty = true;
 
 	@FXML
 	 private Stage stage;
-	 @FXML
+	@FXML
 	 private Scene scene;
-	 @FXML
+	@FXML
 	 private Parent game;
 	private static Battle battle;
 	
@@ -105,22 +93,6 @@ public class Controller {
 			turnLabel.setText("turn: " + battle.getNumberOfTurns());
 			phaseLabel.setText("phase: " + battle.getBattlePhase());
 			resourcesLabel.setText("resources: " + battle.getResourcesGathered());
-			
-		
-			
-				TranslateTransition translate = new TranslateTransition();
-				translate.setByY(-100); 
-				translate.setDuration(javafx.util.Duration.millis(1000));
-				translate.setCycleCount(10);
-				translate.setAutoReverse(true);
-				translate.setNode(rectangle);
-				translate.play();
-				
-				lane1field.getChildren().add(rectangle);
-				
-			
-			
-			
 			
 			
 			// dunno how to make these labels dynamic

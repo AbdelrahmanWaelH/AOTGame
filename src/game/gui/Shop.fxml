@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -69,6 +70,7 @@
       <Pane prefHeight="111.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="resourcesLabel" layoutX="286.0" layoutY="23.0" />
+            <ChoiceBox fx:id="laneChoice" layoutX="14.0" layoutY="11.0" prefWidth="150.0" />
          </children>
       </Pane>
    </top>

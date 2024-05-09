@@ -1,7 +1,11 @@
 package game.gui;
 import java.io.IOException;
+import java.security.acl.Group;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
+
+import javax.swing.RootPaneContainer;
 
 import org.omg.CORBA.PRIVATE_MEMBER;
 
@@ -9,6 +13,8 @@ import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
 import game.engine.lanes.Lane;
+import game.engine.titans.Titan;
+import javafx.animation.TranslateTransition;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -21,7 +27,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Controller {
@@ -54,7 +64,18 @@ public class Controller {
 	 private Label lane5=new Label();
     
      private boolean Hard=true;
-    
+     
+     @FXML
+	 VBox lane1field= new VBox(); 
+     
+     @FXML
+	 VBox lane2field= new VBox(); 
+     
+     @FXML
+	 VBox lane3field= new VBox(); 
+     
+     @FXML
+     Rectangle rectangle= new Rectangle();
     
  
     
@@ -92,6 +113,7 @@ public class Controller {
 			lane2.setText("Wall health: " + l2.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l2.getDangerLevel());
 			lane3.setText("Wall health: " + l3.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l3.getDangerLevel());
 			
+			
 			scene = new Scene(game);
 			stage.setScene(scene);
 			stage.setFullScreen(true);
@@ -124,6 +146,23 @@ public class Controller {
 			lane3.setText("Wall health: " + l3.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l3.getDangerLevel());
 			lane4.setText("Wall health: " + l4.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l4.getDangerLevel());
 			lane5.setText("Wall health: " + l5.getLaneWall().getCurrentHealth() + "          , Danger Level: " + l5.getDangerLevel());
+			
+		
+			
+				TranslateTransition translate = new TranslateTransition();
+				translate.setByY(-100); 
+				translate.setDuration(javafx.util.Duration.millis(1000));
+				translate.setCycleCount(10);
+				translate.setAutoReverse(true);
+				translate.setNode(rectangle);
+				translate.play();
+				
+				lane1field.getChildren().add(rectangle);
+				
+			
+			
+			
+			
 			
 			// dunno how to make these labels dynamic
 			scene = new Scene(game);
@@ -224,4 +263,6 @@ public class Controller {
 		
 		
 	}
+	
+	
 }

@@ -63,18 +63,18 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
             <VBox fx:id="lane1field" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="lane1" text="Wall Health &amp; Danger Level" />
+                  <Label fx:id="laneLabel1" text="Wall Health &amp; Danger Level" />
                   <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="36.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
                </children>
             </VBox>
             <VBox fx:id="lane2field" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="lane2" text="Wall Health &amp; Danger Level" />
+                  <Label fx:id="laneLabel2" text="Wall Health &amp; Danger Level" />
                </children>
             </VBox>
             <VBox fx:id="lane3field" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="lane3" text="Wall Health &amp; Danger Level" />
+                  <Label fx:id="laneLabel3" text="Wall Health &amp; Danger Level" />
                </children>
             </VBox>
          </children>

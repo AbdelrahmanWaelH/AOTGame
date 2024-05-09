@@ -63,27 +63,27 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="lane1" text="Wall Health &amp; Danger Level" />
+                  <Label fx:id="laneLabel1" text="Wall Health &amp; Danger Level" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="lane2" text="Wall Health &amp; Danger Level" />
+                  <Label fx:id="laneLabel2" text="Wall Health &amp; Danger Level" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="lane3" text="Wall Health &amp; Danger Level" />
+                  <Label fx:id="laneLabel3" text="Wall Health &amp; Danger Level" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="lane4" text="Wall Health &amp; Danger Level" />
+                  <Label fx:id="laneLabel4" text="Wall Health &amp; Danger Level" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="lane5" text="Wall Health &amp; Danger Level" />
+                  <Label fx:id="laneLabel5" text="Wall Health &amp; Danger Level" />
                </children>
             </VBox>
          </children>

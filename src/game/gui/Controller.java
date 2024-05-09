@@ -38,26 +38,26 @@ public class Controller implements Initializable{
     @FXML
      private Label resourcesLabel = new Label();
     
-    @FXML
-     private Label lane1 = new Label();
-    
-    @FXML
-     private Label lane2 = new Label();
-    
-    @FXML
-     private Label lane3 = new Label();
-    
-    @FXML
-	 private Label lane4 = new Label();
-    
-    @FXML
-	 private Label lane5 = new Label();
+	@FXML
+	private Label laneLabel1 = new Label();
 
-	 private Lane l1;
-	 private Lane l2;
-	 private Lane l3;
-	 private Lane l4;
-	 private Lane l5;
+	@FXML
+	private Label laneLabel2 = new Label();
+
+	@FXML
+	private Label laneLabel3 = new Label();
+
+	@FXML
+	private Label laneLabel4 = new Label();
+
+	@FXML
+	private Label laneLabel5 = new Label();
+
+	 private Lane Lane1;
+	 private Lane Lane2;
+	 private Lane Lane3;
+	 private Lane Lane4;
+	 private Lane Lane5;
 	@FXML
 	 private ChoiceBox<String> laneChoice = new ChoiceBox<>();
 	private Lane purchaseLane;
@@ -176,11 +176,11 @@ public class Controller implements Initializable{
 		System.out.println(turnLabel.getText());
 		System.out.println(phaseLabel.getText());
 		System.out.println(resourcesLabel.getText());
-		System.out.println(lane1.getText());
-		System.out.println(lane2.getText());
-		System.out.println(lane3.getText());
-		System.out.println(lane4.getText());
-		System.out.println(lane5.getText());
+		System.out.println(laneLabel1.getText());
+		System.out.println(laneLabel2.getText());
+		System.out.println(laneLabel3.getText());
+		System.out.println(laneLabel4.getText());
+		System.out.println(laneLabel5.getText());
 		//System.out.println("lane choice: " + laneChoice.getValue());
 	}
 
@@ -190,17 +190,17 @@ public class Controller implements Initializable{
 		phaseLabel.setText("Phase: " + battle.getBattlePhase());
 		resourcesLabel.setText("Resources: " + battle.getResourcesGathered());
 		ArrayList<Lane> tempArr= battle.getOriginalLanes();
-		l1=tempArr.get(0);
-		l2=tempArr.get(1);
-		l3=tempArr.get(2);
-		lane1.setText("Wall 1 health: " + l1.getLaneWall().getCurrentHealth() + " & Danger Level: " + l1.getDangerLevel());
-		lane2.setText("Wall 2 health: " + l2.getLaneWall().getCurrentHealth() + " & Danger Level: " + l2.getDangerLevel());
-		lane3.setText("Wall 3 health: " + l3.getLaneWall().getCurrentHealth() + " & Danger Level: " + l3.getDangerLevel());
+		Lane1=tempArr.get(0);
+		Lane2=tempArr.get(1);
+		Lane3=tempArr.get(2);
+		laneLabel1.setText("Wall 1 health: " + Lane1.getLaneWall().getCurrentHealth() + " & Danger Level: " + Lane1.getDangerLevel());
+		laneLabel2.setText("Wall 2 health: " + Lane2.getLaneWall().getCurrentHealth() + " & Danger Level: " + Lane2.getDangerLevel());
+		laneLabel3.setText("Wall 3 health: " + Lane3.getLaneWall().getCurrentHealth() + " & Danger Level: " + Lane3.getDangerLevel());
 		if(hardDifficulty){
-			l4=tempArr.get(3);
-			l5=tempArr.get(4);
-			lane4.setText("Wall 4 health: " + l4.getLaneWall().getCurrentHealth() + " & Danger Level: " + l4.getDangerLevel());
-			lane5.setText("Wall 5 health: " + l5.getLaneWall().getCurrentHealth() + " & Danger Level: " + l5.getDangerLevel());
+			Lane4=tempArr.get(3);
+			Lane5=tempArr.get(4);
+			laneLabel4.setText("Wall 4 health: " + Lane4.getLaneWall().getCurrentHealth() + " & Danger Level: " + Lane4.getDangerLevel());
+			laneLabel5.setText("Wall 5 health: " + Lane5.getLaneWall().getCurrentHealth() + " & Danger Level: " + Lane5.getDangerLevel());
 		}
 	}
 	
@@ -209,11 +209,11 @@ public class Controller implements Initializable{
 		String laneName = (String) laneChoice.getValue();
 		System.out.println("Lane: " + laneName + " chosen");
 		switch (laneName) {
-		case "Lane 1": purchaseLane = l1; break;
-		case "Lane 2": purchaseLane = l2; break;
-		case "Lane 3": purchaseLane = l3; break;
-		case "Lane 4": purchaseLane = l4; break;
-		case "Lane 5": purchaseLane = l5; break;
+		case "Lane 1": purchaseLane = Lane1; break;
+		case "Lane 2": purchaseLane = Lane2; break;
+		case "Lane 3": purchaseLane = Lane3; break;
+		case "Lane 4": purchaseLane = Lane4; break;
+		case "Lane 5": purchaseLane = Lane5; break;
 		default: purchaseLane = null;
 		scoreLabel.setText("laneName");
 		}		

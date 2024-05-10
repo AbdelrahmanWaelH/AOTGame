@@ -51,6 +51,14 @@ public class Controller implements Initializable{
 
 	@FXML
 	private Label laneLabel5 = new Label();
+	@FXML
+	private Label pcLabel = new Label();
+	@FXML
+	private Label scLabel = new Label();
+	@FXML
+	private Label vcLabel = new Label();
+	@FXML
+	private Label wtLabel = new Label();
 
 	@FXML
 	 private ChoiceBox<String> laneChoice = new ChoiceBox<>();
@@ -71,7 +79,7 @@ public class Controller implements Initializable{
 	private Lane Lane4;
 	private Lane Lane5;
 	private Lane purchaseLane;
-    private boolean hardDifficulty;
+    private boolean hardDifficulty = true;
 	
 	public void easy(ActionEvent event) throws IOException{
 		hardDifficulty = false;
@@ -81,7 +89,7 @@ public class Controller implements Initializable{
 	private void switchToEasyBattle(ActionEvent event){
 		try {
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-			game = FXMLLoader.load(getClass().getResource("EasyBattle.fxml"));
+			game = FXMLLoader.load(getClass().getResource("easyBattleV2.fxml"));
 			
 			scene = new Scene(game);
 			stage.setScene(scene);
@@ -114,13 +122,13 @@ public class Controller implements Initializable{
 		}
 	}
 	
-	public void skipThisTurn(){
+	public void skipThisTurn(ActionEvent event){
 		System.out.println("Turn skipped...");
 		battle.passTurn();
 		textRefresh();
-		// if (battle.isGameOver()){
-		// 	defeat();
-		// }
+		if (battle.isGameOver()){
+			defeat(event);
+		}
 	}
 
 	public void buy(int code){
@@ -136,30 +144,30 @@ public class Controller implements Initializable{
 	}
 			public void buyButton1(ActionEvent event) {
 				buy(1);
-				// if (battle.isGameOver()){
-				// 	defeat();
-				// }
+				if (battle.isGameOver()){
+					defeat(event);
+				}
 			}
 
 			public void buyButton2(ActionEvent event) {
 				buy(2);
-				// if (battle.isGameOver()){
-				// 	defeat();
-				// }
+				if (battle.isGameOver()){
+					defeat(event);
+				}
 			}
 
 			public void buyButton3(ActionEvent event) {
 				buy(3);
-				// if (battle.isGameOver()){
-				// 	defeat();
-				// }
+				if (battle.isGameOver()){
+					defeat(event);
+				}
 			}
 
 			public void buyButton4(ActionEvent event) {
 				buy(4);
-				// if (battle.isGameOver()){
-				// 	defeat();
-				// }
+				if (battle.isGameOver()){
+					defeat(event);
+				}
 			}
 
 		private void displayAlert(String message, String titleBar) {
@@ -210,8 +218,21 @@ public class Controller implements Initializable{
 			laneLabel5.setText("Wall 5 health: " + Lane5.getLaneWall().getCurrentHealth() + " & Danger Level: " + Lane5.getDangerLevel());
 		}
 	}
-	
+	private void defeat(ActionEvent event){
+		displayAlert("You have been defeated! Your score is: " + battle.getScore(), "Game Over!");
+		try{
+			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+			Parent diff = FXMLLoader.load(getClass().getResource("diffSelection.fxml"));
+			scene = new Scene(diff);
 
+			stage.setScene(scene);
+			stage.setFullScreen(true);
+			stage.show();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if (hardDifficulty){
@@ -229,15 +250,11 @@ public class Controller implements Initializable{
 				default: purchaseLane = null;
 			}
 		});
+		pcLabel.setText("Price: 25\n" + "Damage: 68\n" + "Name: Piercing Cannon\n" + "Type: idk man");
+		scLabel.setText("Price: 25\n" + "Damage: 50\n" + "Name: Sniper Cannon\n" + "Type: idk man");
+		vcLabel.setText("Price: 100\n" + "Damage: 40\n" + "Name: Volley Spread Cannon\n" + "Type: idk man");
+		wtLabel.setText("Price: 65\n" + "Damage: 30\n" + "Name: Wall Trap\n" + "Type: idk man");
+		//i understand this is awful but bear with me 
 	}
-	// private void defeat(){
-	// 	displayAlert("You have been defeated! Your score is: " + battle.getScore(), "Game Over!");
-	// 	try{
-	// 		stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("diffSelection.fxml"))));
-	// 		stage.show();
-	// 		stage.setFullScreen(true);
-	// 	} catch (Exception e){
-	// 		e.printStackTrace();
-	// 	}
-	// }
+	
 }

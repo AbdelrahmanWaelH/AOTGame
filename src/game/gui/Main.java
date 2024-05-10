@@ -1,5 +1,4 @@
 package game.gui;
-import java.security.acl.Group;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +11,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		String title = "AOT Game pre-alpha";
+		String title = "AOT Utopia Game alpha";
 		String iconPath = Controller.iconPath;
 		primaryStage.setTitle(title);
 		primaryStage.getIcons().add(new Image(iconPath));

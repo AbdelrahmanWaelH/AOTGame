@@ -71,12 +71,15 @@ public class Controller implements Initializable{
 	private Lane Lane4;
 	private Lane Lane5;
 	private Lane purchaseLane;
-    private boolean hardDifficulty = true;
+    private boolean hardDifficulty;
 	
-	public void easy(ActionEvent event){
+	public void easy(ActionEvent event) throws IOException{
 		hardDifficulty = false;
+		battle = new Battle(1,0,10,3,250);
+		switchToEasyBattle(event);
+	}
+	private void switchToEasyBattle(ActionEvent event){
 		try {
-			battle = new Battle(1,0,10,3,250);
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 			game = FXMLLoader.load(getClass().getResource("EasyBattle.fxml"));
 			
@@ -86,15 +89,17 @@ public class Controller implements Initializable{
 			stage.show();
 			System.out.println("You have chosen easy mode, instance created");
 			consolePrint();
-		} catch (Exception e){
-			e.printStackTrace();
-		} 
+		} catch (IOException e){
+			displayAlert("IOException when switching to easy battle","IOException");
+		}
 	}
-	
-	public void hard(ActionEvent event){
+	public void hard(ActionEvent event) throws IOException{
 		hardDifficulty = true;
+		battle = new Battle(1,0,10,5,125);
+		switchToHardBattle(event);
+	}
+	private void switchToHardBattle(ActionEvent event){
 		try {
-			battle = new Battle(1,0,10,5,125);
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 			game = FXMLLoader.load(getClass().getResource("HardBattle.fxml"));
 			
@@ -104,11 +109,11 @@ public class Controller implements Initializable{
 			stage.show();
 			System.out.println("You have chosen hard mode, instance created");
 			consolePrint();
-		} catch (Exception e){
-			e.printStackTrace();
+		} catch (IOException e){
+			displayAlert("IOException when switching to hard battle", "IOException");
 		}
 	}
-	
+
 	public void openShop(ActionEvent event){
 		try{
 		Parent shop = FXMLLoader.load(getClass().getResource("Shop.fxml"));
@@ -125,24 +130,10 @@ public class Controller implements Initializable{
 		} 
 	}
 	public void returnToGame(ActionEvent event){
-		try{
 		if (hardDifficulty){
-			game = FXMLLoader.load(getClass().getResource("HardBattle.fxml"));
+			switchToHardBattle(event);
 		} else {
-			game = FXMLLoader.load(getClass().getResource("EasyBattle.fxml"));
-		}
-
-		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-		System.out.println("Returned to game!");
-
-		scene = new Scene(game);
-		stage.setScene(scene);
-		stage.setFullScreen(true);
-		stage.show();
-		} catch (Exception e){
-			e.printStackTrace();
-		} finally {
-			textRefresh();
+			switchToEasyBattle(event);
 		}
 	}
 	
@@ -150,28 +141,53 @@ public class Controller implements Initializable{
 		System.out.println("Turn skipped...");
 		battle.passTurn();
 		textRefresh();
+		// if (battle.isGameOver()){
+		// 	defeat();
+		// }
 	}
 
 	public void buy(int code){
 		try{
 			battle.purchaseWeapon(code, purchaseLane);
 		}catch (InvalidLaneException ILE){
-			displayAlert("The lane you chose is invalid!");
+			displayAlert("The lane you chose is invalid!", "Invalid Lane!");
 		} catch (InsufficientResourcesException IRE) {
-			displayAlert("You currently don't have enough resources to perform this action");
+			displayAlert("You currently don't have enough resources to perform this action", "Insufficient Resources!");
 		} finally {
 			textRefresh();
 		}
 	}
+			public void buyButton1(ActionEvent event) {
+				buy(1);
+				// if (battle.isGameOver()){
+				// 	defeat();
+				// }
+			}
 
-	public void buyButton1(ActionEvent event){ buy(1);this.returnToGame(event); }
-	public void buyButton2(ActionEvent event){ buy(2);this.returnToGame(event); }
-	public void buyButton3(ActionEvent event){ buy(3);this.returnToGame(event); }
-	public void buyButton4(ActionEvent event){ buy(4);this.returnToGame(event); }
+			public void buyButton2(ActionEvent event) {
+				buy(2);
+				// if (battle.isGameOver()){
+				// 	defeat();
+				// }
+			}
 
-	private void displayAlert(String message) {
+			public void buyButton3(ActionEvent event) {
+				buy(3);
+				// if (battle.isGameOver()){
+				// 	defeat();
+				// }
+			}
+
+			public void buyButton4(ActionEvent event) {
+				buy(4);
+				// if (battle.isGameOver()){
+				// 	defeat();
+				// }
+			}
+
+		private void displayAlert(String message, String titleBar) {
         Stage alertStage = new Stage();
-        alertStage.setTitle("Warning! Invalid Action!");
+        alertStage.setTitle(titleBar);
 		alertStage.getIcons().add(new Image(iconPath));
         Label label = new Label(message);
         Button closeButton = new Button("Ok!");
@@ -218,19 +234,6 @@ public class Controller implements Initializable{
 		}
 	}
 	
-	private void getLaneChoiceBox(ActionEvent event){
-		String laneName = (String) laneChoice.getValue();
-		System.out.println("Lane: " + laneName + " chosen");
-		switch (laneName) {
-			case "Lane 1": purchaseLane = Lane1; break;
-			case "Lane 2": purchaseLane = Lane2; break;
-			case "Lane 3": purchaseLane = Lane3; break;
-			case "Lane 4": purchaseLane = Lane4; break;
-			case "Lane 5": purchaseLane = Lane5; break;
-			default: purchaseLane = null;
-		//scoreLabel.setText("laneName");
-		}		
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -250,4 +253,14 @@ public class Controller implements Initializable{
 			}
 		});
 	}
+	// private void defeat(){
+	// 	displayAlert("You have been defeated! Your score is: " + battle.getScore(), "Game Over!");
+	// 	try{
+	// 		stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("diffSelection.fxml"))));
+	// 		stage.show();
+	// 		stage.setFullScreen(true);
+	// 	} catch (Exception e){
+	// 		e.printStackTrace();
+	// 	}
+	// }
 }

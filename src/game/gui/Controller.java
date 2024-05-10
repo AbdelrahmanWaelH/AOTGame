@@ -53,38 +53,33 @@ public class Controller implements Initializable{
 	@FXML
 	private Label laneLabel5 = new Label();
 
-	 private Lane Lane1;
-	 private Lane Lane2;
-	 private Lane Lane3;
-	 private Lane Lane4;
-	 private Lane Lane5;
 	@FXML
 	 private ChoiceBox<String> laneChoice = new ChoiceBox<>();
-	private Lane purchaseLane;
-    
-    private boolean hardDifficulty = true;
 
 	@FXML
 	 private Stage stage;
+
 	@FXML
 	 private Scene scene;
+
 	@FXML
 	 private Parent game;
+
 	private static Battle battle;
+	private Lane Lane1;
+	private Lane Lane2;
+	private Lane Lane3;
+	private Lane Lane4;
+	private Lane Lane5;
+	private Lane purchaseLane;
+    private boolean hardDifficulty = true;
 	
-
-
 	public void easy(ActionEvent event){
 		hardDifficulty = false;
 		try {
 			battle = new Battle(1,0,10,3,250);
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 			game = FXMLLoader.load(getClass().getResource("EasyBattle.fxml"));
-			
-			scoreLabel.setText("Score: " + battle.getScore());
-			turnLabel.setText("turn: " + battle.getNumberOfTurns());
-			phaseLabel.setText("phase: " + battle.getBattlePhase());
-			resourcesLabel.setText("resources: " + battle.getResourcesGathered());
 			
 			scene = new Scene(game);
 			stage.setScene(scene);
@@ -98,31 +93,24 @@ public class Controller implements Initializable{
 	}
 	
 	public void hard(ActionEvent event){
+		hardDifficulty = true;
 		try {
 			battle = new Battle(1,0,10,5,125);
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 			game = FXMLLoader.load(getClass().getResource("HardBattle.fxml"));
 			
-			scoreLabel.setText("Score: " + battle.getScore());
-			turnLabel.setText("turn: " + battle.getNumberOfTurns());
-			phaseLabel.setText("phase: " + battle.getBattlePhase());
-			resourcesLabel.setText("resources: " + battle.getResourcesGathered());
-			
-			
-			// dunno how to make these labels dynamic
 			scene = new Scene(game);
 			stage.setScene(scene);
 			stage.setFullScreen(true);
 			stage.show();
 			System.out.println("You have chosen hard mode, instance created");
 			consolePrint();
-		} catch (IOException e){
+		} catch (Exception e){
 			e.printStackTrace();
 		}
 	}
 	
 	public void openShop(ActionEvent event){
-		
 		try{
 		Parent shop = FXMLLoader.load(getClass().getResource("Shop.fxml"));
 		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -136,7 +124,6 @@ public class Controller implements Initializable{
 		} catch (IOException e){
 			e.printStackTrace();
 		} 
-		
 	}
 	
 	public void skipThisTurn(){
@@ -144,17 +131,24 @@ public class Controller implements Initializable{
 		battle.passTurn();
 		textRefresh();
 	}
-	public void buy(){
-		//should take parameters to fill the purchase weapon method
-		//use easyDiff and a helper that takes two general parameters
-		// try{
-		// 	battle.purchaseWeapon(code, lane);
-		// }catch (InvalidLaneException ILE){
-		// 	displayAlert("The lane you chose is invalid!");
-		// } catch (InsufficientResourcesException IRE) {
-		// 	displayAlert("You currently don't have enough resources to perform this action");
-		// }
+
+	public void buy(int code){
+		try{
+			battle.purchaseWeapon(code, purchaseLane);
+		}catch (InvalidLaneException ILE){
+			displayAlert("The lane you chose is invalid!");
+		} catch (InsufficientResourcesException IRE) {
+			displayAlert("You currently don't have enough resources to perform this action");
+		} finally {
+			textRefresh();
+		}
 	}
+
+	public void buyButton1(){ buy(1); }
+	public void buyButton2(){ buy(2); }
+	public void buyButton3(){ buy(3); }
+	public void buyButton4(){ buy(4); }
+
 	private void displayAlert(String message) {
         Stage alertStage = new Stage();
         alertStage.setTitle("Warning! Invalid Action!");
@@ -171,6 +165,7 @@ public class Controller implements Initializable{
         alertStage.setScene(scene);
         alertStage.show();
     }
+
 	private void consolePrint(){
 		System.out.println(scoreLabel.getText());
 		System.out.println(turnLabel.getText());
@@ -204,8 +199,7 @@ public class Controller implements Initializable{
 		}
 	}
 	
-
-	public void getLaneChoiceBox(ActionEvent event){
+	private void getLaneChoiceBox(ActionEvent event){
 		String laneName = (String) laneChoice.getValue();
 		System.out.println("Lane: " + laneName + " chosen");
 		switch (laneName) {
@@ -215,12 +209,17 @@ public class Controller implements Initializable{
 		case "Lane 4": purchaseLane = Lane4; break;
 		case "Lane 5": purchaseLane = Lane5; break;
 		default: purchaseLane = null;
-		scoreLabel.setText("laneName");
+		//scoreLabel.setText("laneName");
 		}		
 	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		laneChoice.getItems().addAll("Lane 1", "Lane 2", "Lane 3", "Lane 4", "Lane 5");
+		if (hardDifficulty){
+			laneChoice.getItems().addAll("Lane 1", "Lane 2", "Lane 3", "Lane 4", "Lane 5");
+		} else {
+			laneChoice.getItems().addAll("Lane 1", "Lane 2", "Lane 3");
+		}
 		laneChoice.setOnAction(this::getLaneChoiceBox);
 	}
 }

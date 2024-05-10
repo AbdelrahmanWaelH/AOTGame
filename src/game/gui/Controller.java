@@ -101,7 +101,7 @@ public class Controller implements Initializable{
 	private void switchToHardBattle(ActionEvent event){
 		try {
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-			game = FXMLLoader.load(getClass().getResource("HardBattle.fxml"));
+			game = FXMLLoader.load(getClass().getResource("battleV2.fxml"));
 			
 			scene = new Scene(game);
 			stage.setScene(scene);
@@ -111,29 +111,6 @@ public class Controller implements Initializable{
 			consolePrint();
 		} catch (IOException e){
 			displayAlert("IOException when switching to hard battle", "IOException");
-		}
-	}
-
-	public void openShop(ActionEvent event){
-		try{
-		Parent shop = FXMLLoader.load(getClass().getResource("Shop.fxml"));
-		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-		System.out.println("Shop opened!");
-
-		scene = new Scene(shop);
-		stage.setScene(scene);
-		stage.setFullScreen(true);
-		stage.show();
-		textRefresh();
-		} catch (IOException e){
-			e.printStackTrace();
-		} 
-	}
-	public void returnToGame(ActionEvent event){
-		if (hardDifficulty){
-			switchToHardBattle(event);
-		} else {
-			switchToEasyBattle(event);
 		}
 	}
 	

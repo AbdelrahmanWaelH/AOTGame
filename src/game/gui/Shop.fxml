@@ -27,7 +27,7 @@
                <items>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="40.0" layoutY="103.0" mnemonicParsing="false" onAction="#buyButton1" text="Buy Now" />
+                        <Button layoutX="-4.0" layoutY="117.0" mnemonicParsing="false" onAction="#buyButton1" text="Buy Piercing Cannon Now" />
                      </children>
                   </Pane>
                   <VBox prefHeight="200.0" prefWidth="100.0" />
@@ -37,7 +37,7 @@
                <items>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="40.0" layoutY="103.0" mnemonicParsing="false" onAction="#buyButton3" text="Buy Now" />
+                        <Button layoutX="3.0" layoutY="117.0" mnemonicParsing="false" onAction="#buyButton3" text="Buy Volley Spread Now" />
                      </children>
                   </Pane>
                   <VBox prefHeight="200.0" prefWidth="100.0" />
@@ -47,7 +47,7 @@
                <items>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="40.0" layoutY="103.0" mnemonicParsing="false" onAction="#buyButton2" text="Buy Now" />
+                        <Button layoutX="1.0" layoutY="117.0" mnemonicParsing="false" onAction="#buyButton2" text="Buy Sniper Cannon Now" />
                      </children>
                   </Pane>
                   <VBox prefHeight="200.0" prefWidth="100.0" />
@@ -57,7 +57,7 @@
                <items>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="40.0" layoutY="103.0" mnemonicParsing="false" onAction="#buyButton4" text="Buy Now" />
+                        <Button layoutX="15.0" layoutY="117.0" mnemonicParsing="false" onAction="#buyButton4" text="Buy Wall Trap Now" />
                      </children>
                   </Pane>
                   <VBox prefHeight="200.0" prefWidth="100.0" />
@@ -71,6 +71,7 @@
          <children>
             <Label fx:id="resourcesLabel" layoutX="286.0" layoutY="23.0" />
             <ChoiceBox fx:id="laneChoice" layoutX="24.0" layoutY="28.0" prefWidth="150.0" />
+            <Button layoutX="474.0" layoutY="1.0" mnemonicParsing="false" onAction="#returnToGame" prefHeight="109.0" prefWidth="125.0" text="Return to battle!" />
          </children>
       </Pane>
    </top>

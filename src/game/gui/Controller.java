@@ -125,6 +125,27 @@ public class Controller implements Initializable{
 			e.printStackTrace();
 		} 
 	}
+	public void returnToGame(ActionEvent event){
+		try{
+		if (hardDifficulty){
+			game = FXMLLoader.load(getClass().getResource("HardBattle.fxml"));
+		} else {
+			game = FXMLLoader.load(getClass().getResource("EasyBattle.fxml"));
+		}
+
+		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+		System.out.println("Returned to game!");
+
+		scene = new Scene(game);
+		stage.setScene(scene);
+		stage.setFullScreen(true);
+		stage.show();
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+			textRefresh();
+		}
+	}
 	
 	public void skipThisTurn(){
 		System.out.println("Turn skipped...");
@@ -212,7 +233,7 @@ public class Controller implements Initializable{
 		//scoreLabel.setText("laneName");
 		}		
 	}
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if (hardDifficulty){

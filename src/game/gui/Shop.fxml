@@ -69,9 +69,13 @@
    <top>
       <Pane prefHeight="111.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="resourcesLabel" layoutX="286.0" layoutY="23.0" />
-            <ChoiceBox fx:id="laneChoice" layoutX="24.0" layoutY="28.0" prefWidth="150.0" />
+            <Label fx:id="resourcesLabel" layoutX="286.0" layoutY="23.0" text="Res" />
+            <ChoiceBox fx:id="laneChoice" layoutY="11.0" prefWidth="150.0" />
             <Button layoutX="474.0" layoutY="1.0" mnemonicParsing="false" onAction="#returnToGame" prefHeight="109.0" prefWidth="125.0" text="Return to battle!" />
+            <Label fx:id="scoreLabel" layoutX="14.0" layoutY="47.0" text="Score" />
+            <Label fx:id="turnLabel" layoutX="15.0" layoutY="64.0" text="Turn" />
+            <Label fx:id="phaseLabel" layoutX="15.0" layoutY="81.0" text="Phase" />
+            <Label layoutX="99.0" layoutY="81.0" text="LaneData" />
          </children>
       </Pane>
    </top>

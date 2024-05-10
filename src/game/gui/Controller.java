@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
-import game.engine.exceptions.GameActionException;
 import game.engine.lanes.Lane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -165,10 +164,10 @@ public class Controller implements Initializable{
 		}
 	}
 
-	public void buyButton1(){ buy(1); }
-	public void buyButton2(){ buy(2); }
-	public void buyButton3(){ buy(3); }
-	public void buyButton4(){ buy(4); }
+	public void buyButton1(ActionEvent event){ buy(1);this.returnToGame(event); }
+	public void buyButton2(ActionEvent event){ buy(2);this.returnToGame(event); }
+	public void buyButton3(ActionEvent event){ buy(3);this.returnToGame(event); }
+	public void buyButton4(ActionEvent event){ buy(4);this.returnToGame(event); }
 
 	private void displayAlert(String message) {
         Stage alertStage = new Stage();
@@ -197,7 +196,6 @@ public class Controller implements Initializable{
 		System.out.println(laneLabel3.getText());
 		System.out.println(laneLabel4.getText());
 		System.out.println(laneLabel5.getText());
-		//System.out.println("lane choice: " + laneChoice.getValue());
 	}
 
 	public void textRefresh(){
@@ -224,12 +222,12 @@ public class Controller implements Initializable{
 		String laneName = (String) laneChoice.getValue();
 		System.out.println("Lane: " + laneName + " chosen");
 		switch (laneName) {
-		case "Lane 1": purchaseLane = Lane1; break;
-		case "Lane 2": purchaseLane = Lane2; break;
-		case "Lane 3": purchaseLane = Lane3; break;
-		case "Lane 4": purchaseLane = Lane4; break;
-		case "Lane 5": purchaseLane = Lane5; break;
-		default: purchaseLane = null;
+			case "Lane 1": purchaseLane = Lane1; break;
+			case "Lane 2": purchaseLane = Lane2; break;
+			case "Lane 3": purchaseLane = Lane3; break;
+			case "Lane 4": purchaseLane = Lane4; break;
+			case "Lane 5": purchaseLane = Lane5; break;
+			default: purchaseLane = null;
 		//scoreLabel.setText("laneName");
 		}		
 	}
@@ -241,6 +239,15 @@ public class Controller implements Initializable{
 		} else {
 			laneChoice.getItems().addAll("Lane 1", "Lane 2", "Lane 3");
 		}
-		laneChoice.setOnAction(this::getLaneChoiceBox);
+		laneChoice.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, laneName) -> {
+			switch (laneName) {
+				case "Lane 1": purchaseLane = Lane1; break;
+				case "Lane 2": purchaseLane = Lane2; break;
+				case "Lane 3": purchaseLane = Lane3; break;
+				case "Lane 4": purchaseLane = Lane4; break;
+				case "Lane 5": purchaseLane = Lane5; break;
+				default: purchaseLane = null;
+			}
+		});
 	}
 }

@@ -208,14 +208,14 @@ public class Controller implements Initializable{
 		Lane1=tempArr.get(0);
 		Lane2=tempArr.get(1);
 		Lane3=tempArr.get(2);
-		laneLabel1.setText("Wall 1 health: " + Lane1.getLaneWall().getCurrentHealth() + " & Danger Level: " + Lane1.getDangerLevel());
-		laneLabel2.setText("Wall 2 health: " + Lane2.getLaneWall().getCurrentHealth() + " & Danger Level: " + Lane2.getDangerLevel());
-		laneLabel3.setText("Wall 3 health: " + Lane3.getLaneWall().getCurrentHealth() + " & Danger Level: " + Lane3.getDangerLevel());
+		laneLabel1.setText("Wall 1 health: " + Lane1.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane1.getDangerLevel());
+		laneLabel2.setText("Wall 2 health: " + Lane2.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane2.getDangerLevel());
+		laneLabel3.setText("Wall 3 health: " + Lane3.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane3.getDangerLevel());
 		if(hardDifficulty){
 			Lane4=tempArr.get(3);
 			Lane5=tempArr.get(4);
-			laneLabel4.setText("Wall 4 health: " + Lane4.getLaneWall().getCurrentHealth() + " & Danger Level: " + Lane4.getDangerLevel());
-			laneLabel5.setText("Wall 5 health: " + Lane5.getLaneWall().getCurrentHealth() + " & Danger Level: " + Lane5.getDangerLevel());
+			laneLabel4.setText("Wall 4 health: " + Lane4.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane4.getDangerLevel());
+			laneLabel5.setText("Wall 5 health: " + Lane5.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane5.getDangerLevel());
 		}
 	}
 	private void defeat(ActionEvent event){

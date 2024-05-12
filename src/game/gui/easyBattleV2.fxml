@@ -31,10 +31,10 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#buyButton1" text="Buy Now!" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" />
-                  <Button mnemonicParsing="false" onAction="#buyButton4" text="Buy Now!" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-                  <Button mnemonicParsing="false" onAction="#buyButton3" text="Buy Now!" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-                  <Button mnemonicParsing="false" onAction="#buyButton2" text="Buy Now!" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" />
+                  <Button mnemonicParsing="false" onAction="#buyButton1" text="Buy Piercing Cannon Now!" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" />
+                  <Button mnemonicParsing="false" onAction="#buyButton4" text="Buy Wall Trap Now!" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Button mnemonicParsing="false" onAction="#buyButton3" text="Buy Volley Spread Cannon Now!" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Button mnemonicParsing="false" onAction="#buyButton2" text="Buy Sniper Cannon Now!" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" />
                   <Label fx:id="pcLabel" text="pc" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
                   <Label fx:id="wtLabel" text="wt" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                   <Label fx:id="vcLabel" text="vc" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
@@ -60,14 +60,14 @@
          <center>
             <GridPane gridLinesVisible="true" BorderPane.alignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.333333" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.333333" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.333333" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="363.5333221435547" minHeight="10.0" prefHeight="348.0000366210937" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="360.39999237060545" minHeight="10.0" prefHeight="37.59996337890624" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="363.5333221435547" minHeight="10.0" prefHeight="19.79998779296875" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="363.5333221435547" minHeight="10.0" percentHeight="75.0" prefHeight="348.0000366210937" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="360.39999237060545" minHeight="10.0" percentHeight="12.5" prefHeight="37.59996337890624" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="363.5333221435547" minHeight="10.0" percentHeight="12.5" prefHeight="19.79998779296875" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <ImageView fitHeight="40.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />

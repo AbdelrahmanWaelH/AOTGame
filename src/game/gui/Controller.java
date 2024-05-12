@@ -250,10 +250,10 @@ public class Controller implements Initializable{
 				default: purchaseLane = null;
 			}
 		});
-		pcLabel.setText("Price: 25\n" + "Damage: 68\n" + "Name: Piercing Cannon\n" + "Type: idk man");
-		scLabel.setText("Price: 25\n" + "Damage: 50\n" + "Name: Sniper Cannon\n" + "Type: idk man");
-		vcLabel.setText("Price: 100\n" + "Damage: 40\n" + "Name: Volley Spread Cannon\n" + "Type: idk man");
-		wtLabel.setText("Price: 65\n" + "Damage: 30\n" + "Name: Wall Trap\n" + "Type: idk man");
+		pcLabel.setText("Price: 25\n" + "Damage: 68\n" + "Name: Piercing Cannon\n" + "Type: Cannon");
+		scLabel.setText("Price: 25\n" + "Damage: 50\n" + "Name: Sniper Cannon\n" + "Type: Cannon");
+		vcLabel.setText("Price: 100\n" + "Damage: 40\n" + "Name: Volley Spread Cannon\n" + "Type: Cannon");
+		wtLabel.setText("Price: 65\n" + "Damage: 30\n" + "Name: Wall Trap\n" + "Type: Trap");
 		//i understand this is awful but bear with me 
 	}
 	

@@ -2,9 +2,8 @@ package game.gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ResourceBundle;
-import game.engine.weapons.WeaponRegistry;
+
 import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
@@ -81,31 +80,10 @@ public class Controller implements Initializable{
 	private Lane Lane5;
 	private Lane purchaseLane;
     private boolean hardDifficulty = true;
-	private HashMap<Integer, WeaponRegistry> weaponShop;
-	private WeaponRegistry pcReg;
-	private WeaponRegistry scReg;
-	private WeaponRegistry vcReg;
-	private WeaponRegistry wtReg;
-
-
-
 	
 	public void easy(ActionEvent event) throws IOException{
 		hardDifficulty = false;
 		battle = new Battle(1,0,10,3,250);
-		weaponShop = battle.getWeaponFactory().getWeaponShop();
-		pcReg = weaponShop.get(1);
-		scReg = weaponShop.get(2);
-		vcReg = weaponShop.get(3);
-		wtReg = weaponShop.get(4);
-		pcLabel.setText("Name: " + pcReg.getName() + " Price: " + pcReg.getPrice() + " Damage: " + pcReg.getDamage() + " Type: Piercing Cannon");
-		scLabel.setText("Name: " + scReg.getName() + " Price: " + scReg.getPrice() + " Damage: " + scReg.getDamage() + " Type: Sniper Cannon");
-		vcLabel.setText("Name: " + vcReg.getName() + " Price: " + vcReg.getPrice() + " Damage: " + vcReg.getDamage() + " Type: Volley Spread Cannon");
-		wtLabel.setText("Name: " + wtReg.getName() + " Price: " + wtReg.getPrice() + " Damage: " + wtReg.getDamage() + " Type: Wall Trap");
-		System.out.println(pcLabel.getText());
-		System.out.println(scLabel.getText());
-		System.out.println(vcLabel.getText());
-		System.out.println(wtLabel.getText());
 		switchToEasyBattle(event);
 	}
 	private void switchToEasyBattle(ActionEvent event){
@@ -126,19 +104,6 @@ public class Controller implements Initializable{
 	public void hard(ActionEvent event) throws IOException{
 		hardDifficulty = true;
 		battle = new Battle(1,0,10,5,125);
-		weaponShop = battle.getWeaponFactory().getWeaponShop();
-		pcReg = weaponShop.get(1);
-		scReg = weaponShop.get(2);
-		vcReg = weaponShop.get(3);
-		wtReg = weaponShop.get(4);
-		pcLabel.setText("Name: " + pcReg.getName() + " Price: " + pcReg.getPrice() + " Damage: " + pcReg.getDamage() + " Type: Piercing Cannon");
-		scLabel.setText("Name: " + scReg.getName() + " Price: " + scReg.getPrice() + " Damage: " + scReg.getDamage() + " Type: Sniper Cannon");
-		vcLabel.setText("Name: " + vcReg.getName() + " Price: " + vcReg.getPrice() + " Damage: " + vcReg.getDamage() + " Type: Volley Spread Cannon");
-		wtLabel.setText("Name: " + wtReg.getName() + " Price: " + wtReg.getPrice() + " Damage: " + wtReg.getDamage() + " Type: Wall Trap");
-		System.out.println(pcLabel.getText());
-		System.out.println(scLabel.getText());
-		System.out.println(vcLabel.getText());
-		System.out.println(wtLabel.getText());
 		switchToHardBattle(event);
 	}
 	private void switchToHardBattle(ActionEvent event){
@@ -252,11 +217,6 @@ public class Controller implements Initializable{
 			laneLabel4.setText("Wall 4 health: " + Lane4.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane4.getDangerLevel());
 			laneLabel5.setText("Wall 5 health: " + Lane5.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane5.getDangerLevel());
 		}
-		
-		pcLabel.setText("Price: " + pcReg.getPrice() + "\nDamage: " + pcReg.getDamage() + "\nName: Piercing Cannon"+ pcReg.getName() + "\nType: Cannon");
-		scLabel.setText("Price: " + scReg.getPrice() + "\nDamage: " + scReg.getDamage() + "\nName: Sniper Cannon"+ scReg.getName() + "\nType: Cannon");
-		vcLabel.setText("Price: " + vcReg.getPrice() + "\nDamage: " + vcReg.getDamage() + "\nName: Volley Spread Cannon"+ vcReg.getName() + "\nType: Cannon");
-		wtLabel.setText("Price: " + wtReg.getPrice() + "\nDamage: " + wtReg.getDamage() + "\nName: Wall Trap"+ wtReg.getName() + "\nType: Trap");
 	}
 	private void defeat(ActionEvent event){
 		displayAlert("You have been defeated! Your score is: " + battle.getScore(), "Game Over!");
@@ -289,7 +249,12 @@ public class Controller implements Initializable{
 				case "Lane 5": purchaseLane = Lane5; break;
 				default: purchaseLane = null;
 			}
-		}); 
+		});
+		pcLabel.setText("Price: 25\n" + "Damage: 68\n" + "Name: Piercing Cannon\n" + "Type: Cannon");
+		scLabel.setText("Price: 25\n" + "Damage: 50\n" + "Name: Sniper Cannon\n" + "Type: Cannon");
+		vcLabel.setText("Price: 100\n" + "Damage: 40\n" + "Name: Volley Spread Cannon\n" + "Type: Cannon");
+		wtLabel.setText("Price: 65\n" + "Damage: 30\n" + "Name: Wall Trap\n" + "Type: Trap");
+		//i understand this is awful but bear with me 
 	}
 	
 }

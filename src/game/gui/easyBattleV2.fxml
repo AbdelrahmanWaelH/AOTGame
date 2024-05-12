@@ -35,7 +35,7 @@
                   <Button mnemonicParsing="false" onAction="#buyButton4" text="Buy Wall Trap Now!" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
                   <Button mnemonicParsing="false" onAction="#buyButton3" text="Buy Volley Spread Cannon Now!" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
                   <Button mnemonicParsing="false" onAction="#buyButton2" text="Buy Sniper Cannon Now!" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="pcLabel" text="pc" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+                  <Label text="pc" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
                   <Label fx:id="wtLabel" text="wt" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                   <Label fx:id="vcLabel" text="vc" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                   <Label fx:id="scLabel" text="sc" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
@@ -48,7 +48,7 @@
                   <Label layoutX="14.0" layoutY="14.0" text="Lane:" />
                   <ChoiceBox fx:id="laneChoice" layoutX="51.0" layoutY="10.0" prefWidth="150.0" />
                   <Label fx:id="scoreLabel" layoutX="14.0" layoutY="76.0" text="Score" />
-                  <Label fx:id="phaseLabel" layoutX="258.0" layoutY="76.0" text="Phase" />
+                  <Label fx:id="pcLabel" layoutX="258.0" layoutY="76.0" text="Phase" />
                   <Label fx:id="turnLabel" layoutX="136.0" layoutY="76.0" text="Turn" />
                   <Label fx:id="resourcesLabel" layoutX="14.0" layoutY="44.0" text="Res" />
                   <Button layoutX="233.0" layoutY="1.0" mnemonicParsing="false" onAction="#skipThisTurn" text="Pass Turn" AnchorPane.bottomAnchor="79.19999999999999" AnchorPane.leftAnchor="232.79999999999998" AnchorPane.rightAnchor="0.5999999999999943" AnchorPane.topAnchor="1.0" />

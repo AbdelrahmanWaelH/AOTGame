@@ -133,7 +133,7 @@ public class Controller implements Initializable{
 		System.out.println("Turn skipped...");
 		battle.passTurn();
 		textRefresh();
-		if (battle.getLanes().isEmpty()){
+		if (battle.isGameOver()){
 			//is game over? using method
 			defeat(event);
 		}

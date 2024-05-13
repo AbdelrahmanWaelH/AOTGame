@@ -35,10 +35,10 @@
                   <Button mnemonicParsing="false" onAction="#buyButton4" text="Buy Wall Trap Now!" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
                   <Button mnemonicParsing="false" onAction="#buyButton3" text="Buy Volley Spread Cannon Now!" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
                   <Button mnemonicParsing="false" onAction="#buyButton2" text="Buy Sniper Cannon Now!" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="pcLabel" text="pc" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
                   <Label fx:id="wtLabel" text="wt" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                   <Label fx:id="vcLabel" text="vc" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                   <Label fx:id="scLabel" text="sc" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+                  <Label fx:id="pcLabel" text="pc" GridPane.valignment="TOP" />
                </children>
             </GridPane>
          </center>

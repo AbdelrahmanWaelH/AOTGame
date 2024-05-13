@@ -8,6 +8,8 @@ import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
 import game.engine.lanes.Lane;
+import game.engine.weapons.WeaponRegistry;
+import game.engine.weapons.factory.WeaponFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,27 +40,31 @@ public class Controller implements Initializable{
      private Label resourcesLabel = new Label();
     
 	@FXML
-	private Label laneLabel1 = new Label();
+	 private Label laneLabel1 = new Label();
 
 	@FXML
-	private Label laneLabel2 = new Label();
+	 private Label laneLabel2 = new Label();
 
 	@FXML
-	private Label laneLabel3 = new Label();
+	 private Label laneLabel3 = new Label();
 
 	@FXML
-	private Label laneLabel4 = new Label();
+	 private Label laneLabel4 = new Label();
 
 	@FXML
-	private Label laneLabel5 = new Label();
+	 private Label laneLabel5 = new Label();
+
 	@FXML
-	private Label pcLabel = new Label();
+	 private Label pcLabel = new Label();
+
 	@FXML
-	private Label scLabel = new Label();
+	 private Label scLabel = new Label();
+
 	@FXML
-	private Label vcLabel = new Label();
+	 private Label vcLabel = new Label();
+
 	@FXML
-	private Label wtLabel = new Label();
+	 private Label wtLabel = new Label();
 
 	@FXML
 	 private ChoiceBox<String> laneChoice = new ChoiceBox<>();
@@ -80,6 +86,7 @@ public class Controller implements Initializable{
 	private Lane Lane5;
 	private Lane purchaseLane;
     private boolean hardDifficulty = true;
+	
 	
 	public void easy(ActionEvent event) throws IOException{
 		hardDifficulty = false;
@@ -126,7 +133,8 @@ public class Controller implements Initializable{
 		System.out.println("Turn skipped...");
 		battle.passTurn();
 		textRefresh();
-		if (battle.isGameOver()){
+		if (battle.getLanes().isEmpty()){
+			//is game over? using method
 			defeat(event);
 		}
 	}
@@ -219,7 +227,7 @@ public class Controller implements Initializable{
 		}
 	}
 	private void defeat(ActionEvent event){
-		displayAlert("You have been defeated! Your score is: " + battle.getScore(), "Game Over!");
+		
 		try{
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 			Parent diff = FXMLLoader.load(getClass().getResource("diffSelection.fxml"));
@@ -230,6 +238,8 @@ public class Controller implements Initializable{
 			stage.show();
 		} catch (Exception e){
 			e.printStackTrace();
+		} finally {
+			displayAlert("You have been defeated! Your score is: " + battle.getScore(), "Game Over!");
 		}
 	}
 	
@@ -250,11 +260,20 @@ public class Controller implements Initializable{
 				default: purchaseLane = null;
 			}
 		});
-		pcLabel.setText("Price: 25\n" + "Damage: 68\n" + "Name: Piercing Cannon\n" + "Type: Cannon");
-		scLabel.setText("Price: 25\n" + "Damage: 50\n" + "Name: Sniper Cannon\n" + "Type: Cannon");
-		vcLabel.setText("Price: 100\n" + "Damage: 40\n" + "Name: Volley Spread Cannon\n" + "Type: Cannon");
-		wtLabel.setText("Price: 65\n" + "Damage: 30\n" + "Name: Wall Trap\n" + "Type: Trap");
-		//i understand this is awful but bear with me 
+
+		try{
+			WeaponFactory wF = new WeaponFactory();
+			WeaponRegistry wReg1 = wF.getWeaponShop().get(1);
+			WeaponRegistry wReg2 = wF.getWeaponShop().get(2);
+			WeaponRegistry wReg3 = wF.getWeaponShop().get(3);
+			WeaponRegistry wReg4 = wF.getWeaponShop().get(4);
+			pcLabel.setText("Price: " + wReg1.getPrice() + "\nName: " + wReg1.getName() + "\nDamage: " + wReg1.getDamage() + "\nType: Piercing Cannon");
+			scLabel.setText("Price: " + wReg2.getPrice() + "\nName: " + wReg2.getName() + "\nDamage: " + wReg2.getDamage() + "\nType: Sniper Cannon");
+			vcLabel.setText("Price: " + wReg3.getPrice() + "\nName: " + wReg3.getName() + "\nDamage: " + wReg3.getDamage() + "\nType: Volley Cannon");
+			wtLabel.setText("Price: " + wReg4.getPrice() + "\nName: " + wReg4.getName() + "\nDamage: " + wReg4.getDamage() + "\nType: Wall Trap");
+		} catch (IOException e){
+			e.printStackTrace();
+		}
 	}
 	
 }

@@ -19,9 +19,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.Label;   //THISSSS SHITTTTT SUCKSSSS //you're kinda right ngl
 import javafx.scene.image.Image;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -77,6 +83,8 @@ public class Controller implements Initializable{
 
 	@FXML
 	 private Parent game;
+	@FXML
+	 private GridPane motherGrid;
 
 	private static Battle battle;
 	private Lane Lane1;
@@ -215,7 +223,7 @@ public class Controller implements Initializable{
 		ArrayList<Lane> tempArr= battle.getOriginalLanes();
 		Lane1=tempArr.get(0);
 		Lane2=tempArr.get(1);
-		Lane3=tempArr.get(2);
+		Lane3=tempArr.get(2); 
 		laneLabel1.setText("Wall 1 health: " + Lane1.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane1.getDangerLevel());
 		laneLabel2.setText("Wall 2 health: " + Lane2.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane2.getDangerLevel());
 		laneLabel3.setText("Wall 3 health: " + Lane3.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane3.getDangerLevel());
@@ -242,6 +250,7 @@ public class Controller implements Initializable{
 			displayAlert("You have been defeated! Your score is: " + battle.getScore(), "Game Over!");
 		}
 	}
+	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -275,5 +284,7 @@ public class Controller implements Initializable{
 			e.printStackTrace();
 		}
 	}
+	
+
 	
 }

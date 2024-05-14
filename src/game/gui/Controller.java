@@ -8,16 +8,8 @@ import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
 import game.engine.lanes.Lane;
-import game.engine.titans.AbnormalTitan;
-import game.engine.titans.ArmoredTitan;
-import game.engine.titans.PureTitan;
-import game.engine.titans.Titan;
-import game.engine.weapons.VolleySpreadCannon;
-import game.engine.weapons.WallTrap;
-import game.engine.weapons.Weapon;
 import game.engine.weapons.WeaponRegistry;
 import game.engine.weapons.factory.WeaponFactory;
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,7 +26,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 
 public class Controller implements Initializable{

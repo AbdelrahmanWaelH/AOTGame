@@ -22,13 +22,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;   //THISSSS SHITTTTT SUCKSSSS //you're kinda right ngl
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -165,7 +160,7 @@ public class Controller implements Initializable{
 			stage.setFullScreen(true);
 			stage.show();
 			System.out.println("You have chosen easy mode, instance created");
-			consolePrint();
+			//consolePrint();
 		} catch (IOException e){
 			displayAlert("IOException when switching to easy battle","IOException");
 		}
@@ -194,6 +189,7 @@ public class Controller implements Initializable{
 	public void skipThisTurn(ActionEvent event){
 		System.out.println("Turn skipped...");
 		battle.passTurn();
+		System.out.println(battle.isGameOver() + " is the defeated state-------------------------------------------");
 		textRefresh();
 		if (battle.isGameOver()){
 			//is game over? using method
@@ -373,17 +369,22 @@ public class Controller implements Initializable{
 		phaseLabel.setText("Phase: " + battle.getBattlePhase());
 		resourcesLabel.setText("Resources: " + battle.getResourcesGathered());
 		ArrayList<Lane> tempArr= battle.getOriginalLanes();
+
 		Lane1=tempArr.get(0);
 		Lane2=tempArr.get(1);
-		Lane3=tempArr.get(2); 
+		Lane3=tempArr.get(2);
 		laneLabel1.setText("Wall 1 health: " + Lane1.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane1.getDangerLevel());
 		laneLabel2.setText("Wall 2 health: " + Lane2.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane2.getDangerLevel());
 		laneLabel3.setText("Wall 3 health: " + Lane3.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane3.getDangerLevel());
 		if(hardDifficulty){
-			Lane4=tempArr.get(3);
-			Lane5=tempArr.get(4);
+			try {
+			Lane4 = tempArr.get(3);
+			Lane5 = tempArr.get(4);
 			laneLabel4.setText("Wall 4 health: " + Lane4.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane4.getDangerLevel());
 			laneLabel5.setText("Wall 5 health: " + Lane5.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane5.getDangerLevel());
+			} catch(IndexOutOfBoundsException e){
+				e.printStackTrace();
+			} //handles easy mode lane labels
 		}
 	}
 	private void defeat(ActionEvent event){

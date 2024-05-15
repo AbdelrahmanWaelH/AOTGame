@@ -383,7 +383,7 @@ public class Controller implements Initializable{
 			laneLabel4.setText("Wall 4 health: " + Lane4.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane4.getDangerLevel());
 			laneLabel5.setText("Wall 5 health: " + Lane5.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane5.getDangerLevel());
 			} catch(IndexOutOfBoundsException e){
-				e.printStackTrace();
+				System.out.println("did not change lane4 & lane5 labels, mode: " + hardDifficulty);
 			} //handles easy mode lane labels
 		}
 	}

@@ -315,6 +315,11 @@
                   <Label fx:id="lane3weaponcount" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
                   <Label fx:id="lane4weaponcount" text="Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
                   <Label fx:id="lane5weaponcount" text="Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="laneLabel1" text="Label" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="laneLabel2" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="laneLabel3" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="laneLabel4" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="laneLabel5" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
                </children>
             </GridPane>
          </center>

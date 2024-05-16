@@ -32,13 +32,6 @@ import javafx.stage.Stage;
 
 public class Controller implements Initializable{
 	public static String iconPath = "game/gui/assets/icon.png";
-	public static String abnormalImage= "game/gui/assets/abnormal_titan.jpeg";
-	public static String armoredImage= "game/gui/assets/armored_titan.jpeg";
-	public static String colossalImage= "game/gui/assets/colossal_titan.jpeg";
-	public static String piercingImage= "game/gui/assets/piercing_titan.jpeg";
-	public static String sniperImage= "game/gui/assets/sniper_cannon.jpeg";
-	public static String volleyspreadImage= "game/gui/assets/volleyspread_cannon.jpeg";
-	public static String walltrapImage= "game/gui/assets/wall_trap.jpeg";
 	@FXML
      private Label scoreLabel = new Label();
 
@@ -65,48 +58,6 @@ public class Controller implements Initializable{
 
 	@FXML
 	 private Label laneLabel5 = new Label();
-	
-	@FXML
-	 private VBox lane1field=new VBox();
-	
-	@FXML
-	 private VBox lane2field= new VBox();
-	
-	@FXML
-	 private VBox lane3field= new VBox();
-	
-	@FXML
-	 private VBox lane4field= new VBox();
-	
-	@FXML
-	 private VBox lane5field= new VBox();
-	
-	@FXML
-	 private HBox weaponfield1= new HBox();
-	
-	@FXML
-	 private HBox weaponfield2= new HBox();
-	
-	@FXML
-	 private HBox weaponfield3= new HBox();
-	
-	@FXML
-	 private HBox weaponfield4= new HBox();
-	
-	@FXML
-	 private HBox weaponfield5= new HBox();
-	
-	@FXML
-	 private ImageView piercingShopImage= new ImageView();
-	
-	@FXML
-	 private ImageView sniperShopImage= new ImageView();
-	
-	@FXML
-	 private ImageView volleyShopImage=new ImageView();
-	
-	@FXML
-	 private ImageView walltrapShopImage= new ImageView();
 	
 	@FXML
 	 private Label lane1weaponcount=new Label();

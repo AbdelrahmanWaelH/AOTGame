@@ -40,19 +40,19 @@
                   <Label fx:id="wtLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                   <Label fx:id="vcLabel" text="Label" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                   <Label fx:id="scLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
-                  <ImageView fx:id="piercingShopImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="piercingShopImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@assets/piercingCannon.jpeg" />
                      </image></ImageView>
-                  <ImageView fx:id="sniperShopImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                  <ImageView fx:id="sniperShopImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@assets/sniperCannon.jpeg" />
                      </image></ImageView>
-                  <ImageView fx:id="volleyShopImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="volleyShopImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@assets/volleySpreadCannon.jpeg" />
                      </image></ImageView>
-                  <ImageView fx:id="walltrapShopImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <ImageView fx:id="walltrapShopImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@assets/wall_trap.jpeg" />
                      </image></ImageView>
@@ -310,16 +310,16 @@
                         </ImageView>
                      </children>
                   </GridPane>
-                  <Label fx:id="lane1weaponcount" text="Label" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="lane2weaponcount" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="lane3weaponcount" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="lane4weaponcount" text="Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="lane5weaponcount" text="Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="laneLabel1" text="Label" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="laneLabel2" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="laneLabel3" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="laneLabel4" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="laneLabel5" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="lane1weaponcount" text="w1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="lane2weaponcount" text="w2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="lane3weaponcount" text="w3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="lane4weaponcount" text="w4" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="lane5weaponcount" text="w5" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="laneLabel1" text="l1info" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="laneLabel2" text="l2info" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="laneLabel3" text="l3info" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="laneLabel4" text="l4info" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="laneLabel5" text="l5info" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
                </children>
             </GridPane>
          </center>

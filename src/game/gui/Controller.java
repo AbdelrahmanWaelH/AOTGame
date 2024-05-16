@@ -107,6 +107,26 @@ public class Controller implements Initializable{
 	
 	@FXML
 	 private ImageView walltrapShopImage= new ImageView();
+	
+	@FXML
+	 private Label lane1weaponcount=new Label();
+	
+	@FXML
+	 private Label lane2weaponcount=new Label();
+	
+	@FXML
+	 private Label lane3weaponcount=new Label();
+	
+	@FXML
+	 private Label lane4weaponcount=new Label();
+	
+	@FXML
+	 private Label lane5weaponcount=new Label();
+	
+	private int[] piercingCount={0,0,0,0,0};
+	private int[] sniperCount={0,0,0,0,0};
+	private int[] volleyCount={0,0,0,0,0};
+	private int[] trapCount={0,0,0,0,0};
 
 	@FXML
 	 private Label pcLabel = new Label();
@@ -273,6 +293,7 @@ public class Controller implements Initializable{
 		}
 	}
 			public void buyButton1(ActionEvent event) {
+				incrementCountAtLane(1, purchaseLaneName);
 				buy(1);
 				//spawnWeaponAtLane(1);
 				if (battle.isGameOver()){
@@ -281,6 +302,7 @@ public class Controller implements Initializable{
 			}
 
 			public void buyButton2(ActionEvent event) {
+				incrementCountAtLane(2, purchaseLaneName);
 				buy(2);
 				//spawnWeaponAtLane(2);
 				if (battle.isGameOver()){
@@ -290,6 +312,7 @@ public class Controller implements Initializable{
 
 			public void buyButton3(ActionEvent event) {
 				//spawnWeaponAtLane(3);
+				incrementCountAtLane(3, purchaseLaneName);
 				buy(3);
 				if (battle.isGameOver()){
 					defeat(event);
@@ -298,6 +321,7 @@ public class Controller implements Initializable{
 
 			public void buyButton4(ActionEvent event) {
 				//spawnWeaponAtLane(4);
+				incrementCountAtLane(4, purchaseLaneName);
 				buy(4);
 				if (battle.isGameOver()){
 					defeat(event);
@@ -333,6 +357,60 @@ public class Controller implements Initializable{
 				
 				
 			}*/
+			
+		private void incrementCountAtLane(int weapon, String laneName){
+			if(purchaseLaneName.equals("Lane 1")){
+				if(weapon==1){
+					piercingCount[0]++;
+				}else if(weapon==2){
+					sniperCount[0]++;
+				}else if(weapon==3){
+					volleyCount[0]++;
+				}else{
+					trapCount[0]++;
+				}
+			}else if(purchaseLaneName.equals("Lane 2")){
+				if(weapon==1){
+					piercingCount[1]++;
+				}else if(weapon==2){
+					sniperCount[1]++;
+				}else if(weapon==3){
+					volleyCount[1]++;
+				}else{
+					trapCount[1]++;
+				}
+			}else if(purchaseLaneName.equals("Lane 3")){
+				if(weapon==1){
+					piercingCount[2]++;
+				}else if(weapon==2){
+					sniperCount[2]++;
+				}else if(weapon==3){
+					volleyCount[2]++;
+				}else{
+					trapCount[2]++;
+				}
+			}else if(purchaseLaneName.equals("Lane 4")){
+				if(weapon==1){
+					piercingCount[3]++;
+				}else if(weapon==2){
+					sniperCount[3]++;
+				}else if(weapon==3){
+					volleyCount[3]++;
+				}else{
+					trapCount[3]++;
+				}
+			}else if(purchaseLaneName.equals("Lane 5")){
+				if(weapon==1){
+					piercingCount[4]++;
+				}else if(weapon==2){
+					sniperCount[4]++;
+				}else if(weapon==3){
+					volleyCount[4]++;
+				}else{
+					trapCount[4]++;
+				}
+			}
+		}
 
 		private void displayAlert(String message, String titleBar) {
         Stage alertStage = new Stage();
@@ -376,12 +454,17 @@ public class Controller implements Initializable{
 		laneLabel1.setText("Wall 1 health: " + Lane1.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane1.getDangerLevel());
 		laneLabel2.setText("Wall 2 health: " + Lane2.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane2.getDangerLevel());
 		laneLabel3.setText("Wall 3 health: " + Lane3.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane3.getDangerLevel());
+		lane1weaponcount.setText(piercingCount[0] + "    " + sniperCount[0] + "   " + volleyCount[0]);
+		lane2weaponcount.setText(piercingCount[1] + "    " + sniperCount[1] + "   " + volleyCount[1]);
+		lane3weaponcount.setText(piercingCount[2] + "    " + sniperCount[2] + "   " + volleyCount[2]);
 		if(hardDifficulty){
 			try {
 			Lane4 = tempArr.get(3);
 			Lane5 = tempArr.get(4);
 			laneLabel4.setText("Wall 4 health: " + Lane4.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane4.getDangerLevel());
 			laneLabel5.setText("Wall 5 health: " + Lane5.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane5.getDangerLevel());
+			lane4weaponcount.setText(piercingCount[3] + "    " + sniperCount[3] + "    " + volleyCount[3]);
+			lane5weaponcount.setText(piercingCount[4] + "    " + sniperCount[4] + "    " + volleyCount[4]);
 			} catch(IndexOutOfBoundsException e){
 				System.out.println("did not change lane4 & lane5 labels, mode: " + hardDifficulty);
 			} //handles easy mode lane labels

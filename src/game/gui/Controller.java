@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;   //THISSSS SHITTTTT SUCKSSSS //you're kinda right ngl
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -104,6 +105,26 @@ public class Controller implements Initializable{
 	 private Parent game;
 	@FXML
 	 private GridPane motherGrid;
+	@FXML
+	 private ImageView wall1ImageView;
+	@FXML
+	 private ImageView wall2ImageView;
+	@FXML
+	 private ImageView wall3ImageView;
+	@FXML
+	 private ImageView wall4ImageView;
+	@FXML
+	 private ImageView wall5ImageView;
+	@FXML
+	 private ProgressBar wall1HealthBar;
+	@FXML
+	 private ProgressBar wall2HealthBar;
+	@FXML
+	 private ProgressBar wall3HealthBar;
+	@FXML
+	 private ProgressBar wall4HealthBar;
+	@FXML
+	 private ProgressBar wall5HealthBar;
 
 	private static Battle battle;
 	private Lane Lane1;
@@ -307,9 +328,9 @@ public class Controller implements Initializable{
 		Lane1=tempArr.get(0);
 		Lane2=tempArr.get(1);
 		Lane3=tempArr.get(2);
-		laneLabel1.setText("Wall 1 health: " + Lane1.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane1.getDangerLevel());
-		laneLabel2.setText("Wall 2 health: " + Lane2.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane2.getDangerLevel());
-		laneLabel3.setText("Wall 3 health: " + Lane3.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane3.getDangerLevel());
+		laneLabel1.setText("Danger Level: " + Lane1.getDangerLevel());
+		laneLabel2.setText("Danger Level: " + Lane2.getDangerLevel());
+		laneLabel3.setText("Danger Level: " + Lane3.getDangerLevel());
 		lane1weaponcount.setText(piercingCount[0] + space + sniperCount[0] + space + volleyCount[0]);
 		lane2weaponcount.setText(piercingCount[1] + space + sniperCount[1] + space + volleyCount[1]);
 		lane3weaponcount.setText(piercingCount[2] + space + sniperCount[2] + space + volleyCount[2]);
@@ -317,13 +338,33 @@ public class Controller implements Initializable{
 			try {
 			Lane4 = tempArr.get(3);
 			Lane5 = tempArr.get(4);
-			laneLabel4.setText("Wall 4 health: " + Lane4.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane4.getDangerLevel());
-			laneLabel5.setText("Wall 5 health: " + Lane5.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane5.getDangerLevel());
+			laneLabel4.setText("Danger Level: " + Lane4.getDangerLevel());
+			laneLabel5.setText("Danger Level: " + Lane5.getDangerLevel());
 			lane4weaponcount.setText(piercingCount[3] + space + sniperCount[3] + space + volleyCount[3]);
 			lane5weaponcount.setText(piercingCount[4] + space + sniperCount[4] + space + volleyCount[4]);
 			} catch(IndexOutOfBoundsException e){
 				System.out.println("did not change lane4 & lane5 labels, mode: " + hardDifficulty);
 			} //handles easy mode lane labels
+		}
+
+		if (Lane1.isLaneLost())
+			wall1ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
+		if (Lane2.isLaneLost())
+			wall2ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
+		if (Lane3.isLaneLost())
+			wall3ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
+		if (hardDifficulty){
+			if (Lane4.isLaneLost())
+				wall4ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
+			if (Lane5.isLaneLost())
+				wall5ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
+		}
+		wall1HealthBar.setProgress((double) Lane1.getLaneWall().getCurrentHealth() / Lane1.getLaneWall().getBaseHealth());
+		wall2HealthBar.setProgress((double) Lane2.getLaneWall().getCurrentHealth() / Lane2.getLaneWall().getBaseHealth());
+		wall3HealthBar.setProgress((double) Lane3.getLaneWall().getCurrentHealth() / Lane3.getLaneWall().getBaseHealth());
+		if (hardDifficulty){
+			wall4HealthBar.setProgress((double) Lane4.getLaneWall().getCurrentHealth() / Lane4.getLaneWall().getBaseHealth());
+			wall5HealthBar.setProgress((double) Lane5.getLaneWall().getCurrentHealth() / Lane5.getLaneWall().getBaseHealth());
 		}
 	}
 	private void defeat(ActionEvent event){
@@ -341,6 +382,7 @@ public class Controller implements Initializable{
 		} finally {
 			displayAlert("You have been defeated! Your score is: " + battle.getScore(), "Game Over!");
 		}
+
 	}
 	
 	
@@ -377,7 +419,4 @@ public class Controller implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	
-
-	
 }

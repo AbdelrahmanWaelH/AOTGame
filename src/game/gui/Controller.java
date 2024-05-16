@@ -447,6 +447,7 @@ public class Controller implements Initializable{
 		phaseLabel.setText("Phase: " + battle.getBattlePhase());
 		resourcesLabel.setText("Resources: " + battle.getResourcesGathered());
 		ArrayList<Lane> tempArr= battle.getOriginalLanes();
+		String space="             ";
 
 		Lane1=tempArr.get(0);
 		Lane2=tempArr.get(1);
@@ -454,17 +455,17 @@ public class Controller implements Initializable{
 		laneLabel1.setText("Wall 1 health: " + Lane1.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane1.getDangerLevel());
 		laneLabel2.setText("Wall 2 health: " + Lane2.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane2.getDangerLevel());
 		laneLabel3.setText("Wall 3 health: " + Lane3.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane3.getDangerLevel());
-		lane1weaponcount.setText(piercingCount[0] + "    " + sniperCount[0] + "   " + volleyCount[0]);
-		lane2weaponcount.setText(piercingCount[1] + "    " + sniperCount[1] + "   " + volleyCount[1]);
-		lane3weaponcount.setText(piercingCount[2] + "    " + sniperCount[2] + "   " + volleyCount[2]);
+		lane1weaponcount.setText(piercingCount[0] + space + sniperCount[0] + space + volleyCount[0]);
+		lane2weaponcount.setText(piercingCount[1] + space + sniperCount[1] + space + volleyCount[1]);
+		lane3weaponcount.setText(piercingCount[2] + space + sniperCount[2] + space + volleyCount[2]);
 		if(hardDifficulty){
 			try {
 			Lane4 = tempArr.get(3);
 			Lane5 = tempArr.get(4);
 			laneLabel4.setText("Wall 4 health: " + Lane4.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane4.getDangerLevel());
 			laneLabel5.setText("Wall 5 health: " + Lane5.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane5.getDangerLevel());
-			lane4weaponcount.setText(piercingCount[3] + "    " + sniperCount[3] + "    " + volleyCount[3]);
-			lane5weaponcount.setText(piercingCount[4] + "    " + sniperCount[4] + "    " + volleyCount[4]);
+			lane4weaponcount.setText(piercingCount[3] + space + sniperCount[3] + space + volleyCount[3]);
+			lane5weaponcount.setText(piercingCount[4] + space + sniperCount[4] + space + volleyCount[4]);
 			} catch(IndexOutOfBoundsException e){
 				System.out.println("did not change lane4 & lane5 labels, mode: " + hardDifficulty);
 			} //handles easy mode lane labels

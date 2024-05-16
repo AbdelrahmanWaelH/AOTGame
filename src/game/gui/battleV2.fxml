@@ -107,9 +107,6 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-                     <children>
-                        <ProgressBar fx:id="wall4HealthBar" prefWidth="200.0" progress="0.0" GridPane.rowIndex="9" />
-                     </children>
                   </GridPane>
                   <GridPane gridLinesVisible="true" GridPane.columnIndex="1">
                      <columnConstraints>
@@ -127,9 +124,6 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
-                     <children>
-                        <ProgressBar fx:id="wall2HealthBar" prefWidth="200.0" progress="0.0" GridPane.rowIndex="9" />
-                     </children>
                   </GridPane>
                   <GridPane gridLinesVisible="true" GridPane.columnIndex="2">
                      <columnConstraints>
@@ -147,9 +141,6 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
-                     <children>
-                        <ProgressBar fx:id="wall3HealthBar" prefWidth="200.0" progress="0.0" GridPane.rowIndex="9" />
-                     </children>
                   </GridPane>
                   <GridPane gridLinesVisible="true" GridPane.columnIndex="4">
                      <columnConstraints>
@@ -167,9 +158,6 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
-                     <children>
-                        <ProgressBar fx:id="wall5HealthBar" prefWidth="200.0" progress="0.0" GridPane.rowIndex="9" />
-                     </children>
                   </GridPane>
                   <GridPane gridLinesVisible="true">
                      <columnConstraints>
@@ -187,9 +175,6 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
-                     <children>
-                        <ProgressBar fx:id="wall1HealthBar" prefWidth="200.0" progress="0.0" GridPane.rowIndex="9" />
-                     </children>
                   </GridPane>
                   <GridPane GridPane.rowIndex="3">
                     <columnConstraints>
@@ -361,6 +346,11 @@
                         <Image url="@assets/wall.jpeg" />
                      </image>
                   </ImageView>
+                  <ProgressBar fx:id="wall1HealthBar" prefWidth="200.0" progress="0.0" GridPane.rowIndex="2" />
+                  <ProgressBar fx:id="wall2HealthBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ProgressBar fx:id="wall3HealthBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <ProgressBar fx:id="wall4HealthBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <ProgressBar fx:id="wall5HealthBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </center>

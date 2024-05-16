@@ -190,7 +190,7 @@ public class Controller implements Initializable{
 	}
 	
 
-	public void buy(int code){
+	private void buy(int code){
 		try{
 			battle.purchaseWeapon(code, purchaseLane);
 		}catch (InvalidLaneException ILE){

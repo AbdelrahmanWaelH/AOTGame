@@ -55,7 +55,7 @@
                      </image></ImageView>
                   <ImageView fx:id="walltrapShopImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@assets/wall_trap.jpeg" />
+                        <Image url="@assets/trap.jpeg" />
                      </image></ImageView>
                </children>
             </GridPane>
@@ -351,6 +351,31 @@
                   <ProgressBar fx:id="wall3HealthBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <ProgressBar fx:id="wall4HealthBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                   <ProgressBar fx:id="wall5HealthBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <ImageView fitHeight="32.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/trap.jpeg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="32.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/trap.jpeg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="32.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/trap.jpeg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="32.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/trap.jpeg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="32.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/trap.jpeg" />
+                     </image>
+                  </ImageView>
                </children>
             </GridPane>
          </center>

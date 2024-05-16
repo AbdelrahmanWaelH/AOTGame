@@ -310,11 +310,11 @@
                         </ImageView>
                      </children>
                   </GridPane>
-                  <Label fx:id="lane1weaponcount" text="Label" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="lane2weaponcount" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="lane3weaponcount" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="lane4weaponcount" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="lane5weaponcount" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="lane1weaponcount" text="Label" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="lane2weaponcount" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="lane3weaponcount" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="lane4weaponcount" text="Label" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="lane5weaponcount" text="Label" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
                </children>
             </GridPane>
          </center>

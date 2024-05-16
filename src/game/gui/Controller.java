@@ -168,69 +168,6 @@ public class Controller implements Initializable{
 		}
 	}
 	
-	/*public void spawnAndMoveTitans(){
-		ArrayList<Lane> lanes=battle.getOriginalLanes();
-		battle.refillApproachingTitans();
-		ArrayList<Titan> titans = battle.getApproachingTitans();
-		if(!lanes.get(0).isLaneLost()){
-			spawnTitansAtLane(lane1field, titans);
-		}
-		
-		if(!lanes.get(1).isLaneLost()){
-			spawnTitansAtLane(lane2field, titans);
-		}
-		
-		if(!lanes.get(2).isLaneLost()){
-			spawnTitansAtLane(lane3field, titans);
-		}
-		
-		if(hardDifficulty){
-			if(!lanes.get(3).isLaneLost()){
-				spawnTitansAtLane(lane4field, titans);
-			}
-			
-			if(!lanes.get(4).isLaneLost()){
-				spawnTitansAtLane(lane5field, titans);
-			}
-		}
-   }
-
-	 public void spawnTitansAtLane(VBox theLane, ArrayList<Titan> theTitans){
-			int i=0;
-			while(i<theTitans.size()){
-				Titan currTitan=theTitans.get(i);
-				Image currTitanImage;
-				ImageView theSprite;
-				if(currTitan instanceof PureTitan){
-					currTitanImage=new Image("pure_titan.jpeg");
-				}else if(currTitan instanceof AbnormalTitan){
-					currTitanImage=new Image("abnormal_titan.jpeg");
-				}else if(currTitan instanceof ArmoredTitan){
-					currTitanImage=new Image("armored_titan.jpeg");
-				}else{
-					currTitanImage=new Image("colossal_titan.jpeg");
-				}
-				
-				Label healthLabel= new Label();
-				healthLabel.setText("Health: " + currTitan.getCurrentHealth());
-				theSprite=new ImageView(currTitanImage);
-				VBox sprite = new VBox(theSprite, healthLabel);
-				theLane.getChildren().add(sprite);
-				
-				TranslateTransition translate = new TranslateTransition(Duration.seconds(3), theSprite);
-				translate.setByY(-200); 
-				translate.setAutoReverse(true);
-				translate.setCycleCount(TranslateTransition.INDEFINITE);
-				translate.play();
-				i++;
-				moveTitansAtLane(theLane, sprite);
-			}
-	 }
-		
-	 public void moveTitansAtLane(VBox theLane, VBox sprite){
-		 
-	 }*/
-
 
 	public void buy(int code){
 		try{
@@ -246,7 +183,6 @@ public class Controller implements Initializable{
 			public void buyButton1(ActionEvent event) {
 				incrementCountAtLane(1, purchaseLaneName);
 				buy(1);
-				//spawnWeaponAtLane(1);
 				if (battle.isGameOver()){
 					defeat(event);
 				}
@@ -255,14 +191,12 @@ public class Controller implements Initializable{
 			public void buyButton2(ActionEvent event) {
 				incrementCountAtLane(2, purchaseLaneName);
 				buy(2);
-				//spawnWeaponAtLane(2);
 				if (battle.isGameOver()){
 					defeat(event);
 				}
 			}
 
 			public void buyButton3(ActionEvent event) {
-				//spawnWeaponAtLane(3);
 				incrementCountAtLane(3, purchaseLaneName);
 				buy(3);
 				if (battle.isGameOver()){
@@ -271,7 +205,6 @@ public class Controller implements Initializable{
 			}
 
 			public void buyButton4(ActionEvent event) {
-				//spawnWeaponAtLane(4);
 				incrementCountAtLane(4, purchaseLaneName);
 				buy(4);
 				if (battle.isGameOver()){
@@ -279,35 +212,6 @@ public class Controller implements Initializable{
 				}
 			}
 			
-			/*public void spawnWeaponAtLane(int weaponCode){
-				ImageView weaponImage;
-				if(weaponCode==1){
-					weaponImage=new ImageView(new Image(piercingImage));
-				}else if(weaponCode==2){
-					weaponImage=new ImageView(new Image(sniperImage));
-				}else if(weaponCode==3){
-					weaponImage=new ImageView(new Image(volleyspreadImage));
-				}else{
-					weaponImage=new ImageView(new Image(walltrapImage));
-				}
-				
-				weaponImage.setFitWidth(100); 
-		        weaponImage.setPreserveRatio(true); 
-				
-				if(purchaseLaneName.equals("Lane 1")){
-					weaponfield1.getChildren().add(weaponImage);
-				}else if(purchaseLaneName.equals("Lane 2")){
-					weaponfield2.getChildren().add(weaponImage);
-				}else if(purchaseLaneName.equals("Lane 3")){
-					weaponfield3.getChildren().add(weaponImage);
-				}else if(purchaseLaneName.equals("Lane 4")){
-					weaponfield4.getChildren().add(weaponImage);
-				}else if(purchaseLaneName.equals("Lane 5")){
-					weaponfield5.getChildren().add(weaponImage);
-				}
-				
-				
-			}*/
 			
 		private void incrementCountAtLane(int weapon, String laneName){
 			if(purchaseLaneName.equals("Lane 1")){

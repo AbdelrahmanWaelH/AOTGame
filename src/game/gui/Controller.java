@@ -19,14 +19,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;   //THISSSS SHITTTTT SUCKSSSS //you're kinda right ngl
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -104,8 +102,6 @@ public class Controller implements Initializable{
 	@FXML
 	 private Parent game;
 	@FXML
-	 private GridPane motherGrid;
-	@FXML
 	 private ImageView wall1ImageView;
 	@FXML
 	 private ImageView wall2ImageView;
@@ -125,6 +121,16 @@ public class Controller implements Initializable{
 	 private ProgressBar wall4HealthBar;
 	@FXML
 	 private ProgressBar wall5HealthBar;
+	@FXML
+	 private GridPane lane1grid;
+	@FXML
+	 private GridPane lane2grid;
+	@FXML
+	 private GridPane lane3grid;
+	@FXML
+	 private GridPane lane4grid;
+	@FXML
+	 private GridPane lane5grid;
 
 	private static Battle battle;
 	private Lane Lane1;
@@ -172,7 +178,6 @@ public class Controller implements Initializable{
 			stage.setFullScreen(true);
 			stage.show();
 			System.out.println("You have chosen hard mode, instance created");
-			consolePrint();
 		} catch (IOException e){
 			displayAlert("IOException when switching to hard battle", "IOException");
 		}
@@ -304,18 +309,37 @@ public class Controller implements Initializable{
         alertStage.setScene(scene);
         alertStage.show();
     }
+	// public void spawnAndMoveTitans(){
+	// 	ArrayList<Titan> titans = battle.getApproachingTitans();
+	// 	ArrayList<Lane> lanes = battle.getOriginalLanes();
+	// 	if(!lanes.get(0).isLaneLost())
+	// 		spawnTitansAtLane(lane1grid, titans);
+	//     if(!lanes.get(1).isLaneLost())
+	// 		spawnTitansAtLane(lane2grid, titans);
+	// 	if(!lanes.get(2).isLaneLost())
+	// 		spawnTitansAtLane(lane3grid, titans);
+	// 	if(hardDifficulty){
+	// 		try {
+	// 		if(!lanes.get(3).isLaneLost())
+	// 			spawnTitansAtLane(lane4grid, titans);
+	// 		if(!lanes.get(4).isLaneLost())
+	// 			spawnTitansAtLane(lane5grid, titans);
+	// 		} catch (Exception e){
+	// 			System.out.println("did not spawn titans at lane 4 & 5");
+	// 		}
+	// 	}
+	// }
 
-	private void consolePrint(){
-		System.out.println(scoreLabel.getText());
-		System.out.println(turnLabel.getText());
-		System.out.println(phaseLabel.getText());
-		System.out.println(resourcesLabel.getText());
-		System.out.println(laneLabel1.getText());
-		System.out.println(laneLabel2.getText());
-		System.out.println(laneLabel3.getText());
-		System.out.println(laneLabel4.getText());
-		System.out.println(laneLabel5.getText());
-	}
+	// private void spawnTitansAtLane(GridPane laneGrid, ArrayList<Titan> titans){
+	// 	try{
+	// 	for(int i=0; i<titans.size(); i++){
+	// 		Titan titan = titans.get(i);
+	// 		TitanView titanView = new TitanView(titan);
+	// 		laneGrid.add(titanView,0,0);
+	// 	}} catch (Exception e){
+	// 		e.printStackTrace();
+	// 	}
+	// }
 
 	public void textRefresh(){
 		scoreLabel.setText("Score: " + battle.getScore());
@@ -324,7 +348,6 @@ public class Controller implements Initializable{
 		resourcesLabel.setText("Resources: " + battle.getResourcesGathered());
 		ArrayList<Lane> tempArr= battle.getOriginalLanes();
 		String space="             ";
-
 		Lane1=tempArr.get(0);
 		Lane2=tempArr.get(1);
 		Lane3=tempArr.get(2);
@@ -334,6 +357,16 @@ public class Controller implements Initializable{
 		lane1weaponcount.setText(piercingCount[0] + space + sniperCount[0] + space + volleyCount[0]);
 		lane2weaponcount.setText(piercingCount[1] + space + sniperCount[1] + space + volleyCount[1]);
 		lane3weaponcount.setText(piercingCount[2] + space + sniperCount[2] + space + volleyCount[2]);
+		if (Lane1.isLaneLost())
+			wall1ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
+		if (Lane2.isLaneLost())
+			wall2ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
+		if (Lane3.isLaneLost())
+			wall3ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
+		wall1HealthBar.setProgress((double) Lane1.getLaneWall().getCurrentHealth() / Lane1.getLaneWall().getBaseHealth());
+		wall2HealthBar.setProgress((double) Lane2.getLaneWall().getCurrentHealth() / Lane2.getLaneWall().getBaseHealth());
+		wall3HealthBar.setProgress((double) Lane3.getLaneWall().getCurrentHealth() / Lane3.getLaneWall().getBaseHealth());
+	
 		if(hardDifficulty){
 			try {
 			Lane4 = tempArr.get(3);
@@ -342,29 +375,16 @@ public class Controller implements Initializable{
 			laneLabel5.setText("Danger Level: " + Lane5.getDangerLevel());
 			lane4weaponcount.setText(piercingCount[3] + space + sniperCount[3] + space + volleyCount[3]);
 			lane5weaponcount.setText(piercingCount[4] + space + sniperCount[4] + space + volleyCount[4]);
-			} catch(IndexOutOfBoundsException e){
-				System.out.println("did not change lane4 & lane5 labels, mode: " + hardDifficulty);
-			} //handles easy mode lane labels
-		}
-
-		if (Lane1.isLaneLost())
-			wall1ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
-		if (Lane2.isLaneLost())
-			wall2ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
-		if (Lane3.isLaneLost())
-			wall3ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
-		if (hardDifficulty){
+			wall4HealthBar.setProgress((double) Lane4.getLaneWall().getCurrentHealth() / Lane4.getLaneWall().getBaseHealth());
+			wall5HealthBar.setProgress((double) Lane5.getLaneWall().getCurrentHealth() / Lane5.getLaneWall().getBaseHealth());
+			
 			if (Lane4.isLaneLost())
 				wall4ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
 			if (Lane5.isLaneLost())
 				wall5ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
-		}
-		wall1HealthBar.setProgress((double) Lane1.getLaneWall().getCurrentHealth() / Lane1.getLaneWall().getBaseHealth());
-		wall2HealthBar.setProgress((double) Lane2.getLaneWall().getCurrentHealth() / Lane2.getLaneWall().getBaseHealth());
-		wall3HealthBar.setProgress((double) Lane3.getLaneWall().getCurrentHealth() / Lane3.getLaneWall().getBaseHealth());
-		if (hardDifficulty){
-			wall4HealthBar.setProgress((double) Lane4.getLaneWall().getCurrentHealth() / Lane4.getLaneWall().getBaseHealth());
-			wall5HealthBar.setProgress((double) Lane5.getLaneWall().getCurrentHealth() / Lane5.getLaneWall().getBaseHealth());
+			} catch(IndexOutOfBoundsException e){
+				System.out.println("did not change lane4 & lane5 labels, mode: " + hardDifficulty);
+			} //handles easy mode 
 		}
 	}
 	private void defeat(ActionEvent event){

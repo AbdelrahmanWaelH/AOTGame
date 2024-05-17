@@ -36,7 +36,6 @@ public class TitanView extends AnchorPane{
             case 3: icon.setImage(new Image("game/gui/assets/armored_titan.jpeg")); break;
             case 4: icon.setImage(new Image("game/gui/assets/colossal_titan.jpeg")); break;
         }
-        
         refreshHealthBar();
     }
     private void refreshHealthBar(){

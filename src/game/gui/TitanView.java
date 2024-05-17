@@ -9,9 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
-public class TitanView extends AnchorPane{
+public class TitanView extends Pane{
     @FXML
     private ImageView icon;
     @FXML
@@ -36,6 +36,8 @@ public class TitanView extends AnchorPane{
             case 3: icon.setImage(new Image("game/gui/assets/armored_titan.jpeg")); break;
             case 4: icon.setImage(new Image("game/gui/assets/colossal_titan.jpeg")); break;
         }
+        getChildren().add(icon);
+        getChildren().add(healthBar);
         refreshHealthBar();
     }
     private void refreshHealthBar(){

@@ -125,15 +125,15 @@ public class Controller implements Initializable{
 	@FXML
 	 private ProgressBar wall5HealthBar;
 	@FXML
-	 private GridPane lane1grid;
+	 private GridPane laneGrid1;
 	@FXML
-	 private GridPane lane2grid;
+	 private GridPane laneGrid2;
 	@FXML
-	 private GridPane lane3grid;
+	 private GridPane laneGrid3;
 	@FXML
-	 private GridPane lane4grid;
+	 private GridPane laneGrid4;
 	@FXML
-	 private GridPane lane5grid;
+	 private GridPane laneGrid5;
 
 	private static Battle battle;
 	private Lane Lane1;
@@ -189,10 +189,9 @@ public class Controller implements Initializable{
 	public void skipThisTurn(ActionEvent event){
 		System.out.println("Turn skipped...");
 		battle.passTurn();
-		//spawnAndMoveTitans();
+		spawnAndMoveTitans();
 		textRefresh();
 		if (battle.isGameOver()){
-			//is game over? using method
 			defeat(event);
 		}
 	}
@@ -201,7 +200,7 @@ public class Controller implements Initializable{
 	private void buy(int code){
 		try{
 			battle.purchaseWeapon(code, purchaseLane);
-			//spawnAndMoveTitans();
+			spawnAndMoveTitans();
 		}catch (InvalidLaneException ILE){
 			displayAlert("The lane you chose is invalid!", "Invalid Lane!");
 		} catch (InsufficientResourcesException IRE) {
@@ -313,44 +312,39 @@ public class Controller implements Initializable{
         alertStage.setScene(scene);
         alertStage.show();
     }
-	// public void spawnAndMoveTitans(){
-	// 	if(!Lane1.isLaneLost() && lane1grid != null) 
-	// 		spawnTitansAtLane(lane1grid, Lane1.getTitans());
-	// 	if(!Lane2.isLaneLost() && lane2grid != null)
-	// 		spawnTitansAtLane(lane2grid, Lane2.getTitans());
-	// 	if(!Lane3.isLaneLost() && lane3grid != null) 
-	// 		spawnTitansAtLane(lane3grid, Lane3.getTitans());
-	// 	if(hardDifficulty){
-	// 		try {
-	// 		if(!Lane4.isLaneLost() && lane4grid != null)
-	// 			spawnTitansAtLane(lane4grid, Lane4.getTitans());
-	// 		if(!Lane5.isLaneLost() && lane5grid != null)
-	// 			spawnTitansAtLane(lane5grid, Lane5.getTitans());
-	// 		} catch (Exception e){
-	// 			System.out.println("did not spawn titans at lane 4 & 5");
-	// 		}
-	// 	}
-	// }
+	public void spawnAndMoveTitans(){
+		if(!Lane1.isLaneLost() && laneGrid1 != null) 
+			spawnTitansAtLane(laneGrid1, Lane1.getTitans());
+		if(!Lane2.isLaneLost() && laneGrid2 != null)
+			spawnTitansAtLane(laneGrid2, Lane2.getTitans());
+		if(!Lane3.isLaneLost() && laneGrid3 != null) 
+			spawnTitansAtLane(laneGrid3, Lane3.getTitans());
+		if(hardDifficulty){
+			try {
+			if(!Lane4.isLaneLost() && laneGrid4 != null)
+				spawnTitansAtLane(laneGrid4, Lane4.getTitans());
+			if(!Lane5.isLaneLost() && laneGrid5 != null)
+				spawnTitansAtLane(laneGrid5, Lane5.getTitans());
+			} catch (Exception e){
+				System.out.println("did not spawn titans at lane 4 & 5");
+			}
+		}
+	}
 
-	// private void spawnTitansAtLane(GridPane laneGrid, PriorityQueue<Titan> titans){
-	// 	Stack<Titan> tempTitans = new Stack<>();
-		
-	// 	for(int i=0; i<titans.size(); i++){
-	// 		Titan titan = titans.poll();
-	// 		try {
-	// 			TitanView titanView = new TitanView(titan);
-	// 			laneGrid.add(titanView,0,0);
-	// 		} catch (NullPointerException e){
-	// 			System.out.println("lanegrid is null");
-	// 		}
-			
-	// 		//laneGrid.add(titanView,0,0);
-	// 		//tempTitans.push(titan);
-	// 	}
-	// 	for (int i = 0; i < tempTitans.size(); i++)
-	// 		titans.add((Titan) tempTitans.pop());
-		
-	// }
+	private void spawnTitansAtLane(GridPane laneGrid, PriorityQueue<Titan> titans){
+		Stack<Titan> tempTitans = new Stack<>();
+		for(int i=0; i<titans.size(); i++){
+			Titan titan = titans.poll();
+			try{
+				laneGrid.add(new Label("spawned a titan"),0,0);
+			} catch (NullPointerException e) {
+				System.out.println("stupid bastard");
+			}
+			tempTitans.push(titan);
+		}
+		for (int i = 0; i < tempTitans.size(); i++)
+			titans.add((Titan) tempTitans.pop());
+	}
 
 	public void textRefresh(){
 		scoreLabel.setText("Score: " + battle.getScore());
@@ -435,11 +429,6 @@ public class Controller implements Initializable{
 				default: purchaseLane = null;
 			}
 		});
-		lane1grid = new GridPane();
-		lane2grid = new GridPane();
-		lane3grid = new GridPane();
-		lane4grid = new GridPane();
-		lane5grid = new GridPane();
 
 		try{
 			WeaponFactory wF = new WeaponFactory();

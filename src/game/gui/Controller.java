@@ -2,12 +2,15 @@ package game.gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
 import game.engine.lanes.Lane;
+import game.engine.titans.Titan;
 import game.engine.weapons.WeaponRegistry;
 import game.engine.weapons.factory.WeaponFactory;
 import javafx.event.ActionEvent;
@@ -186,7 +189,7 @@ public class Controller implements Initializable{
 	public void skipThisTurn(ActionEvent event){
 		System.out.println("Turn skipped...");
 		battle.passTurn();
-		System.out.println(battle.isGameOver() + " is the defeated state-------------------------------------------");
+		//spawnAndMoveTitans();
 		textRefresh();
 		if (battle.isGameOver()){
 			//is game over? using method
@@ -198,10 +201,11 @@ public class Controller implements Initializable{
 	private void buy(int code){
 		try{
 			battle.purchaseWeapon(code, purchaseLane);
+			//spawnAndMoveTitans();
 		}catch (InvalidLaneException ILE){
 			displayAlert("The lane you chose is invalid!", "Invalid Lane!");
 		} catch (InsufficientResourcesException IRE) {
-			displayAlert("You currently don't have enough resources to perform this action", "Insufficient Resources!");
+			displayAlert(IRE.getMessage(), "Insufficient Resources!");
 		} finally {
 			textRefresh();
 		}
@@ -310,35 +314,42 @@ public class Controller implements Initializable{
         alertStage.show();
     }
 	// public void spawnAndMoveTitans(){
-	// 	ArrayList<Titan> titans = battle.getApproachingTitans();
-	// 	ArrayList<Lane> lanes = battle.getOriginalLanes();
-	// 	if(!lanes.get(0).isLaneLost())
-	// 		spawnTitansAtLane(lane1grid, titans);
-	//     if(!lanes.get(1).isLaneLost())
-	// 		spawnTitansAtLane(lane2grid, titans);
-	// 	if(!lanes.get(2).isLaneLost())
-	// 		spawnTitansAtLane(lane3grid, titans);
+	// 	if(!Lane1.isLaneLost() && lane1grid != null) 
+	// 		spawnTitansAtLane(lane1grid, Lane1.getTitans());
+	// 	if(!Lane2.isLaneLost() && lane2grid != null)
+	// 		spawnTitansAtLane(lane2grid, Lane2.getTitans());
+	// 	if(!Lane3.isLaneLost() && lane3grid != null) 
+	// 		spawnTitansAtLane(lane3grid, Lane3.getTitans());
 	// 	if(hardDifficulty){
 	// 		try {
-	// 		if(!lanes.get(3).isLaneLost())
-	// 			spawnTitansAtLane(lane4grid, titans);
-	// 		if(!lanes.get(4).isLaneLost())
-	// 			spawnTitansAtLane(lane5grid, titans);
+	// 		if(!Lane4.isLaneLost() && lane4grid != null)
+	// 			spawnTitansAtLane(lane4grid, Lane4.getTitans());
+	// 		if(!Lane5.isLaneLost() && lane5grid != null)
+	// 			spawnTitansAtLane(lane5grid, Lane5.getTitans());
 	// 		} catch (Exception e){
 	// 			System.out.println("did not spawn titans at lane 4 & 5");
 	// 		}
 	// 	}
 	// }
 
-	// private void spawnTitansAtLane(GridPane laneGrid, ArrayList<Titan> titans){
-	// 	try{
+	// private void spawnTitansAtLane(GridPane laneGrid, PriorityQueue<Titan> titans){
+	// 	Stack<Titan> tempTitans = new Stack<>();
+		
 	// 	for(int i=0; i<titans.size(); i++){
-	// 		Titan titan = titans.get(i);
-	// 		TitanView titanView = new TitanView(titan);
-	// 		laneGrid.add(titanView,0,0);
-	// 	}} catch (Exception e){
-	// 		e.printStackTrace();
+	// 		Titan titan = titans.poll();
+	// 		try {
+	// 			TitanView titanView = new TitanView(titan);
+	// 			laneGrid.add(titanView,0,0);
+	// 		} catch (NullPointerException e){
+	// 			System.out.println("lanegrid is null");
+	// 		}
+			
+	// 		//laneGrid.add(titanView,0,0);
+	// 		//tempTitans.push(titan);
 	// 	}
+	// 	for (int i = 0; i < tempTitans.size(); i++)
+	// 		titans.add((Titan) tempTitans.pop());
+		
 	// }
 
 	public void textRefresh(){
@@ -424,6 +435,11 @@ public class Controller implements Initializable{
 				default: purchaseLane = null;
 			}
 		});
+		lane1grid = new GridPane();
+		lane2grid = new GridPane();
+		lane3grid = new GridPane();
+		lane4grid = new GridPane();
+		lane5grid = new GridPane();
 
 		try{
 			WeaponFactory wF = new WeaponFactory();

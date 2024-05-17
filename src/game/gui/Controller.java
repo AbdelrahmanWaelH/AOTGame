@@ -2,6 +2,7 @@ package game.gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.ResourceBundle;
 import java.util.Stack;
@@ -10,6 +11,10 @@ import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
 import game.engine.lanes.Lane;
+import game.engine.titans.AbnormalTitan;
+import game.engine.titans.ArmoredTitan;
+import game.engine.titans.ColossalTitan;
+import game.engine.titans.PureTitan;
 import game.engine.titans.Titan;
 import game.engine.weapons.WeaponRegistry;
 import game.engine.weapons.factory.WeaponFactory;
@@ -28,6 +33,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -144,6 +151,7 @@ public class Controller implements Initializable{
 	private Lane purchaseLane;
 	private String purchaseLaneName;
     private boolean hardDifficulty = true;
+	private HashMap<Titan, TitanView> spawnedTitans;
 	
 	
 	public void easy(ActionEvent event) throws IOException{
@@ -313,18 +321,28 @@ public class Controller implements Initializable{
         alertStage.show();
     }
 	public void spawnAndMoveTitans(){
-		if(!Lane1.isLaneLost() && laneGrid1 != null) 
+		if(!Lane1.isLaneLost() && laneGrid1 != null){ 
 			spawnTitansAtLane(laneGrid1, Lane1.getTitans());
-		if(!Lane2.isLaneLost() && laneGrid2 != null)
+			//removeDefeatedTitans();
+		}
+		if(!Lane2.isLaneLost() && laneGrid2 != null){
 			spawnTitansAtLane(laneGrid2, Lane2.getTitans());
-		if(!Lane3.isLaneLost() && laneGrid3 != null) 
+			//removeDefeatedTitans();
+		}
+		if(!Lane3.isLaneLost() && laneGrid3 != null) {
 			spawnTitansAtLane(laneGrid3, Lane3.getTitans());
+			//removeDefeatedTitans();
+		}
 		if(hardDifficulty){
 			try {
-			if(!Lane4.isLaneLost() && laneGrid4 != null)
+			if(!Lane4.isLaneLost() && laneGrid4 != null){
 				spawnTitansAtLane(laneGrid4, Lane4.getTitans());
-			if(!Lane5.isLaneLost() && laneGrid5 != null)
+				//removeDefeatedTitans();
+			}
+			if(!Lane5.isLaneLost() && laneGrid5 != null){
 				spawnTitansAtLane(laneGrid5, Lane5.getTitans());
+				//removeDefeatedTitans();
+			}
 			} catch (Exception e){
 				System.out.println("did not spawn titans at lane 4 & 5");
 			}
@@ -335,16 +353,24 @@ public class Controller implements Initializable{
 		Stack<Titan> tempTitans = new Stack<>();
 		for(int i=0; i<titans.size(); i++){
 			Titan titan = titans.poll();
-			try{
-				laneGrid.add(new Label("spawned a titan"),0,0);
-			} catch (NullPointerException e) {
-				System.out.println("stupid bastard");
-			}
+			TitanView titanView = new TitanView(titan);
+			laneGrid.add(titanView,0,0);
 			tempTitans.push(titan);
+			//spawnedTitans.put(titan,titanView);
 		}
 		for (int i = 0; i < tempTitans.size(); i++)
 			titans.add((Titan) tempTitans.pop());
 	}
+	// private void removeDefeatedTitans(){
+	// 	for (Titan titan: spawnedTitans.keySet()){
+	// 		if (titan.isDefeated()){
+	// 			TitanView titanView = spawnedTitans.get(titan);
+	// 			Pane parent = (Pane) titanView.getParent();
+	// 			parent.getChildren().remove(titanView);
+	// 			spawnedTitans.remove(titan);
+	// 		}
+	// 	}
+	// }
 
 	public void textRefresh(){
 		scoreLabel.setText("Score: " + battle.getScore());
@@ -443,5 +469,45 @@ public class Controller implements Initializable{
 		} catch (IOException e){
 			e.printStackTrace();
 		}
+	}
+}
+
+class TitanView extends Pane{
+	private ImageView icon;
+	private ProgressBar healthBar;
+	private Titan titan;
+
+	public TitanView(Titan titan) {
+		this.titan = titan;
+		icon = new ImageView();
+		healthBar = new ProgressBar();
+		healthBar.setPrefWidth(50);
+		healthBar.setPrefHeight(10);
+		healthBar.setLayoutX(0);
+		healthBar.setLayoutY(0);
+		healthBar.setProgress((double)titan.getCurrentHealth() / titan.getBaseHealth());
+		int code = 0;
+		if (titan instanceof PureTitan) {
+			code = 1;
+		} else if (titan instanceof AbnormalTitan) {
+			code = 2;
+		} else if (titan instanceof ArmoredTitan) {
+			code = 3;
+		} else if (titan instanceof ColossalTitan) {
+			code = 4;
+		} 
+		switch (code) {
+			case 1: icon.setImage(new Image("game/gui/assets/pure_titan.png")); break;
+			case 2: icon.setImage(new Image("game/gui/assets/abnormal_titan.png")); break;
+			case 3: icon.setImage(new Image("game/gui/assets/armored_titan.png")); break;
+			case 4: icon.setImage(new Image("game/gui/assets/colossal_titan.png")); break;
+		}
+		refreshHealthBar();
+		this.getChildren().add(icon);
+		this.getChildren().add(healthBar);
+	}
+
+	private void refreshHealthBar(){
+		this.healthBar.setProgress((double)titan.getCurrentHealth() / titan.getBaseHealth());
 	}
 }

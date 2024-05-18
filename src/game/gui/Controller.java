@@ -2,12 +2,20 @@ package game.gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.PriorityQueue;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
 import game.engine.lanes.Lane;
+import game.engine.titans.AbnormalTitan;
+import game.engine.titans.ArmoredTitan;
+import game.engine.titans.ColossalTitan;
+import game.engine.titans.PureTitan;
+import game.engine.titans.Titan;
 import game.engine.weapons.WeaponRegistry;
 import game.engine.weapons.factory.WeaponFactory;
 import javafx.event.ActionEvent;
@@ -20,23 +28,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
+
 public class Controller implements Initializable{
 	public static String iconPath = "game/gui/assets/icon.png";
-	public static String abnormalImage= "game/gui/assets/abnormal_titan.jpeg";
-	public static String armoredImage= "game/gui/assets/armored_titan.jpeg";
-	public static String colossalImage= "game/gui/assets/colossal_titan.jpeg";
-	public static String piercingImage= "game/gui/assets/piercing_titan.jpeg";
-	public static String sniperImage= "game/gui/assets/sniper_cannon.jpeg";
-	public static String volleyspreadImage= "game/gui/assets/volleyspread_cannon.jpeg";
-	public static String walltrapImage= "game/gui/assets/wall_trap.jpeg";
 	@FXML
      private Label scoreLabel = new Label();
 
@@ -65,46 +69,24 @@ public class Controller implements Initializable{
 	 private Label laneLabel5 = new Label();
 	
 	@FXML
-	 private VBox lane1field=new VBox();
+	 private Label lane1weaponcount=new Label();
 	
 	@FXML
-	 private VBox lane2field= new VBox();
+	 private Label lane2weaponcount=new Label();
 	
 	@FXML
-	 private VBox lane3field= new VBox();
+	 private Label lane3weaponcount=new Label();
 	
 	@FXML
-	 private VBox lane4field= new VBox();
+	 private Label lane4weaponcount=new Label();
 	
 	@FXML
-	 private VBox lane5field= new VBox();
+	 private Label lane5weaponcount=new Label();
 	
-	@FXML
-	 private HBox weaponfield1= new HBox();
-	
-	@FXML
-	 private HBox weaponfield2= new HBox();
-	
-	@FXML
-	 private HBox weaponfield3= new HBox();
-	
-	@FXML
-	 private HBox weaponfield4= new HBox();
-	
-	@FXML
-	 private HBox weaponfield5= new HBox();
-	
-	@FXML
-	 private ImageView piercingShopImage= new ImageView();
-	
-	@FXML
-	 private ImageView sniperShopImage= new ImageView();
-	
-	@FXML
-	 private ImageView volleyShopImage=new ImageView();
-	
-	@FXML
-	 private ImageView walltrapShopImage= new ImageView();
+	private int[] piercingCount={0,0,0,0,0};
+	private int[] sniperCount={0,0,0,0,0};
+	private int[] volleyCount={0,0,0,0,0};
+	private int[] trapCount={0,0,0,0,0};
 
 	@FXML
 	 private Label pcLabel = new Label();
@@ -129,6 +111,36 @@ public class Controller implements Initializable{
 
 	@FXML
 	 private Parent game;
+	@FXML
+	 private ImageView wall1ImageView;
+	@FXML
+	 private ImageView wall2ImageView;
+	@FXML
+	 private ImageView wall3ImageView;
+	@FXML
+	 private ImageView wall4ImageView;
+	@FXML
+	 private ImageView wall5ImageView;
+	@FXML
+	 private ProgressBar wall1HealthBar;
+	@FXML
+	 private ProgressBar wall2HealthBar;
+	@FXML
+	 private ProgressBar wall3HealthBar;
+	@FXML
+	 private ProgressBar wall4HealthBar;
+	@FXML
+	 private ProgressBar wall5HealthBar;
+	@FXML
+	 private GridPane laneGrid1;
+	@FXML
+	 private GridPane laneGrid2;
+	@FXML
+	 private GridPane laneGrid3;
+	@FXML
+	 private GridPane laneGrid4;
+	@FXML
+	 private GridPane laneGrid5;
 
 	private static Battle battle;
 	private Lane Lane1;
@@ -139,6 +151,7 @@ public class Controller implements Initializable{
 	private Lane purchaseLane;
 	private String purchaseLaneName;
     private boolean hardDifficulty = true;
+	private HashMap<Titan, TitanView> spawnedTitans;
 	
 	
 	public void easy(ActionEvent event) throws IOException{
@@ -156,7 +169,7 @@ public class Controller implements Initializable{
 			stage.setFullScreen(true);
 			stage.show();
 			System.out.println("You have chosen easy mode, instance created");
-			consolePrint();
+			//consolePrint();
 		} catch (IOException e){
 			displayAlert("IOException when switching to easy battle","IOException");
 		}
@@ -176,7 +189,6 @@ public class Controller implements Initializable{
 			stage.setFullScreen(true);
 			stage.show();
 			System.out.println("You have chosen hard mode, instance created");
-			consolePrint();
 		} catch (IOException e){
 			displayAlert("IOException when switching to hard battle", "IOException");
 		}
@@ -185,106 +197,44 @@ public class Controller implements Initializable{
 	public void skipThisTurn(ActionEvent event){
 		System.out.println("Turn skipped...");
 		battle.passTurn();
+		spawnAndMoveTitans();
 		textRefresh();
 		if (battle.isGameOver()){
-			//is game over? using method
 			defeat(event);
 		}
 	}
 	
-	/*public void spawnAndMoveTitans(){
-		ArrayList<Lane> lanes=battle.getOriginalLanes();
-		battle.refillApproachingTitans();
-		ArrayList<Titan> titans = battle.getApproachingTitans();
-		if(!lanes.get(0).isLaneLost()){
-			spawnTitansAtLane(lane1field, titans);
-		}
-		
-		if(!lanes.get(1).isLaneLost()){
-			spawnTitansAtLane(lane2field, titans);
-		}
-		
-		if(!lanes.get(2).isLaneLost()){
-			spawnTitansAtLane(lane3field, titans);
-		}
-		
-		if(hardDifficulty){
-			if(!lanes.get(3).isLaneLost()){
-				spawnTitansAtLane(lane4field, titans);
-			}
-			
-			if(!lanes.get(4).isLaneLost()){
-				spawnTitansAtLane(lane5field, titans);
-			}
-		}
-   }
 
-	 public void spawnTitansAtLane(VBox theLane, ArrayList<Titan> theTitans){
-			int i=0;
-			while(i<theTitans.size()){
-				Titan currTitan=theTitans.get(i);
-				Image currTitanImage;
-				ImageView theSprite;
-				if(currTitan instanceof PureTitan){
-					currTitanImage=new Image("pure_titan.jpeg");
-				}else if(currTitan instanceof AbnormalTitan){
-					currTitanImage=new Image("abnormal_titan.jpeg");
-				}else if(currTitan instanceof ArmoredTitan){
-					currTitanImage=new Image("armored_titan.jpeg");
-				}else{
-					currTitanImage=new Image("colossal_titan.jpeg");
-				}
-				
-				Label healthLabel= new Label();
-				healthLabel.setText("Health: " + currTitan.getCurrentHealth());
-				theSprite=new ImageView(currTitanImage);
-				VBox sprite = new VBox(theSprite, healthLabel);
-				theLane.getChildren().add(sprite);
-				
-				TranslateTransition translate = new TranslateTransition(Duration.seconds(3), theSprite);
-				translate.setByY(-200); 
-				translate.setAutoReverse(true);
-				translate.setCycleCount(TranslateTransition.INDEFINITE);
-				translate.play();
-				i++;
-				moveTitansAtLane(theLane, sprite);
-			}
-	 }
-		
-	 public void moveTitansAtLane(VBox theLane, VBox sprite){
-		 
-	 }*/
-
-
-	public void buy(int code){
+	private void buy(int code){
 		try{
 			battle.purchaseWeapon(code, purchaseLane);
+			spawnAndMoveTitans();
 		}catch (InvalidLaneException ILE){
 			displayAlert("The lane you chose is invalid!", "Invalid Lane!");
 		} catch (InsufficientResourcesException IRE) {
-			displayAlert("You currently don't have enough resources to perform this action", "Insufficient Resources!");
+			displayAlert(IRE.getMessage(), "Insufficient Resources!");
 		} finally {
 			textRefresh();
 		}
 	}
 			public void buyButton1(ActionEvent event) {
+				incrementCountAtLane(1, purchaseLaneName);
 				buy(1);
-				//spawnWeaponAtLane(1);
 				if (battle.isGameOver()){
 					defeat(event);
 				}
 			}
 
 			public void buyButton2(ActionEvent event) {
+				incrementCountAtLane(2, purchaseLaneName);
 				buy(2);
-				//spawnWeaponAtLane(2);
 				if (battle.isGameOver()){
 					defeat(event);
 				}
 			}
 
 			public void buyButton3(ActionEvent event) {
-				//spawnWeaponAtLane(3);
+				incrementCountAtLane(3, purchaseLaneName);
 				buy(3);
 				if (battle.isGameOver()){
 					defeat(event);
@@ -292,42 +242,67 @@ public class Controller implements Initializable{
 			}
 
 			public void buyButton4(ActionEvent event) {
-				//spawnWeaponAtLane(4);
+				incrementCountAtLane(4, purchaseLaneName);
 				buy(4);
 				if (battle.isGameOver()){
 					defeat(event);
 				}
 			}
 			
-			/*public void spawnWeaponAtLane(int weaponCode){
-				ImageView weaponImage;
-				if(weaponCode==1){
-					weaponImage=new ImageView(new Image(piercingImage));
-				}else if(weaponCode==2){
-					weaponImage=new ImageView(new Image(sniperImage));
-				}else if(weaponCode==3){
-					weaponImage=new ImageView(new Image(volleyspreadImage));
+			
+		private void incrementCountAtLane(int weapon, String laneName){
+			if(purchaseLaneName.equals("Lane 1")){
+				if(weapon==1){
+					piercingCount[0]++;
+				}else if(weapon==2){
+					sniperCount[0]++;
+				}else if(weapon==3){
+					volleyCount[0]++;
 				}else{
-					weaponImage=new ImageView(new Image(walltrapImage));
+					trapCount[0]++;
 				}
-				
-				weaponImage.setFitWidth(100); 
-		        weaponImage.setPreserveRatio(true); 
-				
-				if(purchaseLaneName.equals("Lane 1")){
-					weaponfield1.getChildren().add(weaponImage);
-				}else if(purchaseLaneName.equals("Lane 2")){
-					weaponfield2.getChildren().add(weaponImage);
-				}else if(purchaseLaneName.equals("Lane 3")){
-					weaponfield3.getChildren().add(weaponImage);
-				}else if(purchaseLaneName.equals("Lane 4")){
-					weaponfield4.getChildren().add(weaponImage);
-				}else if(purchaseLaneName.equals("Lane 5")){
-					weaponfield5.getChildren().add(weaponImage);
+			}else if(purchaseLaneName.equals("Lane 2")){
+				if(weapon==1){
+					piercingCount[1]++;
+				}else if(weapon==2){
+					sniperCount[1]++;
+				}else if(weapon==3){
+					volleyCount[1]++;
+				}else{
+					trapCount[1]++;
 				}
-				
-				
-			}*/
+			}else if(purchaseLaneName.equals("Lane 3")){
+				if(weapon==1){
+					piercingCount[2]++;
+				}else if(weapon==2){
+					sniperCount[2]++;
+				}else if(weapon==3){
+					volleyCount[2]++;
+				}else{
+					trapCount[2]++;
+				}
+			}else if(purchaseLaneName.equals("Lane 4")){
+				if(weapon==1){
+					piercingCount[3]++;
+				}else if(weapon==2){
+					sniperCount[3]++;
+				}else if(weapon==3){
+					volleyCount[3]++;
+				}else{
+					trapCount[3]++;
+				}
+			}else if(purchaseLaneName.equals("Lane 5")){
+				if(weapon==1){
+					piercingCount[4]++;
+				}else if(weapon==2){
+					sniperCount[4]++;
+				}else if(weapon==3){
+					volleyCount[4]++;
+				}else{
+					trapCount[4]++;
+				}
+			}
+		}
 
 		private void displayAlert(String message, String titleBar) {
         Stage alertStage = new Stage();
@@ -345,18 +320,57 @@ public class Controller implements Initializable{
         alertStage.setScene(scene);
         alertStage.show();
     }
-
-	private void consolePrint(){
-		System.out.println(scoreLabel.getText());
-		System.out.println(turnLabel.getText());
-		System.out.println(phaseLabel.getText());
-		System.out.println(resourcesLabel.getText());
-		System.out.println(laneLabel1.getText());
-		System.out.println(laneLabel2.getText());
-		System.out.println(laneLabel3.getText());
-		System.out.println(laneLabel4.getText());
-		System.out.println(laneLabel5.getText());
+	public void spawnAndMoveTitans(){
+		if(!Lane1.isLaneLost() && laneGrid1 != null){ 
+			spawnTitansAtLane(laneGrid1, Lane1.getTitans());
+			//removeDefeatedTitans();
+		}
+		if(!Lane2.isLaneLost() && laneGrid2 != null){
+			spawnTitansAtLane(laneGrid2, Lane2.getTitans());
+			//removeDefeatedTitans();
+		}
+		if(!Lane3.isLaneLost() && laneGrid3 != null) {
+			spawnTitansAtLane(laneGrid3, Lane3.getTitans());
+			//removeDefeatedTitans();
+		}
+		if(hardDifficulty){
+			try {
+			if(!Lane4.isLaneLost() && laneGrid4 != null){
+				spawnTitansAtLane(laneGrid4, Lane4.getTitans());
+				//removeDefeatedTitans();
+			}
+			if(!Lane5.isLaneLost() && laneGrid5 != null){
+				spawnTitansAtLane(laneGrid5, Lane5.getTitans());
+				//removeDefeatedTitans();
+			}
+			} catch (Exception e){
+				System.out.println("did not spawn titans at lane 4 & 5");
+			}
+		}
 	}
+
+	private void spawnTitansAtLane(GridPane laneGrid, PriorityQueue<Titan> titans){
+		Stack<Titan> tempTitans = new Stack<>();
+		for(int i=0; i<titans.size(); i++){
+			Titan titan = titans.poll();
+			TitanView titanView = new TitanView(titan);
+			laneGrid.add(titanView,0,0);
+			tempTitans.push(titan);
+			//spawnedTitans.put(titan,titanView);
+		}
+		for (int i = 0; i < tempTitans.size(); i++)
+			titans.add((Titan) tempTitans.pop());
+	}
+	// private void removeDefeatedTitans(){
+	// 	for (Titan titan: spawnedTitans.keySet()){
+	// 		if (titan.isDefeated()){
+	// 			TitanView titanView = spawnedTitans.get(titan);
+	// 			Pane parent = (Pane) titanView.getParent();
+	// 			parent.getChildren().remove(titanView);
+	// 			spawnedTitans.remove(titan);
+	// 		}
+	// 	}
+	// }
 
 	public void textRefresh(){
 		scoreLabel.setText("Score: " + battle.getScore());
@@ -364,17 +378,44 @@ public class Controller implements Initializable{
 		phaseLabel.setText("Phase: " + battle.getBattlePhase());
 		resourcesLabel.setText("Resources: " + battle.getResourcesGathered());
 		ArrayList<Lane> tempArr= battle.getOriginalLanes();
+		String space="             ";
 		Lane1=tempArr.get(0);
 		Lane2=tempArr.get(1);
 		Lane3=tempArr.get(2);
-		laneLabel1.setText("Wall 1 health: " + Lane1.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane1.getDangerLevel());
-		laneLabel2.setText("Wall 2 health: " + Lane2.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane2.getDangerLevel());
-		laneLabel3.setText("Wall 3 health: " + Lane3.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane3.getDangerLevel());
+		laneLabel1.setText("Danger Level: " + Lane1.getDangerLevel());
+		laneLabel2.setText("Danger Level: " + Lane2.getDangerLevel());
+		laneLabel3.setText("Danger Level: " + Lane3.getDangerLevel());
+		lane1weaponcount.setText(piercingCount[0] + space + sniperCount[0] + space + volleyCount[0]);
+		lane2weaponcount.setText(piercingCount[1] + space + sniperCount[1] + space + volleyCount[1]);
+		lane3weaponcount.setText(piercingCount[2] + space + sniperCount[2] + space + volleyCount[2]);
+		if (Lane1.isLaneLost())
+			wall1ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
+		if (Lane2.isLaneLost())
+			wall2ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
+		if (Lane3.isLaneLost())
+			wall3ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
+		wall1HealthBar.setProgress((double) Lane1.getLaneWall().getCurrentHealth() / Lane1.getLaneWall().getBaseHealth());
+		wall2HealthBar.setProgress((double) Lane2.getLaneWall().getCurrentHealth() / Lane2.getLaneWall().getBaseHealth());
+		wall3HealthBar.setProgress((double) Lane3.getLaneWall().getCurrentHealth() / Lane3.getLaneWall().getBaseHealth());
+	
 		if(hardDifficulty){
-			Lane4=tempArr.get(3);
-			Lane5=tempArr.get(4);
-			laneLabel4.setText("Wall 4 health: " + Lane4.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane4.getDangerLevel());
-			laneLabel5.setText("Wall 5 health: " + Lane5.getLaneWall().getCurrentHealth() + "\nDanger Level: " + Lane5.getDangerLevel());
+			try {
+			Lane4 = tempArr.get(3);
+			Lane5 = tempArr.get(4);
+			laneLabel4.setText("Danger Level: " + Lane4.getDangerLevel());
+			laneLabel5.setText("Danger Level: " + Lane5.getDangerLevel());
+			lane4weaponcount.setText(piercingCount[3] + space + sniperCount[3] + space + volleyCount[3]);
+			lane5weaponcount.setText(piercingCount[4] + space + sniperCount[4] + space + volleyCount[4]);
+			wall4HealthBar.setProgress((double) Lane4.getLaneWall().getCurrentHealth() / Lane4.getLaneWall().getBaseHealth());
+			wall5HealthBar.setProgress((double) Lane5.getLaneWall().getCurrentHealth() / Lane5.getLaneWall().getBaseHealth());
+			
+			if (Lane4.isLaneLost())
+				wall4ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
+			if (Lane5.isLaneLost())
+				wall5ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
+			} catch(IndexOutOfBoundsException e){
+				System.out.println("did not change lane4 & lane5 labels, mode: " + hardDifficulty);
+			} //handles easy mode 
 		}
 	}
 	private void defeat(ActionEvent event){
@@ -392,7 +433,9 @@ public class Controller implements Initializable{
 		} finally {
 			displayAlert("You have been defeated! Your score is: " + battle.getScore(), "Game Over!");
 		}
+
 	}
+	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -427,5 +470,44 @@ public class Controller implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	
+}
+
+class TitanView extends Pane{
+	private ImageView icon;
+	private ProgressBar healthBar;
+	private Titan titan;
+
+	public TitanView(Titan titan) {
+		this.titan = titan;
+		icon = new ImageView();
+		healthBar = new ProgressBar();
+		healthBar.setPrefWidth(50);
+		healthBar.setPrefHeight(10);
+		healthBar.setLayoutX(0);
+		healthBar.setLayoutY(0);
+		healthBar.setProgress((double)titan.getCurrentHealth() / titan.getBaseHealth());
+		int code = 0;
+		if (titan instanceof PureTitan) {
+			code = 1;
+		} else if (titan instanceof AbnormalTitan) {
+			code = 2;
+		} else if (titan instanceof ArmoredTitan) {
+			code = 3;
+		} else if (titan instanceof ColossalTitan) {
+			code = 4;
+		} 
+		switch (code) {
+			case 1: icon.setImage(new Image("game/gui/assets/pure_titan.png")); break;
+			case 2: icon.setImage(new Image("game/gui/assets/abnormal_titan.png")); break;
+			case 3: icon.setImage(new Image("game/gui/assets/armored_titan.png")); break;
+			case 4: icon.setImage(new Image("game/gui/assets/colossal_titan.png")); break;
+		}
+		refreshHealthBar();
+		this.getChildren().add(icon);
+		this.getChildren().add(healthBar);
+	}
+
+	private void refreshHealthBar(){
+		this.healthBar.setProgress((double)titan.getCurrentHealth() / titan.getBaseHealth());
+	}
 }

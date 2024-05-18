@@ -152,6 +152,11 @@ public class Controller implements Initializable{
 	private String purchaseLaneName;
     private boolean hardDifficulty = true;
 	private HashMap<Titan, TitanView> spawnedTitans;
+	private ArrayList<TitanView> spawnedTitans1=new ArrayList<TitanView>();
+	private ArrayList<TitanView> spawnedTitans2=new ArrayList<TitanView>();
+	private ArrayList<TitanView> spawnedTitans3=new ArrayList<TitanView>();
+	private ArrayList<TitanView> spawnedTitans4=new ArrayList<TitanView>();
+	private ArrayList<TitanView> spawnedTitans5=new ArrayList<TitanView>();
 	
 	
 	public void easy(ActionEvent event) throws IOException{
@@ -320,34 +325,34 @@ public class Controller implements Initializable{
         alertStage.setScene(scene);
         alertStage.show();
     }
-	public void spawnAndMoveTitans(){
-		if(!Lane1.isLaneLost() && laneGrid1 != null){ 
-			spawnTitansAtLane(laneGrid1, Lane1.getTitans());
-			//removeDefeatedTitans();
-		}
-		if(!Lane2.isLaneLost() && laneGrid2 != null){
-			spawnTitansAtLane(laneGrid2, Lane2.getTitans());
-			//removeDefeatedTitans();
-		}
-		if(!Lane3.isLaneLost() && laneGrid3 != null) {
-			spawnTitansAtLane(laneGrid3, Lane3.getTitans());
-			//removeDefeatedTitans();
-		}
-		if(hardDifficulty){
-			try {
-			if(!Lane4.isLaneLost() && laneGrid4 != null){
-				spawnTitansAtLane(laneGrid4, Lane4.getTitans());
-				//removeDefeatedTitans();
-			}
-			if(!Lane5.isLaneLost() && laneGrid5 != null){
-				spawnTitansAtLane(laneGrid5, Lane5.getTitans());
-				//removeDefeatedTitans();
-			}
-			} catch (Exception e){
-				System.out.println("did not spawn titans at lane 4 & 5");
-			}
-		}
-	}
+	// public void spawnAndMoveTitans(){
+	// 	if(!Lane1.isLaneLost() && laneGrid1 != null){ 
+	// 		spawnTitansAtLane(laneGrid1, Lane1.getTitans());
+	// 		//removeDefeatedTitans();
+	// 	}
+	// 	if(!Lane2.isLaneLost() && laneGrid2 != null){
+	// 		spawnTitansAtLane(laneGrid2, Lane2.getTitans());
+	// 		//removeDefeatedTitans();
+	// 	}
+	// 	if(!Lane3.isLaneLost() && laneGrid3 != null) {
+	// 		spawnTitansAtLane(laneGrid3, Lane3.getTitans());
+	// 		//removeDefeatedTitans();
+	// 	}
+	// 	if(hardDifficulty){
+	// 		try {
+	// 		if(!Lane4.isLaneLost() && laneGrid4 != null){
+	// 			spawnTitansAtLane(laneGrid4, Lane4.getTitans());
+	// 			//removeDefeatedTitans();
+	// 		}
+	// 		if(!Lane5.isLaneLost() && laneGrid5 != null){
+	// 			spawnTitansAtLane(laneGrid5, Lane5.getTitans());
+	// 			//removeDefeatedTitans();
+	// 		}
+	// 		} catch (Exception e){
+	// 			System.out.println("did not spawn titans at lane 4 & 5");
+	// 		}
+	// 	}
+	// }
 
 	private void spawnTitansAtLane(GridPane laneGrid, PriorityQueue<Titan> titans){
 		Stack<Titan> tempTitans = new Stack<>();
@@ -371,7 +376,148 @@ public class Controller implements Initializable{
 	// 		}
 	// 	}
 	// }
+	public void spawnAndMoveTitans(){
+		if(!Lane1.isLaneLost() && laneGrid1 != null){ 
+			spawnAndMoveTitansAtLane(laneGrid1, Lane1,1);
+			//removeDefeatedTitans();
+		}
+		if(!Lane2.isLaneLost() && laneGrid2 != null){
+			spawnAndMoveTitansAtLane(laneGrid2, Lane2,2);
+			removeDefeatedTitans();
+		}
+		if(!Lane3.isLaneLost() && laneGrid3 != null) {
+			spawnAndMoveTitansAtLane(laneGrid3, Lane3,3);
+			removeDefeatedTitans();
+		}
+		if(hardDifficulty){
+			try {
+			if(!Lane4.isLaneLost() && laneGrid4 != null){
+				spawnAndMoveTitansAtLane(laneGrid4, Lane4,4);
+				removeDefeatedTitans();
+			}
+			if(!Lane5.isLaneLost() && laneGrid5 != null){
+				spawnAndMoveTitansAtLane(laneGrid5, Lane5,5);
+				removeDefeatedTitans();
+			}
+			} catch (Exception e){
+				System.out.println("did not spawn titans at lane 4 & 5");
+			}
+		}
+	}
+	
+	private ArrayList<TitanView> getSpawnedTitans(int currLaneNum){
+		switch (currLaneNum) {
+		case 1: return spawnedTitans1;
+		case 2:return spawnedTitans2;
+		case 3:return spawnedTitans3;
+		case 4:return spawnedTitans4;
+		default: return spawnedTitans5;
+		}
+	}
+	
+	private void spawnTitanInLane(TitanView currTitan, int currLaneNum){
+		switch (currLaneNum) {
+		case 1: spawnedTitans1.add(currTitan);
+		case 2:spawnedTitans2.add(currTitan);
+		case 3:spawnedTitans3.add(currTitan);
+		case 4:spawnedTitans4.add(currTitan);
+		default:spawnedTitans5.add(currTitan);
+		}
+	}
+	
+	private void removeTitanInLane(TitanView currTitan, int currLaneNum){
+		switch (currLaneNum) {
+		case 1: spawnedTitans1.remove(currTitan);
+		case 2:spawnedTitans1.remove(currTitan);
+		case 3:spawnedTitans1.remove(currTitan);
+		case 4:spawnedTitans1.remove(currTitan);
+		default:spawnedTitans1.remove(currTitan);
+		}
+	}
 
+	private void spawnAndMoveTitansAtLane(GridPane laneGrid, Lane currLane, int currLaneNum){
+		Stack<Titan> tempTitans = new Stack<>();
+		for(Titan titan:currLane.getTitans()){
+			TitanView titanView = new TitanView(titan);
+			laneGrid.add(titanView,0,0);
+			tempTitans.push(titan);
+			spawnTitanInLane(titanView, currLaneNum);
+		}
+		for (int i = 0; i < tempTitans.size(); i++)
+			currLane.getTitans().add((Titan) tempTitans.pop());
+		
+		if(!getSpawnedTitans(currLaneNum).isEmpty())
+			moveTitansAtLane(laneGrid, getSpawnedTitans(currLaneNum),currLaneNum);
+	}
+	 private void removeDefeatedTitans(){
+	 	for (TitanView titan: spawnedTitans1){
+	 		if (titan.getTitan().isDefeated()){
+	 			Pane parent = (Pane) titan.getParent();
+	 			parent.getChildren().remove(titan);
+	 			removeTitanInLane(titan, 1);
+	 		}
+	 	}
+	 	
+	 	for (TitanView titan: spawnedTitans2){
+	 		if (titan.getTitan().isDefeated()){
+	 			Pane parent = (Pane) titan.getParent();
+	 			parent.getChildren().remove(titan);
+	 			removeTitanInLane(titan, 2);
+	 		}
+	 	}
+	 	
+	 	for (TitanView titan: spawnedTitans3){
+	 		if (titan.getTitan().isDefeated()){
+	 			Pane parent = (Pane) titan.getParent();
+	 			parent.getChildren().remove(titan);
+	 			removeTitanInLane(titan, 3);
+	 		}
+	 	}
+	 	
+	 	for (TitanView titan: spawnedTitans4){
+	 		if (titan.getTitan().isDefeated()){
+	 			Pane parent = (Pane) titan.getParent();
+	 			parent.getChildren().remove(titan);
+	 			removeTitanInLane(titan, 4);
+	 		}
+	 	}
+	 	
+	 	for (TitanView titan: spawnedTitans5){
+	 		if (titan.getTitan().isDefeated()){
+	 			Pane parent = (Pane) titan.getParent();
+	 			parent.getChildren().remove(titan);
+	 			removeTitanInLane(titan, 5);
+	 		}
+	 	}
+	 }
+	
+	public void moveTitansAtLane(GridPane currLaneGrid, ArrayList<TitanView> spawnedTitans, int currLaneNum){
+		
+		    for (TitanView currTitanView : spawnedTitans) {
+		        if (!currTitanView.getTitan().hasReachedTarget()) {
+		            int currRow = currTitanView.getRow();
+		            currLaneGrid.getChildren().remove(currTitanView);
+
+		            if (currTitanView.getTitan() instanceof ColossalTitan) {
+		                currRow += currTitanView.getGridStep() + 1;
+		            } else {
+		                currRow += currTitanView.getGridStep();
+		            }
+
+		            if (currRow > 9) {
+		                currRow = 9;
+		            }
+
+		            currTitanView.setRow(currRow);
+		            currLaneGrid.add(currTitanView, 0, currRow);
+		            Titan currTitan=currTitanView.getTitan();
+		            currTitan.move();
+		            Titan adjustedTitan=currTitan;
+		            removeTitanInLane(currTitanView, currLaneNum);
+		            spawnTitanInLane(new TitanView(adjustedTitan), currLaneNum);
+		        }
+		    }
+		}
 	public void textRefresh(){
 		scoreLabel.setText("Score: " + battle.getScore());
 		turnLabel.setText("Turn: " + battle.getNumberOfTurns());
@@ -476,6 +622,8 @@ class TitanView extends Pane{
 	private ImageView icon;
 	private ProgressBar healthBar;
 	private Titan titan;
+	private int gridStep = 0;
+	private int currRow = 0;
 
 	public TitanView(Titan titan) {
 		this.titan = titan;
@@ -487,6 +635,7 @@ class TitanView extends Pane{
 		healthBar.setLayoutY(0);
 		healthBar.setProgress((double)titan.getCurrentHealth() / titan.getBaseHealth());
 		int code = 0;
+		this.gridStep = titan.getSpeed()/5;
 		if (titan instanceof PureTitan) {
 			code = 1;
 		} else if (titan instanceof AbnormalTitan) {
@@ -509,5 +658,19 @@ class TitanView extends Pane{
 
 	private void refreshHealthBar(){
 		this.healthBar.setProgress((double)titan.getCurrentHealth() / titan.getBaseHealth());
+	}
+	public Titan getTitan(){
+		return this.titan;
+	}
+	public void setRow(int currRow){
+		this.currRow=currRow;
+	}
+	
+	public int getRow(){
+		return this.currRow;
+	}
+	
+	public int getGridStep(){
+		return this.gridStep;
 	}
 }

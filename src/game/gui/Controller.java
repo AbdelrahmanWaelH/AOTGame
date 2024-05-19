@@ -6,7 +6,12 @@ import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.ResourceBundle;
 import java.util.Stack;
+<<<<<<< Updated upstream
 
+=======
+import java.util.concurrent.Delayed;
+import java.util.Stack;
+>>>>>>> Stashed changes
 import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
@@ -18,6 +23,10 @@ import game.engine.titans.PureTitan;
 import game.engine.titans.Titan;
 import game.engine.weapons.WeaponRegistry;
 import game.engine.weapons.factory.WeaponFactory;
+<<<<<<< Updated upstream
+=======
+import javafx.animation.PauseTransition;
+>>>>>>> Stashed changes
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +45,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+<<<<<<< Updated upstream
+=======
+import javafx.util.Duration;
+>>>>>>> Stashed changes
 
 
 
@@ -83,6 +96,24 @@ public class Controller implements Initializable{
 	@FXML
 	 private Label lane5weaponcount=new Label();
 	
+<<<<<<< Updated upstream
+=======
+	@FXML
+	private Label lane1trapcount=new Label();
+	
+	@FXML
+	private Label lane2trapcount=new Label();
+	
+	@FXML
+	private Label lane3trapcount=new Label();
+	
+	@FXML
+	private Label lane4trapcount=new Label();
+	
+	@FXML
+	private Label lane5trapcount=new Label();
+	
+>>>>>>> Stashed changes
 	private int[] piercingCount={0,0,0,0,0};
 	private int[] sniperCount={0,0,0,0,0};
 	private int[] volleyCount={0,0,0,0,0};
@@ -151,7 +182,16 @@ public class Controller implements Initializable{
 	private Lane purchaseLane;
 	private String purchaseLaneName;
     private boolean hardDifficulty = true;
+<<<<<<< Updated upstream
 	private HashMap<Titan, TitanView> spawnedTitans;
+=======
+	private ArrayList<TitanView> spawnedTitans1=new ArrayList<TitanView>();
+	private ArrayList<TitanView> spawnedTitans2=new ArrayList<TitanView>();
+	private ArrayList<TitanView> spawnedTitans3=new ArrayList<TitanView>();
+	private ArrayList<TitanView> spawnedTitans4=new ArrayList<TitanView>();
+	private ArrayList<TitanView> spawnedTitans5=new ArrayList<TitanView>();
+
+>>>>>>> Stashed changes
 	
 	
 	public void easy(ActionEvent event) throws IOException{
@@ -320,6 +360,7 @@ public class Controller implements Initializable{
         alertStage.setScene(scene);
         alertStage.show();
     }
+<<<<<<< Updated upstream
 	public void spawnAndMoveTitans(){
 		if(!Lane1.isLaneLost() && laneGrid1 != null){ 
 			spawnTitansAtLane(laneGrid1, Lane1.getTitans());
@@ -332,21 +373,58 @@ public class Controller implements Initializable{
 		if(!Lane3.isLaneLost() && laneGrid3 != null) {
 			spawnTitansAtLane(laneGrid3, Lane3.getTitans());
 			//removeDefeatedTitans();
+=======
+
+	private void consolePrint(){
+		System.out.println(scoreLabel.getText());
+		System.out.println(turnLabel.getText());
+		System.out.println(phaseLabel.getText());
+		System.out.println(resourcesLabel.getText());
+		System.out.println(laneLabel1.getText());
+		System.out.println(laneLabel2.getText());
+		System.out.println(laneLabel3.getText());
+		System.out.println(laneLabel4.getText());
+		System.out.println(laneLabel5.getText());
+	}
+
+	public void spawnAndMoveTitans(){
+		if(!Lane1.isLaneLost() && laneGrid1 != null){ 
+			spawnAndMoveTitansAtLane(laneGrid1, Lane1, 1);
+			removeDefeatedTitans();
+		}
+		if(!Lane2.isLaneLost() && laneGrid2 != null){
+			spawnAndMoveTitansAtLane(laneGrid2, Lane2, 2);
+			removeDefeatedTitans();
+		}
+		if(!Lane3.isLaneLost() && laneGrid3 != null) {
+			spawnAndMoveTitansAtLane(laneGrid3, Lane3, 3);
+			removeDefeatedTitans();
+>>>>>>> Stashed changes
 		}
 		if(hardDifficulty){
 			try {
 			if(!Lane4.isLaneLost() && laneGrid4 != null){
+<<<<<<< Updated upstream
 				spawnTitansAtLane(laneGrid4, Lane4.getTitans());
 				//removeDefeatedTitans();
 			}
 			if(!Lane5.isLaneLost() && laneGrid5 != null){
 				spawnTitansAtLane(laneGrid5, Lane5.getTitans());
 				//removeDefeatedTitans();
+=======
+				spawnAndMoveTitansAtLane(laneGrid4, Lane4, 4);
+				removeDefeatedTitans();
+			}
+			if(!Lane5.isLaneLost() && laneGrid5 != null){
+				spawnAndMoveTitansAtLane(laneGrid5, Lane5, 5);
+				removeDefeatedTitans();
+>>>>>>> Stashed changes
 			}
 			} catch (Exception e){
 				System.out.println("did not spawn titans at lane 4 & 5");
 			}
 		}
+<<<<<<< Updated upstream
 	}
 
 	private void spawnTitansAtLane(GridPane laneGrid, PriorityQueue<Titan> titans){
@@ -361,6 +439,144 @@ public class Controller implements Initializable{
 		for (int i = 0; i < tempTitans.size(); i++)
 			titans.add((Titan) tempTitans.pop());
 	}
+=======
+
+	}
+	
+	private ArrayList<TitanView> getSpawnedTitans(int currLaneNum){
+		switch (currLaneNum) {
+		case 1: return spawnedTitans1;
+		case 2:return spawnedTitans2;
+		case 3:return spawnedTitans3;
+		case 4:return spawnedTitans4;
+		default: return spawnedTitans5;
+		}
+	}
+	
+	private void spawnTitanInLane(TitanView currTitan, int currLaneNum){
+		switch (currLaneNum) {
+		case 1: spawnedTitans1.add(currTitan);
+		case 2:spawnedTitans2.add(currTitan);
+		case 3:spawnedTitans3.add(currTitan);
+		case 4:spawnedTitans4.add(currTitan);
+		default:spawnedTitans5.add(currTitan);
+		}
+	}
+	
+	private void removeTitanInLane(TitanView currTitan, int currLaneNum){
+		ArrayList<TitanView> tempList;
+		switch (currLaneNum) {
+		case 1: tempList=spawnedTitans1;
+		case 2:tempList=spawnedTitans2;
+		case 3:tempList=spawnedTitans3;
+		case 4:tempList=spawnedTitans4;
+		default:tempList=spawnedTitans5;
+		}
+		
+		int i=0;
+		while(i<tempList.size()){
+			if(tempList.get(i)==currTitan){
+				tempList.remove(i);
+				break;
+			}
+			i++;
+		}
+		
+		switch (currLaneNum) {
+		case 1: spawnedTitans1=tempList;
+		case 2:spawnedTitans2=tempList;
+		case 3:spawnedTitans3=tempList;
+		case 4:spawnedTitans4=tempList;
+		default:spawnedTitans5=tempList;
+		}
+		
+	}
+
+	private void spawnAndMoveTitansAtLane(GridPane laneGrid, Lane currLane, int currLaneNum){
+		Stack<Titan> tempTitans = new Stack<>();
+		for(Titan titan:currLane.getTitans()){
+			TitanView titanView = new TitanView(titan);
+			laneGrid.add(titanView,0,0);
+			tempTitans.push(titan);
+			spawnTitanInLane(titanView, currLaneNum);
+		}
+		for (int i = 0; i < tempTitans.size(); i++)
+			currLane.getTitans().add((Titan) tempTitans.pop());
+		
+//		if(!getSpawnedTitans(currLaneNum).isEmpty())
+//			moveTitansAtLane(laneGrid, getSpawnedTitans(currLaneNum),currLaneNum);
+	}
+	 private void removeDefeatedTitans(){
+	 	for (TitanView titan: spawnedTitans1){
+	 		if (titan.getTitan().isDefeated()){
+	 			Pane parent = (Pane) titan.getParent();
+	 			parent.getChildren().remove(titan);
+	 			removeTitanInLane(titan, 1);
+	 		}
+	 	}
+	 	
+	 	for (TitanView titan: spawnedTitans2){
+	 		if (titan.getTitan().isDefeated()){
+	 			Pane parent = (Pane) titan.getParent();
+	 			parent.getChildren().remove(titan);
+	 			removeTitanInLane(titan, 2);
+	 		}
+	 	}
+	 	
+	 	for (TitanView titan: spawnedTitans3){
+	 		if (titan.getTitan().isDefeated()){
+	 			Pane parent = (Pane) titan.getParent();
+	 			parent.getChildren().remove(titan);
+	 			removeTitanInLane(titan, 3);
+	 		}
+	 	}
+	 	
+	 	for (TitanView titan: spawnedTitans4){
+	 		if (titan.getTitan().isDefeated()){
+	 			Pane parent = (Pane) titan.getParent();
+	 			parent.getChildren().remove(titan);
+	 			removeTitanInLane(titan, 4);
+	 		}
+	 	}
+	 	
+	 	for (TitanView titan: spawnedTitans5){
+	 		if (titan.getTitan().isDefeated()){
+	 			Pane parent = (Pane) titan.getParent();
+	 			parent.getChildren().remove(titan);
+	 			removeTitanInLane(titan, 5);
+	 		}
+	 	}
+	 }
+	
+	public void moveTitansAtLane(GridPane currLaneGrid, ArrayList<TitanView> spawnedTitans, int currLaneNum){
+		
+		    for (TitanView currTitanView : spawnedTitans) {
+		        if (!currTitanView.getTitan().hasReachedTarget()) {
+		            int currRow = currTitanView.getRow();
+		            currLaneGrid.getChildren().remove(currTitanView);
+
+		            if (currTitanView.getTitan() instanceof ColossalTitan) {
+		                currRow += currTitanView.getGridStep() + 1;
+		            } else {
+		                currRow += currTitanView.getGridStep();
+		            }
+
+		            if (currRow > 9) {
+		                currRow = 9;
+		            }
+
+		            currTitanView.setRow(currRow);
+		            currLaneGrid.add(currTitanView, 0, currRow);
+		            Titan currTitan=currTitanView.getTitan();
+		            currTitan.move();
+		            Titan adjustedTitan=currTitan;
+		            removeTitanInLane(currTitanView, currLaneNum);
+		            spawnTitanInLane(new TitanView(adjustedTitan), currLaneNum);
+		        }
+		    }
+		}
+
+>>>>>>> Stashed changes
 	// private void removeDefeatedTitans(){
 	// 	for (Titan titan: spawnedTitans.keySet()){
 	// 		if (titan.isDefeated()){
@@ -388,6 +604,12 @@ public class Controller implements Initializable{
 		lane1weaponcount.setText(piercingCount[0] + space + sniperCount[0] + space + volleyCount[0]);
 		lane2weaponcount.setText(piercingCount[1] + space + sniperCount[1] + space + volleyCount[1]);
 		lane3weaponcount.setText(piercingCount[2] + space + sniperCount[2] + space + volleyCount[2]);
+<<<<<<< Updated upstream
+=======
+		lane1trapcount.setText(space+space+trapCount[0] + "");
+		lane2trapcount.setText(space+space+trapCount[1] + "");
+		lane3trapcount.setText(space+space+trapCount[2] + "");
+>>>>>>> Stashed changes
 		if (Lane1.isLaneLost())
 			wall1ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
 		if (Lane2.isLaneLost())
@@ -406,6 +628,11 @@ public class Controller implements Initializable{
 			laneLabel5.setText("Danger Level: " + Lane5.getDangerLevel());
 			lane4weaponcount.setText(piercingCount[3] + space + sniperCount[3] + space + volleyCount[3]);
 			lane5weaponcount.setText(piercingCount[4] + space + sniperCount[4] + space + volleyCount[4]);
+<<<<<<< Updated upstream
+=======
+			lane4trapcount.setText(space+ space+ trapCount[3] + "");
+			lane5trapcount.setText(space+space+trapCount[4] + "");
+>>>>>>> Stashed changes
 			wall4HealthBar.setProgress((double) Lane4.getLaneWall().getCurrentHealth() / Lane4.getLaneWall().getBaseHealth());
 			wall5HealthBar.setProgress((double) Lane5.getLaneWall().getCurrentHealth() / Lane5.getLaneWall().getBaseHealth());
 			
@@ -476,9 +703,20 @@ class TitanView extends Pane{
 	private ImageView icon;
 	private ProgressBar healthBar;
 	private Titan titan;
+<<<<<<< Updated upstream
 
 	public TitanView(Titan titan) {
 		this.titan = titan;
+=======
+	private int gridStep=0;
+	private int currRow=0;
+	
+
+	public TitanView(Titan titan) {
+		this.titan = titan;
+		this.gridStep=titan.getSpeed()/5;
+
+>>>>>>> Stashed changes
 		icon = new ImageView();
 		healthBar = new ProgressBar();
 		healthBar.setPrefWidth(50);
@@ -506,6 +744,26 @@ class TitanView extends Pane{
 		this.getChildren().add(icon);
 		this.getChildren().add(healthBar);
 	}
+<<<<<<< Updated upstream
+=======
+	
+	public Titan getTitan(){
+		return this.titan;
+	}
+	
+	public void setRow(int currRow){
+		this.currRow=currRow;
+	}
+	
+	public int getRow(){
+		return this.currRow;
+	}
+	
+	public int getGridStep(){
+		return this.gridStep;
+	}
+
+>>>>>>> Stashed changes
 
 	private void refreshHealthBar(){
 		this.healthBar.setProgress((double)titan.getCurrentHealth() / titan.getBaseHealth());

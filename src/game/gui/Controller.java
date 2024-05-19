@@ -6,12 +6,8 @@ import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.ResourceBundle;
 import java.util.Stack;
-<<<<<<< Updated upstream
-
-=======
 import java.util.concurrent.Delayed;
 import java.util.Stack;
->>>>>>> Stashed changes
 import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
@@ -23,10 +19,7 @@ import game.engine.titans.PureTitan;
 import game.engine.titans.Titan;
 import game.engine.weapons.WeaponRegistry;
 import game.engine.weapons.factory.WeaponFactory;
-<<<<<<< Updated upstream
-=======
 import javafx.animation.PauseTransition;
->>>>>>> Stashed changes
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,10 +38,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-<<<<<<< Updated upstream
-=======
 import javafx.util.Duration;
->>>>>>> Stashed changes
 
 
 
@@ -96,8 +86,6 @@ public class Controller implements Initializable{
 	@FXML
 	 private Label lane5weaponcount=new Label();
 	
-<<<<<<< Updated upstream
-=======
 	@FXML
 	private Label lane1trapcount=new Label();
 	
@@ -113,7 +101,6 @@ public class Controller implements Initializable{
 	@FXML
 	private Label lane5trapcount=new Label();
 	
->>>>>>> Stashed changes
 	private int[] piercingCount={0,0,0,0,0};
 	private int[] sniperCount={0,0,0,0,0};
 	private int[] volleyCount={0,0,0,0,0};
@@ -182,16 +169,12 @@ public class Controller implements Initializable{
 	private Lane purchaseLane;
 	private String purchaseLaneName;
     private boolean hardDifficulty = true;
-<<<<<<< Updated upstream
-	private HashMap<Titan, TitanView> spawnedTitans;
-=======
 	private ArrayList<TitanView> spawnedTitans1=new ArrayList<TitanView>();
 	private ArrayList<TitanView> spawnedTitans2=new ArrayList<TitanView>();
 	private ArrayList<TitanView> spawnedTitans3=new ArrayList<TitanView>();
 	private ArrayList<TitanView> spawnedTitans4=new ArrayList<TitanView>();
 	private ArrayList<TitanView> spawnedTitans5=new ArrayList<TitanView>();
 
->>>>>>> Stashed changes
 	
 	
 	public void easy(ActionEvent event) throws IOException{
@@ -360,20 +343,6 @@ public class Controller implements Initializable{
         alertStage.setScene(scene);
         alertStage.show();
     }
-<<<<<<< Updated upstream
-	public void spawnAndMoveTitans(){
-		if(!Lane1.isLaneLost() && laneGrid1 != null){ 
-			spawnTitansAtLane(laneGrid1, Lane1.getTitans());
-			//removeDefeatedTitans();
-		}
-		if(!Lane2.isLaneLost() && laneGrid2 != null){
-			spawnTitansAtLane(laneGrid2, Lane2.getTitans());
-			//removeDefeatedTitans();
-		}
-		if(!Lane3.isLaneLost() && laneGrid3 != null) {
-			spawnTitansAtLane(laneGrid3, Lane3.getTitans());
-			//removeDefeatedTitans();
-=======
 
 	private void consolePrint(){
 		System.out.println(scoreLabel.getText());
@@ -399,47 +368,21 @@ public class Controller implements Initializable{
 		if(!Lane3.isLaneLost() && laneGrid3 != null) {
 			spawnAndMoveTitansAtLane(laneGrid3, Lane3, 3);
 			removeDefeatedTitans();
->>>>>>> Stashed changes
 		}
 		if(hardDifficulty){
 			try {
 			if(!Lane4.isLaneLost() && laneGrid4 != null){
-<<<<<<< Updated upstream
-				spawnTitansAtLane(laneGrid4, Lane4.getTitans());
-				//removeDefeatedTitans();
-			}
-			if(!Lane5.isLaneLost() && laneGrid5 != null){
-				spawnTitansAtLane(laneGrid5, Lane5.getTitans());
-				//removeDefeatedTitans();
-=======
 				spawnAndMoveTitansAtLane(laneGrid4, Lane4, 4);
 				removeDefeatedTitans();
 			}
 			if(!Lane5.isLaneLost() && laneGrid5 != null){
 				spawnAndMoveTitansAtLane(laneGrid5, Lane5, 5);
 				removeDefeatedTitans();
->>>>>>> Stashed changes
 			}
 			} catch (Exception e){
 				System.out.println("did not spawn titans at lane 4 & 5");
 			}
 		}
-<<<<<<< Updated upstream
-	}
-
-	private void spawnTitansAtLane(GridPane laneGrid, PriorityQueue<Titan> titans){
-		Stack<Titan> tempTitans = new Stack<>();
-		for(int i=0; i<titans.size(); i++){
-			Titan titan = titans.poll();
-			TitanView titanView = new TitanView(titan);
-			laneGrid.add(titanView,0,0);
-			tempTitans.push(titan);
-			//spawnedTitans.put(titan,titanView);
-		}
-		for (int i = 0; i < tempTitans.size(); i++)
-			titans.add((Titan) tempTitans.pop());
-	}
-=======
 
 	}
 	
@@ -576,7 +519,6 @@ public class Controller implements Initializable{
 		    }
 		}
 
->>>>>>> Stashed changes
 	// private void removeDefeatedTitans(){
 	// 	for (Titan titan: spawnedTitans.keySet()){
 	// 		if (titan.isDefeated()){
@@ -604,12 +546,9 @@ public class Controller implements Initializable{
 		lane1weaponcount.setText(piercingCount[0] + space + sniperCount[0] + space + volleyCount[0]);
 		lane2weaponcount.setText(piercingCount[1] + space + sniperCount[1] + space + volleyCount[1]);
 		lane3weaponcount.setText(piercingCount[2] + space + sniperCount[2] + space + volleyCount[2]);
-<<<<<<< Updated upstream
-=======
 		lane1trapcount.setText(space+space+trapCount[0] + "");
 		lane2trapcount.setText(space+space+trapCount[1] + "");
 		lane3trapcount.setText(space+space+trapCount[2] + "");
->>>>>>> Stashed changes
 		if (Lane1.isLaneLost())
 			wall1ImageView.setImage(new Image("game/gui/assets/wall_destroyed.jpeg"));
 		if (Lane2.isLaneLost())
@@ -628,11 +567,8 @@ public class Controller implements Initializable{
 			laneLabel5.setText("Danger Level: " + Lane5.getDangerLevel());
 			lane4weaponcount.setText(piercingCount[3] + space + sniperCount[3] + space + volleyCount[3]);
 			lane5weaponcount.setText(piercingCount[4] + space + sniperCount[4] + space + volleyCount[4]);
-<<<<<<< Updated upstream
-=======
 			lane4trapcount.setText(space+ space+ trapCount[3] + "");
 			lane5trapcount.setText(space+space+trapCount[4] + "");
->>>>>>> Stashed changes
 			wall4HealthBar.setProgress((double) Lane4.getLaneWall().getCurrentHealth() / Lane4.getLaneWall().getBaseHealth());
 			wall5HealthBar.setProgress((double) Lane5.getLaneWall().getCurrentHealth() / Lane5.getLaneWall().getBaseHealth());
 			
@@ -703,11 +639,6 @@ class TitanView extends Pane{
 	private ImageView icon;
 	private ProgressBar healthBar;
 	private Titan titan;
-<<<<<<< Updated upstream
-
-	public TitanView(Titan titan) {
-		this.titan = titan;
-=======
 	private int gridStep=0;
 	private int currRow=0;
 	
@@ -716,7 +647,6 @@ class TitanView extends Pane{
 		this.titan = titan;
 		this.gridStep=titan.getSpeed()/5;
 
->>>>>>> Stashed changes
 		icon = new ImageView();
 		healthBar = new ProgressBar();
 		healthBar.setPrefWidth(50);
@@ -744,8 +674,6 @@ class TitanView extends Pane{
 		this.getChildren().add(icon);
 		this.getChildren().add(healthBar);
 	}
-<<<<<<< Updated upstream
-=======
 	
 	public Titan getTitan(){
 		return this.titan;
@@ -763,7 +691,6 @@ class TitanView extends Pane{
 		return this.gridStep;
 	}
 
->>>>>>> Stashed changes
 
 	private void refreshHealthBar(){
 		this.healthBar.setProgress((double)titan.getCurrentHealth() / titan.getBaseHealth());

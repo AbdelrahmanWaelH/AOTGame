@@ -232,10 +232,10 @@ public class Controller implements Initializable{
 	}
 	
 	public void skipThisTurn(ActionEvent event){
-		System.out.println("Turn skipped...");
-		battle.passTurn();
 		try{
-		spawnAndMoveTitans();
+			System.out.println("Turn skipped...");
+			battle.passTurn();
+			spawnAndMoveTitans();
 		} catch (Exception e){
 			System.out.println("Exception with spawn and move titans in pass turn");
 		}
@@ -399,20 +399,21 @@ public class Controller implements Initializable{
 		}
 		}
 		if(hardDifficulty){
-			try {
-			if(!Lane4.isLaneLost() && laneGrid4 != null){
+			if(!Lane4.isLaneLost() && laneGrid4 != null){ 
+				try {
 				spawnTitansAtLane(laneGrid4, Lane4,4);
+				} catch (Exception e){
+					System.out.println("Exception in lane 4");
+				}
 			}
-			if(!Lane5.isLaneLost() && laneGrid5 != null){
+			if(!Lane5.isLaneLost() && laneGrid5 != null){ 
+				try {
 				spawnTitansAtLane(laneGrid5, Lane5,5);
-			}
-			} catch (Exception e){
-				System.out.println("did not spawn titans at lane 4 & 5");
-			} finally{
-				moveAndDespawn();
+				} catch (Exception e){
+					System.out.println("Exception in lane 5");
+				}
 			}
 		}
-
 	}
 	private void spawnTitansAtLane(GridPane laneGrid, Lane lane, int laneNum){
 		//Iterator<Titan> iterator = lane.getTitans().iterator();
@@ -421,6 +422,8 @@ public class Controller implements Initializable{
 			allSpawnedTitans.add(titanView);
 			laneGrid.add(titanView, 0 , 0);
 		}
+		
+		moveAndDespawn();
 	}
 	private void moveAndDespawn(){
 		for (TitanView titanView: allSpawnedTitans){
@@ -455,7 +458,7 @@ public class Controller implements Initializable{
 		int distance = titan.getDistance();
 		
 		titanLane.getChildren().remove(titanView);
-		if (distance <= 10)
+		if (distance>0 && distance <= 10)
 			titanLane.add(titanView, 0, 9);
 		else if (distance > 10 && distance <= 20)
 			titanLane.add(titanView, 0, 8);

@@ -2,13 +2,7 @@ package game.gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.PriorityQueue;
 import java.util.ResourceBundle;
-import java.util.Stack;
-import java.util.concurrent.Delayed;
-import java.util.Stack;
 import game.engine.Battle;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
@@ -20,7 +14,6 @@ import game.engine.titans.PureTitan;
 import game.engine.titans.Titan;
 import game.engine.weapons.WeaponRegistry;
 import game.engine.weapons.factory.WeaponFactory;
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,9 +30,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 
 
@@ -211,6 +202,32 @@ public class Controller implements Initializable{
 			System.out.println("You have chosen hard mode, instance created");
 		} catch (IOException e){
 			displayAlert("IOException when switching to hard battle", "IOException");
+		}
+	}
+	public void switchToInstructions(ActionEvent event){
+		try {
+			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+			game = FXMLLoader.load(getClass().getResource("instructions.fxml"));
+			
+			scene = new Scene(game);
+			stage.setScene(scene);
+			stage.setFullScreen(true);
+			stage.show();
+		} catch (IOException e){
+			displayAlert("IOException when switching to instructions", "IOException");
+		}
+	}
+	public void switchToDiffSelection(ActionEvent event){
+		try {
+			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+			game = FXMLLoader.load(getClass().getResource("diffSelection.fxml"));
+			
+			scene = new Scene(game);
+			stage.setScene(scene);
+			stage.setFullScreen(true);
+			stage.show();
+		} catch (IOException e){
+			displayAlert("IOException when switching to difficulty selection", "IOException");
 		}
 	}
 	

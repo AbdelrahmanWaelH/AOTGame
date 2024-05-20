@@ -6,8 +6,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.gui.Controller">
    <children>
-      <Button layoutY="208.0" mnemonicParsing="false" onAction="#hard" prefHeight="104.0" prefWidth="600.0" text="Hard" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Button layoutY="188.0" mnemonicParsing="false" onAction="#easy" prefHeight="104.0" prefWidth="600.0" text="Easy" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Button layoutY="208.0" mnemonicParsing="false" onAction="#hard" prefHeight="104.0" prefWidth="600.0" text="Start Hard Mode" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Button layoutY="188.0" mnemonicParsing="false" onAction="#easy" prefHeight="104.0" prefWidth="600.0" text="Start Easy Mode" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Label alignment="CENTER" layoutX="239.0" layoutY="108.0" prefHeight="21.0" prefWidth="133.0" text="Choose a Difficulty!" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Button layoutX="474.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToInstructions" text="Game Instructions" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
    </children>
 </AnchorPane>

@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.ResourceBundle;
 import java.util.Stack;
@@ -169,11 +170,6 @@ public class Controller implements Initializable{
 	private Lane purchaseLane;
 	private String purchaseLaneName;
     private boolean hardDifficulty = true;
-	private ArrayList<TitanView> spawnedTitans1=new ArrayList<TitanView>();
-	private ArrayList<TitanView> spawnedTitans2=new ArrayList<TitanView>();
-	private ArrayList<TitanView> spawnedTitans3=new ArrayList<TitanView>();
-	private ArrayList<TitanView> spawnedTitans4=new ArrayList<TitanView>();
-	private ArrayList<TitanView> spawnedTitans5=new ArrayList<TitanView>();
 	private ArrayList<TitanView> allSpawnedTitans = new ArrayList<TitanView>();
 
 	
@@ -359,36 +355,37 @@ public class Controller implements Initializable{
 
 	public void spawnAndMoveTitans(){
 		if(!Lane1.isLaneLost() && laneGrid1 != null){ 
-			spawnTitansAtLane(laneGrid1, Lane1);
-			//removeDefeatedTitans();
+			spawnTitansAtLane(laneGrid1, Lane1,1);
 		}
 		if(!Lane2.isLaneLost() && laneGrid2 != null){
-			spawnTitansAtLane(laneGrid1, Lane1);
+			spawnTitansAtLane(laneGrid2, Lane2,2);
 			//removeDefeatedTitans();
 		}
 		if(!Lane3.isLaneLost() && laneGrid3 != null) {
-			spawnTitansAtLane(laneGrid1, Lane1);
+			spawnTitansAtLane(laneGrid3, Lane3,3);
 			//removeDefeatedTitans();
 		}
 		if(hardDifficulty){
 			try {
 			if(!Lane4.isLaneLost() && laneGrid4 != null){
-				spawnTitansAtLane(laneGrid1, Lane1);
+				spawnTitansAtLane(laneGrid4, Lane4,4);
 				//removeDefeatedTitans();
 			}
 			if(!Lane5.isLaneLost() && laneGrid5 != null){
-				spawnTitansAtLane(laneGrid1, Lane1);
-				//removeDefeatedTitans();
+				spawnTitansAtLane(laneGrid5, Lane5,5);
 			}
 			} catch (Exception e){
 				System.out.println("did not spawn titans at lane 4 & 5");
+			} finally{
+				moveAndDespawn();
 			}
 		}
 
 	}
-	private void spawnTitansAtLane(GridPane laneGrid, Lane lane){
-		for (Titan titan:lane.getTitans()){
-			TitanView titanView = new TitanView(titan);
+	private void spawnTitansAtLane(GridPane laneGrid, Lane lane, int laneNum){
+		//Iterator<Titan> iterator = lane.getTitans().iterator();
+		for (Titan titan: lane.getTitans()){
+			TitanView titanView = new TitanView(titan,laneNum);
 			allSpawnedTitans.add(titanView);
 			laneGrid.add(titanView, 0 , 0);
 		}
@@ -397,15 +394,55 @@ public class Controller implements Initializable{
 		for (TitanView titanView: allSpawnedTitans){
 			if (titanView.getTitan().isDefeated()){
 				//find which grid to remove from then remove
+				switch(titanView.getLaneNum()){
+					case 1: laneGrid1.getChildren().remove(titanView); break;
+					case 2: laneGrid2.getChildren().remove(titanView) ; break;
+					case 3: laneGrid3.getChildren().remove(titanView); break;
+					case 4: laneGrid4.getChildren().remove(titanView) ; break;
+					case 5: laneGrid5.getChildren().remove(titanView) ; break;
+				}
+				allSpawnedTitans.remove(titanView);
 			} else {
 				//insert into new lane grid cell
+				setTitanCell(titanView);
 			}
 		}
 	}
 	
 	private void setTitanCell(TitanView titanView){
 		Titan titan = titanView.getTitan();
+		GridPane titanLane;
+		switch (titanView.getLaneNum()) {
+			case 1: titanLane = laneGrid1; break;
+			case 2: titanLane = laneGrid2; break;
+			case 3: titanLane = laneGrid3; break;
+			case 4: titanLane = laneGrid4; break;
+			case 5: titanLane = laneGrid5; break;
+			default: titanLane = new GridPane();
+		} 
+		int distance = titan.getDistance();
 		
+		titanLane.getChildren().remove(titanView);
+		if (distance <= 10)
+			titanLane.add(titanView, 0, 9);
+		else if (distance > 10 && distance <= 20)
+			titanLane.add(titanView, 0, 8);
+		else if (distance > 20 && distance <= 30)
+			titanLane.add(titanView, 0, 7);
+		else if (distance > 30 && distance <= 40)
+			titanLane.add(titanView, 0, 6);
+		else if (distance > 40 && distance <= 50)
+			titanLane.add(titanView, 0, 5);
+		else if (distance > 50 && distance <= 60)
+			titanLane.add(titanView, 0, 4);
+		else if (distance > 60 && distance <= 70)
+			titanLane.add(titanView, 0, 3);
+		else if (distance > 70 && distance <= 80)
+			titanLane.add(titanView, 0, 2);
+		else if (distance > 80 && distance <= 90)
+			titanLane.add(titanView, 0, 1);
+		else
+			titanLane.add(titanView, 0, 0);
 	}
 	
 	
@@ -522,12 +559,13 @@ class TitanView extends Pane{
 	private Titan titan;
 	private int gridStep=0;
 	private int currRow=0;
+	private int laneNum= 0;
 	
 
-	public TitanView(Titan titan) {
+	public TitanView(Titan titan, int laneNum) {
 		this.titan = titan;
 		this.gridStep=titan.getSpeed()/5;
-
+		this.laneNum = laneNum;
 		icon = new ImageView();
 		healthBar = new ProgressBar();
 		healthBar.setPrefWidth(50);
@@ -570,6 +608,9 @@ class TitanView extends Pane{
 	
 	public int getGridStep(){
 		return this.gridStep;
+	}
+	public int getLaneNum(){
+		return this.laneNum;
 	}
 
 

@@ -1,0 +1,4 @@
+Assets should be placed twice in the following directories:
+AOTGame\src\game\gui\assets
+AOTGame\bin\game\gui\assets
+

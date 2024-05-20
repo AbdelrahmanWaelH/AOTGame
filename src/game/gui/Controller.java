@@ -376,17 +376,14 @@ public class Controller implements Initializable{
 		}
 		if(!Lane2.isLaneLost() && laneGrid2 != null){
 			spawnTitansAtLane(laneGrid2, Lane2,2);
-			//removeDefeatedTitans();
 		}
 		if(!Lane3.isLaneLost() && laneGrid3 != null) {
 			spawnTitansAtLane(laneGrid3, Lane3,3);
-			//removeDefeatedTitans();
 		}
 		if(hardDifficulty){
 			try {
 			if(!Lane4.isLaneLost() && laneGrid4 != null){
 				spawnTitansAtLane(laneGrid4, Lane4,4);
-				//removeDefeatedTitans();
 			}
 			if(!Lane5.isLaneLost() && laneGrid5 != null){
 				spawnTitansAtLane(laneGrid5, Lane5,5);
@@ -435,7 +432,7 @@ public class Controller implements Initializable{
 			case 3: titanLane = laneGrid3; break;
 			case 4: titanLane = laneGrid4; break;
 			case 5: titanLane = laneGrid5; break;
-			default: titanLane = new GridPane();
+			default: titanLane = laneGrid1;
 		} 
 		int distance = titan.getDistance();
 		
@@ -517,7 +514,6 @@ public class Controller implements Initializable{
 		}
 	}
 	private void defeat(ActionEvent event){
-		
 		try{
 			stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 			Parent diff = FXMLLoader.load(getClass().getResource("diffSelection.fxml"));
@@ -533,7 +529,6 @@ public class Controller implements Initializable{
 		}
 
 	}
-	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -574,14 +569,11 @@ class TitanView extends Pane{
 	private ImageView icon;
 	private ProgressBar healthBar;
 	private Titan titan;
-	private int gridStep=0;
-	private int currRow=0;
 	private int laneNum= 0;
 	
 
 	public TitanView(Titan titan, int laneNum) {
 		this.titan = titan;
-		this.gridStep=titan.getSpeed()/5;
 		this.laneNum = laneNum;
 		icon = new ImageView();
 		healthBar = new ProgressBar();
@@ -615,21 +607,9 @@ class TitanView extends Pane{
 		return this.titan;
 	}
 	
-	public void setRow(int currRow){
-		this.currRow=currRow;
-	}
-	
-	public int getRow(){
-		return this.currRow;
-	}
-	
-	public int getGridStep(){
-		return this.gridStep;
-	}
 	public int getLaneNum(){
 		return this.laneNum;
 	}
-
 
 	private void refreshHealthBar(){
 		this.healthBar.setProgress((double)titan.getCurrentHealth() / titan.getBaseHealth());

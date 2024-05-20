@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="542.0" fitWidth="609.0" layoutX="-6.0" layoutY="-44.0" pickOnBounds="true" AnchorPane.bottomAnchor="-98.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="-44.0">
+         <image>
+            <Image url="@../../../../../Pictures/AOTGame%20assets/_41ff1dc2-22fa-4f5f-bbf3-50065e3d450b.jpeg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

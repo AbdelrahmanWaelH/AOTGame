@@ -436,15 +436,11 @@ public class Controller implements Initializable{
 	}
 
 	private void spawnAndMoveTitansAtLane(GridPane laneGrid, Lane currLane, int currLaneNum){
-		Stack<Titan> tempTitans = new Stack<>();
 		for(Titan titan:currLane.getTitans()){
 			TitanView titanView = new TitanView(titan);
 			laneGrid.add(titanView,0,0);
-			tempTitans.push(titan);
-			spawnTitanInLane(titanView, currLaneNum);
+			//spawnTitanInLane(titanView, currLaneNum);
 		}
-		for (int i = 0; i < tempTitans.size(); i++)
-			currLane.getTitans().add((Titan) tempTitans.pop());
 		
 //		if(!getSpawnedTitans(currLaneNum).isEmpty())
 //			moveTitansAtLane(laneGrid, getSpawnedTitans(currLaneNum),currLaneNum);
@@ -518,17 +514,6 @@ public class Controller implements Initializable{
 		        }
 		    }
 		}
-
-	// private void removeDefeatedTitans(){
-	// 	for (Titan titan: spawnedTitans.keySet()){
-	// 		if (titan.isDefeated()){
-	// 			TitanView titanView = spawnedTitans.get(titan);
-	// 			Pane parent = (Pane) titanView.getParent();
-	// 			parent.getChildren().remove(titanView);
-	// 			spawnedTitans.remove(titan);
-	// 		}
-	// 	}
-	// }
 
 	public void textRefresh(){
 		scoreLabel.setText("Score: " + battle.getScore());

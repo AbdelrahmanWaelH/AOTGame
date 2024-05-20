@@ -458,7 +458,7 @@ public class Controller implements Initializable{
 		int distance = titan.getDistance();
 		
 		titanLane.getChildren().remove(titanView);
-		if (distance>0 && distance <= 10)
+		if (distance>=0 && distance <= 10)
 			titanLane.add(titanView, 0, 9);
 		else if (distance > 10 && distance <= 20)
 			titanLane.add(titanView, 0, 8);
@@ -620,6 +620,9 @@ class TitanView extends Pane{
 			case 4: icon.setImage(new Image("game/gui/assets/colossal_titan.png")); break;
 		}
 		refreshHealthBar();
+		icon.setPreserveRatio(false);
+		icon.setFitHeight(titan.getHeightInMeters()*5);
+		//icon.maxHeight(120);
 		this.getChildren().add(icon);
 		this.getChildren().add(healthBar);
 	}

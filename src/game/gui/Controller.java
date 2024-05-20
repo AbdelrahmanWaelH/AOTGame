@@ -234,7 +234,11 @@ public class Controller implements Initializable{
 	public void skipThisTurn(ActionEvent event){
 		System.out.println("Turn skipped...");
 		battle.passTurn();
+		try{
 		spawnAndMoveTitans();
+		} catch (Exception e){
+			System.out.println("Exception with spawn and move titans in pass turn");
+		}
 		textRefresh();
 		if (battle.isGameOver()){
 			defeat(event);
@@ -250,7 +254,9 @@ public class Controller implements Initializable{
 			displayAlert("The lane you chose is invalid!", "Invalid Lane!");
 		} catch (InsufficientResourcesException IRE) {
 			displayAlert(IRE.getMessage(), "Insufficient Resources!");
-		} finally {
+		} catch(Exception e){
+			System.out.println("exception with spawn and move titans in buy");
+		}finally {
 			textRefresh();
 		}
 	}
@@ -372,13 +378,25 @@ public class Controller implements Initializable{
 
 	public void spawnAndMoveTitans(){
 		if(!Lane1.isLaneLost() && laneGrid1 != null){ 
+			try {
 			spawnTitansAtLane(laneGrid1, Lane1,1);
+			} catch (Exception e){
+				System.out.println("Exception in lane 1");
+			}
 		}
 		if(!Lane2.isLaneLost() && laneGrid2 != null){
+		try{
 			spawnTitansAtLane(laneGrid2, Lane2,2);
+		} catch (Exception e){
+			System.out.println("Exception in lane 1");
+		}
 		}
 		if(!Lane3.isLaneLost() && laneGrid3 != null) {
+			try{
 			spawnTitansAtLane(laneGrid3, Lane3,3);
+		} catch (Exception e){
+			System.out.println("Exception in lane 1");
+		}
 		}
 		if(hardDifficulty){
 			try {

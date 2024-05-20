@@ -363,7 +363,8 @@ public class Controller implements Initializable{
         alertStage.setScene(scene);
         alertStage.show();
     }
-
+	
+	@SuppressWarnings("unused")
 	private void consolePrint(){
 		System.out.println(scoreLabel.getText());
 		System.out.println(turnLabel.getText());
